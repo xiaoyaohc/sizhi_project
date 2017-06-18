@@ -1,0 +1,101 @@
+<extend name="Public/base" />
+
+<block name="body">
+	<!-- 标题栏 -->
+	<div class="main-title">
+		<h2>{$meta_title}</h2>
+	</div>
+	<div class="cf">
+		<div class="fl">
+            <a class="btn" href="{:U('Score/add',array('type'=>$type))}">录 入</a>
+            <button class="btn ajax-post confirm" url="{:U('deleteInfos')}" target-form="ids" target-form="ids">删 除</button>
+        </div>
+        <!-- 高级搜索 -->
+		<div class="search-form fr cf">
+			
+		</div>
+        
+    </div>
+    <!-- 数据列表 -->
+    <div class="data-table table-striped">
+	<table class="">
+    <thead>
+        <tr>
+	        <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+			<th class="">学生</th>
+			<th class="">科目</th>
+			<th class="">教师</th>
+			<th class="">考试时间</th>
+			<th class="">分数</th>
+			<th class="">录入时间</th>
+			<th class="">操作</th>
+		</tr>
+    </thead>
+    <tbody>
+		<notempty name="info">
+		<volist name="info" id="vo">
+		<tr>
+			<td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}" /></td>
+			<td>{$vo.student_name}</td>
+			<td>{$vo.subject_name}</td>
+			<td>{$vo.teacher_name}</td>
+			<td><span>{$vo.test_time|time_format}</span></td>
+			<td>{$vo.score}</td>
+			<td><span>{$vo.add_time|time_format}</span></td>
+			<td><eq name="vo.status" value="1">
+				[<a href="{:U('Score/edit?id='.$vo['id'])}" class="authorize">编辑</a>]
+                [<a href="{:U('Score/deleteInfos?id='.$vo['id'])}" class="confirm ajax-get">删除</a>]
+            </td>
+			
+		</tr>
+		</volist>
+		<else/>
+		<td colspan="9" class="text-center"> aOh! 暂时还没有内容! </td>
+		</notempty>
+	</tbody>
+    </table>
+	</div>
+    <div class="page">
+        {$_page}
+    </div>
+</block>
+
+<block name="script">
+	<script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+
+	<script type="text/javascript">
+	//搜索功能
+	$("#search").click(function(){
+		var url = $(this).attr('url');
+        var query  = $('form').serialize();
+        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+        query = query.replace(/^&/g,'');
+        if( url.indexOf('?')>0 ){
+            url += '&' + query;
+        }else{
+            url += '?' + query;
+        }
+		window.location.href = url;
+	});
+	//回车搜索
+	$(".search-input").keyup(function(e){
+		if(e.keyCode === 13){
+			$("#search").click();
+			return false;
+		}
+	});
+    //导航高亮
+    highlight_subnav('{:U('Score/index')}');
+
+    $(document).ready(function() {
+    	$('#select').val("{:U('Score/index',array('parent_id'=>$parent_id))}");	
+    	$('#select').change(function(){
+    		location.href = $(this).val();
+    	});
+
+    	$('select[name=info_type]').change(function(event) {
+    		$('#search').click();
+    	});
+    });
+	</script>
+</block>

@@ -1,0 +1,70 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <div class="main-title">
+        <h2>{$meta_title}</h2>
+    </div>
+    <form action="{:U('Area/update')}" method="post" class="form-horizontal">
+         
+        <div class="form-item">
+            <label class="item-label">区域名字<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="area_name" value="{$data.area_name}">
+            </div>
+            <label class="item-label">负责人姓名<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="name" value="{$data.name}">
+            </div>
+            <label class="item-label">负责人微信id<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="wx_id" value="{$data.wx_id}">
+            </div>
+            <label class="item-label">企业号账号<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="accounts" value="{$data.accounts}">
+            </div>
+            <label class="item-label">联系号码<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="add_phone" value="{$data.add_phone}">
+            </div>
+            <label class="item-label">校区分成比例（如：0.8）<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="ratio" value="{$data.ratio}">
+            </div>
+            <label class="item-label">银行账号<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="bank_num" value="{$data.bank_num}">
+            </div>
+            <label class="item-label">银行账户名<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="bank_name" value="{$data.bank_name}">
+            </div>
+        </div>
+        <div class="form-item">
+            <input type="hidden" name="id" value="{$data.id}">
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>           
+        </div>
+    </form>
+</block>
+
+<block name="script">
+    <script type="text/javascript"> 
+    highlight_subnav('{:U('Area/index')}');
+    <if condition="$data.parent_id">
+    $(document).ready(function() {
+        $('select[name=case_type]').change(function(event) {
+             $('.check-tips_' + $(this).val()).show().siblings('.check-tips').hide();
+             if($(this).val() == 1 || $(this).val() == 5){
+                $('#bigPicBox').show();
+             }else{
+                $('#bigPicBox').hide();
+             }
+
+        });
+        $('select[name=case_type]').trigger('change');
+    });
+    </if>    
+    </script>
+</block>

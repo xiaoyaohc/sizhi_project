@@ -1,0 +1,272 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>博胜科技</title>
+		<link rel="stylesheet" type="text/css" href="__TECH__/bootstrap-3.3.4-dist/css/bootstrap.css"/>
+		<link rel="stylesheet" type="text/css" href="__TECH__/css/lrtk.css"/>
+		<link rel="stylesheet" type="text/css" href="__TECH__/css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="__TECH__/css/styles.css"/>
+		<script type="text/javascript" src="__TECH__/js/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="__TECH__/bootstrap-3.3.4-dist/js/bootstrap.js"></script>
+		<script type="text/javascript" src="__TECH__/js/common.js"></script>
+	</head>
+	<body>
+		<!-- 弹窗 -->
+		<div class="win-wrapper" id="win-wrapper">
+			<div class="win-main">
+				<a href="javascript:;" class="win-close"></a>
+				<div class="win-title">
+				</div>
+				<!-- <div class="win-date">
+				</div> -->
+				<div class="win-contentext">
+				</div>
+				<a href="javascript:;"  class="win-return">返回</a>
+			</div>
+		</div>
+		
+		<div class="header">
+			<div class="main1024">
+				<div class="header-logo"></div>
+				<div class="header-nav">
+					<ul>
+						<li><a href="{:U('Tech/index')}#">首页</a></li>
+						<li><a href="#001">关于我们</a></li>
+						<li><a href="#002">服务产品</a></li>
+						<li><a href="#003">客户案例</a></li>
+						<li><a href="#004">新闻中心</a></li>
+						<li><a href="#005">联系我们</a></li>
+					</ul>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+		</div>
+		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+			<!-- Indicators -->
+			<ol class="carousel-indicators">
+				<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+				<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+				<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+			</ol>
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner" role="listbox">
+				<volist name="slides" id="item" key="k" >
+                    <div class="item {$k==1?'active':''}">
+                        <img src="{$item.slide_pic}" alt="">
+                    </div>
+                </volist>
+			</div>
+		</div>
+		<div class="aboout"  >
+			<div class="cat" name="001" id="001"></div>
+			<div class="main1024">
+				<div class="about-logo"><img src="__TECH__/images/about-logo.jpg" /></div>
+				<div class="about-title">
+					<!-- 博胜信息科技（广州）有限公司 成立于2012年 -->
+					<!-- {$abouts.about_name} -->
+				</div>
+				<div class="about-text">
+					<!-- <p>
+						博胜信息科技（谈（以下简称博胜科技）隶属北京博胜互动文化传播有限公司旗下，是一家为品牌企业提供
+						移动互联网产品的开发应用、广告投放和APP开发与推广的整合式科技公司。公司以“服务至上、发展共赢”为基本形态，激情的团队，热情如花绽放。
+					</p>
+					<p>
+						博胜精神：诚信、创新、团结、卓越。
+						<br>
+						博胜性格：朝气，有活力，热衷于挑战沉醉于创新。
+						<br>
+						博胜目标：奋勇拼搏，为客户实现价值最大化。
+					</p>
+					<p>
+						为汲取源源不断的创意灵感和保持对互联网行业的高度敏感，博胜互动每年都会定期外派员工参加国际和国内的广告行业盛会，在与外界交流学习增长见识的同时延伸创造力，为客户提供更有效的解决方案积蓄热量。
+						<br>
+						坚持始终如一，为客户传递价值。
+						<br>
+						为了梦想，我们一直不断超越。
+						<br>
+						我们追求以更精致的服务和更超前的创新思维真正做到网尽其能，在互联网的世界，为客户创想无限未来！
+					</p>
+					<p>
+						
+					</p> -->
+					{$abouts.about_content}
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+		</div>
+		<div class="por">
+			<div class="cat" name="002" id="002"></div>
+			<div class="main1024">
+				<div class="por-logo"><img src="__TECH__/images/por-logo.jpg" /></div>
+				<div class="por-tab">
+					<div class="por-tab-box">
+						<div class="por-tab-box-rou por-tab-box-rou1"></div>
+						<div class="por-tab-box-title">
+							DSP 业务
+						</div>
+						<div class="por-tab-box-content">
+							更优质的广告平台资源、更精准地运营后台、更好地监控数据效果……涵盖了90%以上的主流媒体渠道,配套出专业的解决方案,从而提升广告效果。
+						</div>
+						
+					</div>
+					<div class="por-tab-box">
+						<div class="por-tab-box-rou por-tab-box-rou2"></div>
+						<div class="por-tab-box-title">
+							百度业务
+						</div>
+						<div class="por-tab-box-content">
+							百度贴吧，作为全球最大中文社区，与百度搜索紧密结合，准确把握用户需求，企业吧拥有官方特权，直接接触目标用户，精准把控粉丝数据，实现企业与粉丝共赢。
+						</div>
+					</div>
+					<div class="por-tab-box">
+						<div class="por-tab-box-rou por-tab-box-rou3"></div>
+						<div class="por-tab-box-title">
+							新浪业务
+						</div>
+						<div class="por-tab-box-content">
+							作为国内新型社交平台，是一个庞大的交友娱乐社区。它与新闻热点、时事紧密结合。更能让粉丝在平台上与众多明星进行互动。
+						</div>
+					</div>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+		</div>
+		<div class="case" >
+			<div class="cat" name="003" id="003"></div>
+			<div class="main1024">
+				<div class="case-logo"><img src="__TECH__/images/case-logo.jpg" /></div>
+				<div class="case-box">
+					<div id="case_cont">
+						<div class="case-box-pic1">
+							<div class="case-box-pic1-1 cb_item" id='case_box1'>
+								<div class="case-box-pic-hover">
+									<a href="javascript:()" class="case-box-pic-hover-more">MORE +</a>
+								</div>
+								<!-- <img src="__TECH__/images/case-pic1.jpg"> -->
+							</div>
+							<div class="case-box-pic1-2 cb_item" id='case_box2'>
+								<div class="case-box-pic-hover">
+									<a href="javascript:()" class="case-box-pic-hover-more">MORE +</a>
+								</div>
+								<!-- <img src="__TECH__/images/case-pic2.jpg"> -->
+							</div>
+						</div>
+						<div class="case-box-pic2 cb_item" id='case_box3'>
+							<div class="case-box-pic-hover">
+								<a href="javascript:()" class="case-box-pic-hover-more">MORE +</a>
+							</div>
+							<!-- <img src="__TECH__/images/case-pic3.jpg"> -->
+						</div>
+						<div class="case-box-pic3">
+							<div class="case-box-pic3-1 cb_item" id='case_box4'>
+								<div class="case-box-pic-hover">
+									<a href="javascript:()" class="case-box-pic-hover-more">MORE +</a>
+								</div>
+								<!-- <img src="__TECH__/images/case-pic4.jpg"> -->
+							</div>
+							<div class="case-box-pic3-2 cb_item" id='case_box5'>
+								<div class="case-box-pic-hover">
+									<a href="javascript:()" class="case-box-pic-hover-more">MORE +</a>
+								</div>
+								<!-- <img src="__TECH__/images/case-pic5.jpg"> -->
+							</div>
+						</div>
+					</div>
+					<div id="case_loading">加载中，请稍后...</div>
+				</div>
+				<div class="case-icon">
+					<ul id="paging"></ul>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+		</div>
+		<div class="news">
+			<div class="cat" name="004" id="004"></div>
+			<div class="main1024">
+				<div class="news-logo"><img src="__TECH__/images/news-logo.jpg" /></div>
+				<div class="news-content" style="height:270px;">
+					<div id="case_loading2">加载中，请稍后...</div>
+					<ul id="news_ul"></ul>
+				</div>
+				<div class="case-icon">
+					<ul id="paging2">
+					</ul>
+				</div>
+				<script type="text/javascript">
+				$(".case-icon ul li a").children("ul").children("li").children("a").click(function(){
+							var a = $(this).index();
+						var b = $(".case-content").width();
+								var left =-(a*b);
+						$(".case-icon ul li").removeClass("case-icon-bgRed");
+						$(this).addClass("case-icon-bgRed");
+				});
+				</script>
+				<div style="clear:both;"></div>
+			</div>
+		</div>
+		<div class="contact" >
+			<div class="cat" name="005" id="005"></div>
+			<div class="contact-logo"><img src="__TECH__/images/contact-logo-map.jpg" /></div>
+			<div class="contact-comp">博胜信息科技（广州）有限公司</div>
+			<div class="contact-add">{$contact.contact_content}</div>
+		</div>
+		<div class="footer">
+			<div class="main1024">
+				<ul>
+					<li><a href="{:U('Index/index')}" target="_blank">博胜集团</a></li>
+					<li><a href="{:U('Inva/index')}" target="_blank">博胜互动</a></li>
+					<!-- <li><a href="{:U('Tech/index')}" target="_blank">博胜科技</a></li> -->
+					<li><a href="{:U('Bj/index')}" target="_blank">湖南博佳</a></li>
+					<li><a href="{:U('Ds/index')}" target="_blank">博胜电商</a></li>
+				</ul>
+				<div class="footer-copy">
+					版权所有 SiteServer All Rights Reserved
+				</div>
+			</div>
+		</div>
+		<a href="javascript:()" onclick="pageScroll()" class="gotop"></a>
+	</body>
+	<script type="text/javascript" src="__TECH__/js/text.js"></script>
+	<script src="__STATIC__/jquery.scrollTo.min.js"></script>
+	<script type="text/javascript" src="__TECH__/js/tech.case.js"></script>
+	<script type="text/javascript">
+	//判断滚动条滑动到400时显示按钮
+	$(window).scroll(function(){
+			var  top = $(window).scrollTop();
+		if (top>400) {
+			$(".gotop").fadeIn();
+		}else
+		{
+			$(".gotop").fadeOut();
+			};
+	})
+	function pageScroll(){
+		//把内容滚动指定的像素数（第一个参数是向右滚动的像素数，第二个参数是向下滚动的像素数）
+		window.scrollBy(0,-100);
+		//延时递归调用，模拟滚动向上效果
+		scrolldelay = setTimeout('pageScroll()',30);
+		//获取scrollTop值，声明了DTD的标准网页取document.documentElement.scrollTop，否则取document.body.scrollTop；因为二者只有一个会生效，另一个就恒为0，所以取和值可以得到网页的真正的scrollTop值
+		var sTop=document.documentElement.scrollTop+document.body.scrollTop;
+		//判断当页面到达顶部，取消延时代码（否则页面滚动到顶部会无法再向下正常浏览页面）
+		if(sTop==0) clearTimeout(scrolldelay);
+	}
+
+
+	$(document).ready(function() {
+		$('.header-nav').find('a').click(function(event) {
+            event.preventDefault();
+            var _target = $($(this).attr('href'));
+            if(_target.length > 0){
+            	$('body').scrollTo(_target,{duration:400});
+            }
+        });
+
+        $('.header-nav').find('li').eq(0).click(function(event) {
+        	event.preventDefault();
+        	pageScroll();
+        });
+	});
+
+	</script>
+</html>

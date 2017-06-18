@@ -1,0 +1,102 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <div class="main-title">
+        <h2>{$meta_title}</h2>
+    </div>
+    <form action="{:U('Slide/insert')}" method="post" class="form-horizontal">
+
+        
+        <div class="form-item">
+            <label class="item-label">幻灯片名字<span class="check-tips">（不能为空）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="slide_name" value="{$data.slide_name}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">幻灯片链接<span class="check-tips"></span></label>
+            <div class="controls">
+             <input type="text" class="text input-large" name="slide_url" value="{$data.slide_url}"> 
+            </div>
+        </div>
+       
+        <div class="form-item">
+            <label class="item-label">
+                幻灯片 
+            </label>
+            <input type="file" id="upload_picture">
+            <input type="hidden" name="slide_pic" id="slide_pic" value="{$data['slide_pic']|default=''}"/>
+            <div class="upload-img-box">
+            <notempty name="data['slide_pic']">
+                <div class="upload-pre-item" title="点击删除图片"><img src="{$data.slide_pic|get_cover='path'}"/></div>
+            </notempty>
+            </div>
+            </div>
+            <script type="text/javascript">
+            //上传图片
+            /* 初始化上传插件 */
+            $("#upload_picture").uploadify({
+                "height"          : 30,
+                "swf"             : "__STATIC__/uploadify/uploadify.swf",
+                "fileObjName"     : "download",
+                "buttonText"      : "上传图片",
+                "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+                "width"           : 120,
+                'removeTimeout'   : 1,
+                'fileTypeExts'    : '*.jpg; *.png; *.gif;',
+                "onUploadSuccess" : uploadPicture,
+                'onFallback' : function() {
+                    alert('未检测到兼容版本的Flash.');
+                }
+            });
+            function uploadPicture(file, data){
+                var data = $.parseJSON(data);
+                var src = '';
+                if(data.status){
+                    $("#slide_pic").val(data.path);
+                    src = data.url || '__ROOT__' + data.path;
+                    $("#slide_pic").parent().find('.upload-img-box').html(
+                        '<div class="upload-pre-item" title="点击删除图片"><img src="' + src + '"/></div>'
+                    );
+                } else {
+                    updateAlert(data.info);
+                    setTimeout(function(){
+                        $('#top-alert').find('button').click();
+                        $(that).removeClass('disabled').prop('disabled',false);
+                    },1500);
+                }
+            }
+            </script>
+        
+        <div class="form-item">
+            <label class="item-label">排序<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="slide_sort" value="{$data.slide_sort}">
+                
+            </div>
+        </div>
+        <div class="form-item">
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>           
+        </div>
+    </form>
+</block>
+
+<block name="script">
+    <script type="text/javascript"> 
+    highlight_subnav('{:U('Slide/index')}');
+    <if condition="$data.parent_id">
+    $(document).ready(function() {
+        $('select[name=parent_id]').val({$data.parent_id});
+    });
+
+    $('select[name=slide_type]').change(function(event) {
+         $('.check-tips_' + $(this).val()).show().siblings('.check-tips').hide();
+    });
+    $('select[name=slide_type]').trigger('change');
+
+   
+    </if>    
+    </script>
+</block>

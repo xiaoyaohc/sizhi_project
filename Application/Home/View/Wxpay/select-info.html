@@ -1,0 +1,72 @@
+<!doctype html>
+<html class="no-js">
+<include file="index/header" />
+<body style=" margin-bottom:4rem;">
+<div id="loading" class="popload">
+    <div class="popload-main">
+        <span class="popload-main-ico"></span>
+        <p class="popload-main-txt" id="progress">加载中...</p>
+    </div>
+</div>
+
+<div class="wrapper">
+    <header data-am-widget="header" class="am-header am-header-default am-header-fixed">
+        <div class="am-header-left am-header-nav">
+            <a href="javascript:;" onclick="history.back(-1);" class="am-btn">
+                <i class="am-header-icon am-icon-angle-left am-icon-sm"></i>
+            </a>
+        </div>
+        <h1 class="am-header-title">
+            请选择联系人
+        </h1>
+        <div class="am-header-right am-header-nav">
+            <button class="am-btn am-btn-primary" data-am-collapse="{target: '#collapse-nav'}"><i class="am-icon-bars am-icon-sm"></i></button>
+        </div>
+		<include file="index/nav" />
+    </header>
+	<style>
+    	
+    </style>
+    <div class="order-wrapper">
+		<div class="select_info">
+			<foreach name="stuList" item="stu" >
+			<div class="select_item">
+				<ul>
+					<li><span>{$stu['student_name']}</span></li>
+					<li>{$stu['contact']}</li>
+					<li>{$stu['school']}</li>
+					<li>{$stu['class']}</li>
+				</ul>
+				<div class="s_control">
+					<a href="{:U('Order/selectDefault','','')}/order_sn/{$order_sn}/wx_id/{$_GET['wx_id']}/stu_id/{$stu['student_id']}" class="moren <?php if($stu['is_default']==1){ echo 'moren_hover';} ?>"><i></i>设为默认<input type="radio" name="moren" <?php if($stu['is_default']==1){ echo 'checked:"checked';} ?> /></a>
+					<a href="{:U('Order/selectDel','','')}/order_sn/{$order_sn}/wx_id/{$_GET['wx_id']}/stu_id/{$stu['student_id']}" class="delete"><i></i>删除</a>
+					<a href="{:U('Order/stuAdd','','')}/order_sn/{$order_sn}/wx_id/{$_GET['wx_id']}/stu_id/{$stu['student_id']}" class="mode"><i></i>编辑</a>
+				</div>
+			</div>
+			</foreach>
+			<a href="{:U('Order/stuAdd','','')}/order_sn/{$order_sn}/wx_id/{$_GET['wx_id']}" class="select_add_info">添加新联系人</a>
+		</div>
+    </div>
+
+
+    <footer class="am-footer am-footer-default">
+        <div class="am-footer-miscs">
+            <p>CopyRight©2016  四志教育 Inc.</p>
+        </div>
+    </footer>
+</div>
+
+<script src="__ASSETS__/vendors/lib.min.js"></script>
+<script src="__ASSETS__/scripts/app.min.js"></script>
+<script>
+    $(function () {
+		$('.moren').click(function(){
+			$('.moren').removeClass('moren_hover');
+			$('.moren').find('input').attr('checked',false);
+			$(this).addClass('moren_hover');
+			$(this).find('input').attr('checked',true);
+		})
+    });
+</script>
+</body>
+</html>

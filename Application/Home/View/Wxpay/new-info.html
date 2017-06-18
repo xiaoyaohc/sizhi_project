@@ -1,0 +1,106 @@
+<!doctype html>
+<html class="no-js">
+<include file="index/header" />
+
+<body>
+<div id="loading" class="popload">
+    <div class="popload-main">
+        <span class="popload-main-ico"></span>
+        <p class="popload-main-txt" id="progress">加载中...</p>
+    </div>
+</div>
+
+<div class="wrapper">
+    <header data-am-widget="header" class="am-header am-header-default am-header-fixed">
+        <div class="am-header-left am-header-nav">
+            <a href="javascript:;" onclick="history.back(-1);" class="am-btn">
+                <i class="am-header-icon am-icon-angle-left am-icon-sm"></i>
+            </a>
+        </div>
+        <h1 class="am-header-title">
+            添加新联系人
+        </h1>
+        <div class="am-header-right am-header-nav">
+            <a href="javascript:;" onclick="$('#form').submit()" class="am-btn">保存</a>
+        </div>
+        
+    </header>
+	
+    <div class="order-wrapper app-form">     
+		<form action="{:U('Order/stuSave','','')}/order_sn/{$_GET['order_sn']}/wx_id/{$openId}/stu_id/{$stu['student_id']}" method="post" id="form">
+            <ul class="am-list">
+                <li>
+                    <span>
+                        学生姓名
+                    </span>
+                    <span class="am-fr form-ctrl">
+                        <input type="text" placeholder="请输入姓名" value="{$stu['student_name']}" name="student_name" />
+                    </span>
+                </li>
+                <li>
+                    <span>
+                        联系电话
+                    </span>
+                    <span class="am-fr form-ctrl">
+                        <input type="text" placeholder="请输入联系电话" value="{$stu['contact']}" name="contact" />
+                    </span>
+                </li>
+                <li>
+                    <span>
+                        学校
+                    </span>
+                    <span class="am-fr form-ctrl"><input type="text" placeholder="请输入学校" value="{$stu['school']}" name="school" /></span>
+                </li>
+                <li>
+                    <span>
+                        班级
+                    </span>
+                    <span class="am-fr form-ctrl">
+                        <input type="text" placeholder="请输入班级" value="{$stu['class']}" name="class"/>
+                        <input type="hidden" value="{$stu['is_default']}" id="is_default" name="is_default"/>
+                    </span>
+                </li>
+                
+            </ul>
+			<div class="app_control">
+				<ul>
+					<li>
+						<span>设为默认</span>
+						<span class="am-fr form-ctrl">
+							<a href="javascript:;" class="moren <?php if($stu['is_default']==1){ echo 'moren_hover';} ?>"><i><input type="checkbox" <?php if($stu['is_default']==1){ echo 'checked';} ?>/></i></a>
+						</span>
+					</li>
+					
+				</ul>
+			</div>
+        </form>
+    </div>
+
+
+    <footer class="am-footer am-footer-default">
+        <div class="am-footer-miscs">
+            <p>CopyRight©2016  四志教育 Inc.</p>
+        </div>
+    </footer>
+</div>
+
+<script src="__ASSETS__/vendors/lib.min.js"></script>
+<script src="__ASSETS__/scripts/app.min.js"></script>
+<script>
+    $(function () {
+		$('.moren').click(function(){
+			if($(this).find('input').attr('checked')){
+                $('#is_default').val(1);
+				$(this).removeClass('moren_hover');
+				$(this).find('input').attr('checked',false);
+			}else{
+                $('#is_default').val(0);
+                $(this).addClass('moren_hover');
+				$(this).find('input').attr('checked',true);
+			}
+			
+		})
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <div class="main-title">
+        <h2>{$meta_title}</h2>
+    </div>
+    <form action="{:U('Teacher/update')}" method="post" class="form-horizontal">
+        <div class="form-item">
+            <div class="form-item">
+            <label class="item-label">教师姓名</label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="teacher_name" value="{$data.teacher_name}">
+            </div>
+        </div>
+        <div id="contact_pic_box">
+             <div class="form-item contact_pic_box_1">
+            <label class="item-label">图片1(尺寸:400*400)</label>
+                <input type="file" id="upload_picture1">
+                <input type="hidden" name="pic1" id="pic1" value="{$data['pic1']|default=''}"/>
+                <div class="upload-img-box">
+                <notempty name="data['pic1']">
+                    <div class="upload-pre-item" title="点击删除图片"><img src="{$data.pic1}"/></div>
+                </notempty>
+                </div>
+            </div>
+            <script type="text/javascript">
+            //上传图片
+            /* 初始化上传插件 */
+            $("#upload_picture1").uploadify({
+                "height"          : 30,
+                "swf"             : "__STATIC__/uploadify/uploadify.swf",
+                "fileObjName"     : "download",
+                "buttonText"      : "上传图片",
+                "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+                "width"           : 120,
+                'removeTimeout'   : 1,
+                'fileTypeExts'    : '*.jpg; *.png; *.gif;',
+                "onUploadSuccess" : uploadPicture,
+                'onFallback' : function() {
+                    alert('未检测到兼容版本的Flash.');
+                }
+            });
+            function uploadPicture(file, data){
+                var data = $.parseJSON(data);
+                var src = '';
+                if(data.status){
+                    $("#pic1").val(data.path);
+                    src = data.url || '__ROOT__' + data.path;
+                    $("#pic1").parent().find('.upload-img-box').html(
+                        '<div class="upload-pre-item" title="点击删除图片"><img src="' + src + '"/></div>'
+                    );
+                } else {
+                    updateAlert(data.info);
+                    setTimeout(function(){
+                        $('#top-alert').find('button').click();
+                        $(that).removeClass('disabled').prop('disabled',false);
+                    },1500);
+                }
+            }
+            </script>
+        </div>
+        <div id="contact_pic_box">
+             <div class="form-item contact_pic_box_1">
+            <label class="item-label">图片2</label>
+                <input type="file" id="upload_picture2">
+                <input type="hidden" name="pic2" id="pic2" value="{$data['pic2']|default=''}"/>
+                <div class="upload-img-box">
+                <notempty name="data['pic2']">
+                    <div class="upload-pre-item" title="点击删除图片"><img src="{$data.pic2}"/></div>
+                </notempty>
+                </div>
+            </div>
+            <script type="text/javascript">
+            //上传图片
+            /* 初始化上传插件 */
+            $("#upload_picture2").uploadify({
+                "height"          : 30,
+                "swf"             : "__STATIC__/uploadify/uploadify.swf",
+                "fileObjName"     : "download",
+                "buttonText"      : "上传图片",
+                "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+                "width"           : 120,
+                'removeTimeout'   : 1,
+                'fileTypeExts'    : '*.jpg; *.png; *.gif;',
+                "onUploadSuccess" : uploadPicture,
+                'onFallback' : function() {
+                    alert('未检测到兼容版本的Flash.');
+                }
+            });
+            function uploadPicture(file, data){
+                var data = $.parseJSON(data);
+                var src = '';
+                if(data.status){
+                    $("#pic2").val(data.path);
+                    src = data.url || '__ROOT__' + data.path;
+                    $("#pic2").parent().find('.upload-img-box').html(
+                        '<div class="upload-pre-item" title="点击删除图片"><img src="' + src + '"/></div>'
+                    );
+                } else {
+                    updateAlert(data.info);
+                    setTimeout(function(){
+                        $('#top-alert').find('button').click();
+                        $(that).removeClass('disabled').prop('disabled',false);
+                    },1500);
+                }
+            }
+            </script>
+        </div>
+        <div id="contact_pic_box">
+             <div class="form-item contact_pic_box_1">
+            <label class="item-label">图片3</label>
+                <input type="file" id="upload_picture3">
+                <input type="hidden" name="pic3" id="pic3" value="{$data['pic3']|default=''}"/>
+                <div class="upload-img-box">
+                <notempty name="data['pic3']">
+                    <div class="upload-pre-item" title="点击删除图片"><img src="{$data.pic3}"/></div>
+                </notempty>
+                </div>
+            </div>
+            <script type="text/javascript">
+            //上传图片
+            /* 初始化上传插件 */
+            $("#upload_picture3").uploadify({
+                "height"          : 30,
+                "swf"             : "__STATIC__/uploadify/uploadify.swf",
+                "fileObjName"     : "download",
+                "buttonText"      : "上传图片",
+                "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+                "width"           : 120,
+                'removeTimeout'   : 1,
+                'fileTypeExts'    : '*.jpg; *.png; *.gif;',
+                "onUploadSuccess" : uploadPicture,
+                'onFallback' : function() {
+                    alert('未检测到兼容版本的Flash.');
+                }
+            });
+            function uploadPicture(file, data){
+                var data = $.parseJSON(data);
+                var src = '';
+                if(data.status){
+                    $("#pic3").val(data.path);
+                    src = data.url || '__ROOT__' + data.path;
+                    $("#pic3").parent().find('.upload-img-box').html(
+                        '<div class="upload-pre-item" title="点击删除图片"><img src="' + src + '"/></div>'
+                    );
+                } else {
+                    updateAlert(data.info);
+                    setTimeout(function(){
+                        $('#top-alert').find('button').click();
+                        $(that).removeClass('disabled').prop('disabled',false);
+                    },1500);
+                }
+            }
+            </script>
+        </div>
+        <div class="form-item">
+            <label class="item-label">所属区域</label>
+            <div class="controls">
+                <select name="area_id">
+                    <option value="0" >请选择</option>
+                    <foreach name="area" item="opt" key="opt_k">
+                        <option value="{$opt.id}" <eq name="data.area_id" value="$opt.id"> selected</eq>>{$opt.area_name}</option>
+                    </foreach>
+                </select>
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">教龄<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="senority" value="{$data.senority}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">手机号码<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="add_phone" value="{$data.add_phone}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">微信id<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="wx_id" value="{$data.wx_id}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">企业号账户<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="accounts" value="{$data.accounts}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">推荐排序<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="rank" value="{$data.rank}">
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">描述<span class="check-tips"></span></label>
+            <div class="controls">
+                <div class="textarea input-large">
+                    <textarea name="introduce" rows="7" cols="56">{$data.introduce}</textarea>
+                </div>                
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">银行卡账号<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="bank_num" value="{$data.bank_num}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">银行帐户名<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="bank_name" value="{$data.bank_name}">
+            </div>
+        </div>
+        <div class="form-item">
+            <input type="hidden" name="teacher_id" value="{$data.teacher_id}">
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>           
+        </div>
+    </form>
+</block>
+
+<block name="script">
+    <script type="text/javascript"> 
+    highlight_subnav('{:U('Teacher/index')}');
+
+    $('select[name=info_type]').change(function(event) {
+         $('.check-tips_' + $(this).val()).show().siblings('.check-tips').hide();
+    });
+    $('select[name=info_type]').trigger('change');
+    
+    <if condition="$data.parent_id">
+    // $(document).ready(function() {
+    //     $('select[name=parent_id]').val({$data.parent_id});
+    // });
+    </if>    
+    </script>
+</block>

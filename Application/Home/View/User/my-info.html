@@ -1,0 +1,119 @@
+<!doctype html>
+<html class="no-js">
+<include file="index/header" />
+<body>
+<div id="loading" class="popload">
+    <div class="popload-main">
+        <span class="popload-main-ico"></span>
+        <p class="popload-main-txt" id="progress">加载中...</p>
+    </div>
+</div>
+
+<div class="wrapper">
+    <header data-am-widget="header" class="am-header am-header-default am-header-fixed">
+        <div class="am-header-left am-header-nav">
+            <a href="{:U('Index/Home')}" class="am-btn">
+                <i class="am-header-icon am-icon-angle-left am-icon-sm"></i>
+            </a>
+        </div>
+        <h1 class="am-header-title">
+            个人中心
+        </h1>
+        <div class="am-header-right am-header-nav">
+            <button class="am-btn am-btn-primary" data-am-collapse="{target: '#collapse-nav'}"><i class="am-icon-bars am-icon-sm"></i></button>
+        </div>
+        <include file="index/nav" />
+    </header>
+
+    <div class="container">
+        <!--<div class="uc-header am-g am-padding-xs">-->
+            <!--<div class="am-u-sm-4">-->
+                <!--<img src="__ASSETS__/images/p1.jpg" alt="" class="am-img-thumbnail am-img-responsive am-circle">-->
+            <!--</div>-->
+            <!--<div class="am-u-sm-8">-->
+                <!--<h3>-->
+                    <!--张三，欢迎登陆~-->
+                <!--</h3>-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <div class="am-tabs am-tabs-d2 am-no-layout uc-top-tabs">
+            <ul class="am-tabs-nav am-cf">
+                <li>
+                    <a href="{:U('User/UserCenter')}">
+                        我的课程
+                    </a>
+                </li>
+                <li>
+                    <a href="{:U('User/userScore')}">
+                        历史成绩
+                    </a>
+                </li>
+                <li class="am-active">
+                    <a href="{:U('User/UserInfo')}">
+                        个人信息
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="order-wrapper app-form">
+            <form action="{:U('User/UserInfoEdit','','')}" method="post">
+                <ul class="am-list">
+                    <li>
+                        <span>
+                            头像
+                        </span>
+                        <span class="am-fr form-ctrl am-cf">
+                            <img src="{$UserInfo.pic}" class="head-img am-fr" alt="">
+                            <button style="display: none;" class="am-btn am-btn-default"><i class="am-icon-upload"></i> 点我上传</button>
+                        </span>
+                    </li>
+                    <li>
+                        <span>
+                            昵称
+                        </span>
+                        <span class="am-fr form-ctrl"><input type="text" placeholder="昵称" value="{$UserInfo.nick_name}" name="nick_name"></span>
+                    </li>
+                    <li>
+                        <span>
+                            姓名
+                        </span>
+                        <span class="am-fr form-ctrl"><input type="text" placeholder="请输入姓名" value="{$UserInfo.wx_username}" name="wx_username"></span>
+                    </li>
+                    <li>
+                        <span>
+                            电话
+                        </span>
+                        <span class="am-fr form-ctrl"><input type="text" placeholder="请输入电话" value="{$UserInfo.contact}" name="contact"></span>
+                    </li>
+                    <li>
+                        <span>
+                            学校
+                        </span>
+                        <span class="am-fr form-ctrl"><input type="text" placeholder="请输入学校" value="{$UserInfo.school}" name="school"></span>
+                    </li>
+                    <li>
+                        <span>
+                            班级
+                        </span>
+                        <span class="am-fr form-ctrl"><input type="text" placeholder="请输入班级" value="{$UserInfo.class}" name="class"></span>
+                    </li>
+                    <li>
+                        <button class="am-btn am-btn-danger am-btn-block am-btn-lg">确认修改</button>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+
+    <footer class="am-footer am-footer-default">
+        <div class="am-footer-miscs">
+            <p>CopyRight©2016  四志教育 Inc.</p>
+        </div>
+    </footer>
+</div>
+
+<script src="__ASSETS__/vendors/lib.min.js"></script>
+<script src="__ASSETS__/scripts/app.min.js"></script>
+</body>
+</html>

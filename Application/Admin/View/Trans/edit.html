@@ -1,0 +1,65 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <div class="main-title">
+        <h2>{$meta_title}</h2>
+    </div>
+    <form action="{:U('Trans/update')}" method="post" class="form-horizontal">
+        <div class="form-item">
+            <label class="item-label">订单号:{$data.order_id}</label>
+                
+        </div>
+        <div class="form-item">
+            <label class="item-label">学生:{$data.nick_name}</label>
+                
+        </div>
+        <div class="form-item">
+            <label class="item-label">课程:{$data.class_name}</label>
+                
+        </div>
+        <div class="form-item">
+            <label class="item-label">科目:{$data.subject_name}</label>
+                
+        </div>
+        <div class="form-item">
+            <label class="item-label">金额:{$data.pay_money}<span class="check-tips"></span></label>
+                
+        </div>
+        <div class="form-item">
+            <label class="item-label">上课时间<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" name="class_stime" class="text  time" value="{$current|date='Y-m-d H:i',###}"  />格式：2016-01-02 10:00
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">课程状态</label>
+            <div class="controls">
+                 <input type="radio" class="px" id="class_status" value="1" name="class_status" <eq name="data.class_status" value="1"> checked</eq>/>已完成 &nbsp;&nbsp;
+                 <input type="radio" class="px" id="class_status" value="0" name="class_status" <eq name="data.class_status" value="0"> checked</eq> />未完成
+            </div>
+        </div>
+        <div class="form-item">
+            <input type="hidden" name="id" value="{$data.id}">
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>           
+        </div>
+    </form>
+</block>
+
+<block name="script">
+    <script type="text/javascript"> 
+    highlight_subnav('{:U('Trans/index')}');
+
+    $('select[name=info_type]').change(function(event) {
+         $('.check-tips_' + $(this).val()).show().siblings('.check-tips').hide();
+    });
+    $('select[name=info_type]').trigger('change');
+    
+    <if condition="$data.parent_id">
+    // $(document).ready(function() {
+    //     $('select[name=parent_id]').val({$data.parent_id});
+    // });
+    </if>    
+    </script>
+</block>

@@ -1,0 +1,51 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <div class="main-title">
+        <h2>{$meta_title}</h2>
+    </div>
+    <form action="{:U('Areaorder/update')}" method="post" class="form-horizontal">
+        <div class="form-item">
+            <label class="item-label">订单号:{$data.order_id}</label>               
+        </div>
+        <div class="form-item">
+            <label class="item-label">校区:{$data.area_name}</label>               
+        </div>
+         <div class="form-item">
+            <label class="item-label">订单价格:{$data.pay_money}</label>               
+        </div>
+         <div class="form-item">
+            <label class="item-label">校区收入:{$data.income}</label>               
+        </div>
+        <div class="form-item">
+            <label class="item-label">结算状态</label>
+            <div class="controls">
+                 <input type="radio" class="px" id="statements_status" value="1" name="statements_status" <eq name="data.statements_status" value="1"> checked</eq>/>已结算 &nbsp;&nbsp;
+                 <input type="radio" class="px" id="statements_status" value="0" name="statements_status" <eq name="data.statements_status" value="0"> checked</eq> />未结算
+            </div>
+        </div>
+        <div class="form-item">
+            <input type="hidden" name="id" value="{$data.id}">
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>           
+        </div>
+    </form>
+</block>
+
+<block name="script">
+    <script type="text/javascript"> 
+    highlight_subnav('{:U('Areaorder/index')}');
+
+    $('select[name=info_type]').change(function(event) {
+         $('.check-tips_' + $(this).val()).show().siblings('.check-tips').hide();
+    });
+    $('select[name=info_type]').trigger('change');
+    
+    <if condition="$data.parent_id">
+    // $(document).ready(function() {
+    //     $('select[name=parent_id]').val({$data.parent_id});
+    // });
+    </if>    
+    </script>
+</block>

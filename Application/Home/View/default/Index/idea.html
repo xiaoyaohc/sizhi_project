@@ -1,0 +1,52 @@
+<extend name="Base/main" />
+<block name="left_cont">
+	<div class="idea">
+            <div class="con_pd idea-title"></div>
+            <img class="con_pd idea-img" src="__MAIN__/images/idea-img.gif"/>
+            <div class="con_pd idea-text">
+                <p>
+                    博胜集团为客户提供的服务从最初单一的网络传播推广，逐步发展为以“博胜空间理论”为基础；以互联网平台的应用为核心，整合品牌网络口碑、无线广告、电子商务为传播领域一体化的综合营销服务体系，将客户的推广价值最大化。
+                </p>
+                <p>
+                    以结果导向结论，利用博胜传播，理念化管理，形成全方位的传播数据库，通过对数据的科学、深度、有效分析为策略、内容、渠道、执行不断提供优化依据 促使传播效果最大化，体现在传播策略有效性的全程监控及优化、提升传播内容创意病毒性扩散、促使传播渠道不断精细精准，从而达成目标受众行为轨迹的深度把控。
+                </p>
+            </div>
+        </div>
+</block>
+<block name="script">
+	<script>
+    $(function(){
+        function windwoSize(){
+            var viewHeight = document.documentElement.clientHeight;
+            if(viewHeight > 626){
+                var nab_pd = (viewHeight-487)/6;
+                    $(".right-content").children(".nav").children("ul").children("li").children("a").css({
+                    'padding-top':nab_pd+'px',
+                });
+                var idea_pd = (viewHeight-615)/4;
+                $(".con_pd").css({
+                    'margin-top':idea_pd+'px'
+                });
+            
+            }
+            else{
+                var nab_pd = (626-487)/6;
+                    $(".right-content").children(".nav").children("ul").children("li").children("a").css({
+                    'padding-top':nab_pd+'px',
+                });
+                var idea_pd = (626-615)/3;
+                $(".con_pd").css({
+                    'margin-top':idea_pd+'px'
+                });
+
+                
+            }
+        }
+        windwoSize();
+        window.addEventListener("resize", function () {
+            windwoSize();    
+        });
+    })
+    
+</script>
+</block>

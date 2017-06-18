@@ -1,0 +1,93 @@
+<!doctype html>
+<html class="no-js">
+<include file="index/header" />
+<body>
+<div id="loading" class="popload">
+    <div class="popload-main">
+        <span class="popload-main-ico"></span>
+        <p class="popload-main-txt" id="progress">加载中...</p>
+    </div>
+</div>
+
+<div class="wrapper">
+    <header data-am-widget="header" class="am-header am-header-default am-header-fixed">
+        <div class="am-header-left am-header-nav">
+            <a href="{:U('Index/Home')}" class="am-btn">
+                <i class="am-header-icon am-icon-angle-left am-icon-sm"></i>
+            </a>
+        </div>
+        <h1 class="am-header-title">
+            收入
+        </h1>
+        <div class="am-header-right am-header-nav">
+            <button class="am-btn am-btn-primary" data-am-collapse="{target: '#collapse-nav'}"><i class="am-icon-bars am-icon-sm"></i></button>
+        </div>
+        <include file="index/nav" />
+    </header>
+
+    <div class="container">
+        <article class="am-article about-article">
+
+            <div class="am-g">
+                <div class="am-u-sm-4 am-u-sm-offset-4">
+                    <img src="__ASSETS__/images/sizhi.png" alt="" class="am-img-responsive am-img-thumbnail am-circle">
+                </div>
+            </div>
+
+            <div class="order-wrapper app-form">
+                <ul class="am-list">
+                    <?php if(!empty($AgentRatio) || !empty($LastAgentRatio)){?>
+                    <li>
+                        <span>
+                            代理商：
+                        </span>
+                        <span class="am-fr">
+                            <foreach name="LastAgentRatio" item="Ratio">
+                            您{$Ratio['time']}的结算收入为¥{$Ratio['ratio']}元，<br />
+                            </foreach>
+                            本月累积结算收入为¥<?php echo empty($AgentRatio)?0:$AgentRatio; ?>元。
+                        </span>
+                    </li>
+                    <?php }?>
+                    <?php if(!empty($AreaRatio) || !empty($LastAreaRatio)){?>
+                    <li>
+                        <span>
+                            商家：
+                        </span>
+                        <span class="am-fr">
+                            <foreach name="LastAreaRatio" item="Ratio">
+                            您{$Ratio['time']}的结算收入为¥{$Ratio['ratio']}元，<br />
+                            </foreach>
+                            本月累积结算收入为¥<?php echo empty($AreaRatio)?0:$AreaRatio; ?>元。
+                        </span>
+                    </li>
+                    <?php }?>
+                    <?php if(!empty($TeachRatio) || !empty($LastTeachRatio)){?>
+                    <li>
+                        <span>
+                            老师：
+                        </span>
+                        <span class="am-fr">
+                            <foreach name="LastTeachRatio" item="Ratio">
+                            您{$Ratio['time']}的结算收入为¥{$Ratio['ratio']}元，<br />
+                            </foreach>
+                            本月累积结算收入为¥<?php echo empty($TeachRatio)?0:$TeachRatio; ?>元。
+                        </span>
+                    </li>
+                    <?php }?>
+                </ul>
+            </div>
+        </article>
+    </div>
+
+    <footer class="am-footer am-footer-default">
+        <div class="am-footer-miscs">
+            <p>CopyRight©2016  四志教育 Inc.</p>
+        </div>
+    </footer>
+</div>
+
+<script src="__ASSETS__/vendors/lib.min.js"></script>
+<script src="__ASSETS__/scripts/app.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>博佳-{$list.case_name}</title>
+    <!--核心配置-->
+    <!--<link href="__BJ__/css/bootstrap-theme.css" rel="stylesheet" type="text/css" />-->
+    <link href="__BJ__/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="__BJ__/css/comm.css" rel="stylesheet" type="text/css" />
+    <!--web css-->
+    <link href="__BJ__/css/layout.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+<div class="main">
+    <div class="header">
+        <div class="header-main">
+            <div class="header-logo"></div>
+            <div class="header-nav">
+                <ul>
+                    <li>
+                        <a href="{:U('Bj/index')}#f">
+                            首页
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{:U('Bj/index')}#a">
+                            关于我们
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{:U('Bj/index')}#b">
+                            客户案例
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{:U('Bj/index')}#c">
+                            博佳服务
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{:U('Bj/index')}#d">
+                            新闻中心
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{:U('Bj/index')}#e">
+                            联系我们
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="box86"></div>
+    <div class="navigation">
+        <div class="navigation-main">
+            <a href="{:U('Bj/index')}#f">首页</a> > <a href="{:U('Bj/cases')}">客户案例</a> ><span> {$list.case_name}</span>
+        </div>
+    </div>
+    <div class="page">
+        <notempty name="list.case_pic">
+            <img src="{$list.case_pic}">
+        </notempty>
+        <h3>
+            {$list.case_name}
+        </h3>
+        <span class="time">
+            <!-- {$list.case_time|time_format} -->
+        </span>
+        {$list.case_content}
+        <a class="return" href="javascript:void(0);" onclick ="history.go(-1);">
+            返 回
+        </a>
+    </div>
+    <div class="footer">
+        <div class="footer-main">
+            版权所有 SiteServer All Rights Reserved
+        </div>
+    </div>
+</div>
+
+<!--bootstrap js-->
+<script src="__BJ__/js/jquery.min.js"></script>
+<script src="__BJ__/js/bootstrap.js"></script>
+
+
+
+</body>
+</html>

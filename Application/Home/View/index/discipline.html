@@ -1,0 +1,136 @@
+<!doctype html>
+<html class="no-js">
+<include file="index/header" />
+<body>
+<div id="loading" class="popload">
+    <div class="popload-main">
+        <span class="popload-main-ico"></span>
+        <p class="popload-main-txt" id="progress">加载中...</p>
+    </div>
+</div>
+
+<div class="wrapper">
+    <header data-am-widget="header" class="am-header am-header-default am-header-fixed">
+        <div class="am-header-left am-header-nav">
+            <a href="{:U('Index/Home')}" class="am-btn">
+                <i class="am-header-icon am-icon-angle-left am-icon-sm"></i>
+            </a>
+        </div>
+        <h1 class="am-header-title">
+            纪律之星排名
+        </h1>
+        <div class="am-header-right am-header-nav">
+            <button class="am-btn am-btn-primary" data-am-collapse="{target: '#collapse-nav'}"><i class="am-icon-bars am-icon-sm"></i></button>
+        </div>
+        <include file="index/nav" />
+    </header>
+
+    <div class="container rank_list">
+        <foreach name="rank" item="Info">
+            <div class="rank_item">
+                <dl class="rank_default">
+                    <dt style="background:url('') no-repeat; width:7rem ">
+                        <i class="ricon ricon-1" style="background:url(__ASSETS__/images/star-on.png) center no-repeat;"></i>
+                    </dt>
+                    <dd>
+                        <div style="font-size: 20px;">第{$key+1}名：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {$Info.student_name}</div>
+                        <a href="javascript:;" class="rank_zan" student_id="{$Info.student_id}"><i></i><span class="vote_num" >{$Info.vote_num}</span></a>
+                    </dd>
+                </dl>
+                <ul class="rank_comment">
+                    <li>评论：{$Info.comment}</li>
+                </ul>
+            </div>
+        </foreach>
+    </div>
+
+    <?php if(1==0){ ?>
+    <div class="container">
+        <ul class="rank-list am-list" id="rank-list">
+        <foreach name="rank" item="Info">
+            <li class="am-g">
+                <div class="am-u-sm-2">
+                    <i class="ricon ricon-1" style="background:url(__ASSETS__/images/star-on.png) no-repeat;"></i>
+                </div>
+                <div class="am-u-sm-10">
+                    <div class="am-g">
+                    <!--    <div class="am-u-sm-3">
+                            <img src="{$Info.pic}" alt="" class="am-img-thumbnail am-img-responsive am-circle">
+                        </div>  --> 
+                        <div class="am-u-sm-9">
+                            <h3>
+                                第{$key+1}名：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {$Info.student_name}
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </foreach>
+        </ul>
+    </div>
+    <?php } ?>
+
+    <footer class="am-footer am-footer-default">
+        <div class="am-footer-miscs">
+            <p>CopyRight©2016  四志教育 Inc.</p>
+        </div>
+    </footer>
+</div>
+
+<script src="__ASSETS__/vendors/lib.min.js"></script>
+<script src="__ASSETS__/scripts/app.min.js"></script>
+<script>
+    wx.ready(function () {
+        var shareData = {
+            title: '四志教育-纪律之星排名',
+            desc: "<?php echo $rank['0']['rankShare']['student_name'].'-第'.$rank['0']['rankShare']['order'].'名'; ?>",
+            link: 'http://<?php echo C('WX_CONFIG.domain').$_SERVER["REQUEST_URI"];?>',
+            imgUrl: 'http://<?php echo C('WX_CONFIG.domain');?>/Public/Home/assets/images/sizhi.png',
+            trigger: function (res) {
+            // alert('用户点击发送给朋友');
+            },
+            success: function (res) {
+            alert('已分享');
+            },
+            cancel: function (res) {
+            alert('已取消');
+            },
+            fail: function (res) {
+            alert(JSON.stringify(res));
+            }
+        };
+        wx.onMenuShareAppMessage(shareData);
+        var shareTimelineData = shareData;
+        shareTimelineData.title = "纪律之星排名-<?php echo $rank['0']['rankShare']['student_name'].'-第'.$rank['0']['rankShare']['order'].'名'; ?>";
+        wx.onMenuShareTimeline(shareTimelineData);
+    });
+
+    $(function () {
+        app.rankHandle();
+    });
+
+    //点赞功能
+    $('.rank_zan').click(function(){
+        var obj = $(this);
+        var vote_type=0;    //进步之星
+        var student_id=$(this).attr('student_id');
+        $.post("{:U('Index/vote','','')}",{vote_type:vote_type,student_id:student_id},function(res){
+            if(res.status==1){
+//                alert('成功');
+                obj.find('.vote_num').html(parseInt(obj.find('.vote_num').html())+1);
+            }else{
+                if(res.status==2){
+//                    alert('取消');
+                    obj.find('.vote_num').html(parseInt(obj.find('.vote_num').html())-1);
+                }
+                if(res.status==0){
+//                    alert('失败');
+                    return false;
+                }
+            }
+        });
+
+    })
+</script>
+</body>
+</html>

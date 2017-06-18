@@ -1,0 +1,120 @@
+<extend name="Public/base" />
+
+<block name="body">
+	<!-- 标题栏 -->
+	<div class="main-title">
+		<h2>{$meta_title}</h2>
+	</div>
+	<div class="cf">
+        <!-- 高级搜索 -->
+		<div class="search-form fr cf">
+			<form>
+			<div style="float:left; margin-right:5px;">
+                年:
+				<select name="year">
+                    <option value="0" >请选择</option>
+                    <foreach name="year_type" item="opt" key="opt_k">
+                        <option value="{$opt_k}" <eq name="year" value="$opt_k"> selected</eq>>{$opt}</option>
+                    </foreach>
+                </select>
+                月:
+				<select name="month">
+                    <option value="0" >请选择</option>
+                    <foreach name="month_type" item="opt" key="opt_k">
+                        <option value="{$opt_k}" <eq name="month" value="$opt_k"> selected</eq>>{$opt}</option>
+                    </foreach>
+                </select>
+            </div>
+			<div class="sleft">
+				<input type="text" name="teacher_name" class="search-input" value="{:I('teacher_name')}" placeholder="教师名称">
+				<a class="sch-btn" href="javascript:;" id="search" url="{:U('index')}"><i class="btn-search"></i></a>
+			</div>
+		    </form>
+		</div>
+        
+    </div>
+    <!-- 数据列表 -->
+    <div class="data-table table-striped">
+	<table class="">
+    <thead>
+        <tr>
+	        
+			<th class="">日期</th>
+			<th class="">教师</th>
+			<th class="">课程</th>
+			<th class="">提成比例</th>
+			<th class="">订单金额</th>
+			<th class="">工资</th>
+		</tr>
+    </thead>
+    <tbody>
+		<notempty name="info">
+		<volist name="info" id="vo">
+		<tr>
+			
+			<td>{$vo.y}年{$vo.m}月</td>
+			<td>{$vo.teacher_name}</td>
+			<td>{$vo.class_name}</td>
+			<td>{$vo.proportion}</td>
+			<td>{$vo.pay_money}</td>
+			<td>{$vo.salary}</td>		
+		</tr>
+		</volist>
+		<else/>
+		<td colspan="9" class="text-center"> aOh! 暂时还没有内容! </td>
+		</notempty>
+	</tbody>
+	<tbody>
+		<notempty name="data">
+		<tr style="background:yellow;">
+			<td colspan="5">总计</td>
+			<td>{$data.sumd_salary}</td>		
+		</tr>
+		</notempty>
+	</tbody>
+    </table>
+	</div>
+    <div class="page">
+        {$_page}
+    </div>
+</block>
+
+<block name="script">
+	<script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+
+	<script type="text/javascript">
+	//搜索功能
+	$("#search").click(function(){
+		var url = $(this).attr('url');
+        var query  = $('form').serialize();
+        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+        query = query.replace(/^&/g,'');
+        if( url.indexOf('?')>0 ){
+            url += '&' + query;
+        }else{
+            url += '?' + query;
+        }
+		window.location.href = url;
+	});
+	//回车搜索
+	$(".search-input").keyup(function(e){
+		if(e.keyCode === 13){
+			$("#search").click();
+			return false;
+		}
+	});
+    //导航高亮
+    highlight_subnav('{:U('Salary/index')}');
+
+    $(document).ready(function() {
+    	$('#select').val("{:U('Salary/index',array('parent_id'=>$parent_id))}");	
+    	$('#select').change(function(){
+    		location.href = $(this).val();
+    	});
+
+    	$('select[name=info_type]').change(function(event) {
+    		$('#search').click();
+    	});
+    });
+	</script>
+</block>

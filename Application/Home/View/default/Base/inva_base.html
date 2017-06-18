@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>{$seoTitle}</title>
+		<link rel="stylesheet" type="text/css" href="__INVA__/css/lrtk.css"/>
+		<link rel="stylesheet" type="text/css" href="__INVA__/css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="__INVA__/css/styles.css"/>
+		<script type="text/javascript" src="__INVA__/js/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="__INVA__/js/common.js"></script>
+	</head>
+	<body>
+		<div class="header" name="000" id="000" >
+			<div class="wrapper">
+				<div class="header-logo"></div>
+				<div class="header-nav">
+					<ul>
+						<li><a href="{:U('index')}#">首页</a></li>
+						<li class="<?php echo $Think.ACTION_NAME=='about'?'active':''; ?>"><a href="{:U('about')}">关于我们</a></li>
+						<li class="<?php echo ($Think.ACTION_NAME=='works'||$Think.ACTION_NAME=='works_detail')?'active':''; ?>"><a href="{:U('works')}">客户案例</a></li>
+						<li class="<?php echo $Think.ACTION_NAME=='solutions'?'active':''; ?>"><a href="{:U('solutions')}">解决方案</a></li>
+						<li class="<?php echo ($Think.ACTION_NAME=='newscenter'||$Think.ACTION_NAME=='news_detail')?'active':''; ?>"><a href="{:U('newscenter')}">新闻中心</a></li>
+						<li><a href="{:U('index')}#002">联系我们</a></li>
+					</ul>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+		</div>
+		
+		<!-- content -->
+		<block name="content"></block>
+		<!-- content -->
+		
+		<div class="contact" name="002" id="002">
+	    	<div class="wrapper">
+			    <div class="contact-left" >
+			        <div class="contact-name">
+			        	{$contact.contact_name}
+			        </div>
+				    <div class="contact-add">
+				            <!-- 博胜互动为客户提供完整的网络营销策略及专业的广告服务与支持<br />
+				    		地 址：{$contact.contact_address}<br />
+							电话：{$contact.contact_tel} <br />
+							传真号：{$contact.contact_fax}<br />
+							邮箱：{$contact.contact_email} <br /> -->
+							{$contact.contact_content}
+			    	</div> 		    	
+			    </div> 
+			    <ul>
+		    		<li><a href="{:U('Index/index')}" target="_blank">博胜集团</a></li>
+		    		<li><a href="{:U('Tech/index')}" target="_blank">博胜科技</a></li>
+		    		<li><a href="{:U('Bj/index')}" target="_blank">湖南博佳</a></li>
+		    		<li><a href="{:U('Ds/index')}" target="_blank">博胜电商</a></li>
+		    	</ul>
+			    <div style="clear:both;"></div>			    		    	
+	        </div>
+	    </div>
+
+		<div class="footer">
+			版权所有 SiteServer All Rights Reserved
+		</div>
+		<a href="javascript:pageScroll();" class="gotop"></a>
+	</body>
+	<script type="text/javascript" src="__INVA__/js/text.js"></script>
+	<script type="text/javascript">
+	/*判断滚动条滑动到400时显示按钮*/
+	$(window).scroll(function(){
+		$(".gotop")[$(window).scrollTop()>400?'fadeIn':'fadeOut']();		
+	});
+	function pageScroll(){
+		window.scrollBy(0,-100);
+		scrolldelay = setTimeout('pageScroll()',30);
+		var sTop=document.documentElement.scrollTop+document.body.scrollTop;
+		if(sTop==0) clearTimeout(scrolldelay);
+		return false;
+	}
+	</script>
+</html>

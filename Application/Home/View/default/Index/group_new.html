@@ -1,0 +1,117 @@
+<extend name="Base/main" />
+<block name="left_cont">
+    <div class="about">
+        <div class="con-pd about-title-1"></div>
+
+        <div class="group_cont">
+            <div id="fullpage" style="display:none;">
+                <div class="section">
+                    <div class="slide"> 
+                        <div class="group_cont_item group_cont_1">
+                            <div class="inner group_cont_inner">
+                                <div class="left_nav">
+                                    <a class="active" target="_blank" href="{:U('Inva/index')}">
+                                        <span class="maker"></span>
+                                        <span class="hover"></span>
+                                        博胜互动
+                                    </a>
+                                    <a target="_blank" href="{:U('Tech/index')}">
+                                        <span class="maker"></span>
+                                        <span class="hover"></span>
+                                        博胜科技
+                                    </a>
+                                    <a target="_blank" href="{:U('Bj/index')}">
+                                        <span class="maker"></span>
+                                        <span class="hover"></span>
+                                        湖南博佳
+                                    </a>
+                                    <a target="_blank" href="{:U('Ds/index')}">
+                                        <span class="maker"></span>
+                                        <span class="hover"></span>
+                                        博胜电商
+                                    </a>
+                                </div>
+                                <div class="group_txt">
+                                        <p>
+                                        集团致力于为企业提供基于互联网的全套解决方案，为企业信息化建设做出努力，全力为客户缔造个性化的网络空间，助力企业成长。公司聚集IT界的精英，由造诣资深的网络工程师、电脑程序员、营销顾问及专业客服团队、美术设计师、专业撰写人员等组成。
+                                        </p>
+                                        <p>
+                                            这是一支“自强不息、坚韧不拔、勇于创新、讲求实效”的团队。
+                                        </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide"> 
+                        <div class="group_cont_item group_cont_item2 group_cont_item3">
+                            <img src="__MAIN__/images/p2.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</block>
+<block name="script">
+<link rel="stylesheet" href="__STATIC__/fullpage/jquery.fullpage.min.css">
+<script type="text/javascript" src="__STATIC__/fullpage/jquery.fullpage.min.js"></script>
+<script>
+    $(function(){        
+        function windwoSize(){
+            var viewHeight = document.documentElement.clientHeight;
+            // alert(viewHeight)
+            if(viewHeight > 735){
+                var nab_pd = (viewHeight-487)/5;
+                    $(".right-content").children(".nav").children("ul").children("li").children("a").css({
+                    'padding-top':nab_pd+'px',
+                });
+                var content_pd = (viewHeight-556)/7;
+                $(".con-pd").css({
+                    'margin-top':content_pd+'px'
+                });
+
+
+                $('.group_cont_item').css({
+                    'margin-top': content_pd + 60 + "px"
+                });
+
+                $('.group_cont').removeClass('fix_1366');
+            }
+            else{
+                var nab_pd = (626-487)/3;
+                $(".right-content").children(".nav").children("ul").children("li").children("a").css({
+                    'padding-top':nab_pd+'px',
+                });
+                var content_pd = (626-556)/5;
+                $(".con-pd").css({
+                    'margin-top':content_pd+'px'
+                });
+                $('.group_cont_item').css({
+                    'margin-top': 0
+                });
+                $('.group_cont').addClass('fix_1366');
+            }
+            
+        }
+        windwoSize();
+        window.addEventListener("resize", function () {
+            windwoSize();    
+        });
+        
+
+        $('#fullpage').show().fullpage({
+            slidesNavigation: true,
+            slidesNavPosition: 'bottom'
+        });
+
+        var index = 0;
+        setInterval(function(){
+            index++;
+            index = index%4;
+            $('.left_nav a').eq(index).addClass('active').siblings('a').removeClass('active');
+        },4000);
+
+    })
+</script>
+</block>

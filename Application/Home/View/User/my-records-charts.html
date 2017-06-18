@@ -1,0 +1,84 @@
+<!doctype html>
+<html class="no-js">
+<include file="index/header" />
+<body>
+<div id="loading" class="popload">
+    <div class="popload-main">
+        <span class="popload-main-ico"></span>
+        <p class="popload-main-txt" id="progress">加载中...</p>
+    </div>
+</div>
+
+<div class="wrapper">
+    <header data-am-widget="header" class="am-header am-header-default am-header-fixed">
+        <div class="am-header-left am-header-nav">
+            <a href="{:U('Index/Home')}" class="am-btn">
+                <i class="am-header-icon am-icon-angle-left am-icon-sm"></i>
+            </a>
+        </div>
+        <h1 class="am-header-title">
+            个人中心
+        </h1>
+        <div class="am-header-right am-header-nav">
+            <button class="am-btn am-btn-primary" data-am-collapse="{target: '#collapse-nav'}"><i class="am-icon-bars am-icon-sm"></i></button>
+        </div>
+        <include file="index/nav" />
+    </header>
+
+    <div class="container">
+        <div class="am-tabs am-tabs-d2 am-no-layout uc-top-tabs">
+            <ul class="am-tabs-nav am-cf">
+                <li>
+                    <a href="{:U('User/UserCenter')}">
+                        我的课程
+                    </a>
+                </li>
+                <li class="am-active">
+                    <a href="">
+                        历史成绩
+                    </a>
+                </li>
+                <li>
+                    <a href="{:U('User/UserInfo')}">
+                        个人信息
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="am-padding-top">
+            <div class="recordCharts" id="recordCharts"></div>
+            <div class="am-margin-xl am-text-center am-padding">
+                <a href="{:U('User/UserScore')}" class="am-btn am-btn-primary">返回</a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="am-footer am-footer-default">
+        <div class="am-footer-miscs">
+            <p>CopyRight©2016  四志教育 Inc.</p>
+        </div>
+    </footer>
+</div>
+
+<script src="__ASSETS__/vendors/lib.min.js"></script>
+<!--echarts-->
+<script src="__ASSETS__/vendors/echarts/echarts.min.js"></script>
+<script src="__ASSETS__/scripts/app.min.js"></script>
+<script>
+$(function () {
+    app.myReccords({
+        text:"历史{$ScoreInfo['subject_name']}成绩",
+        subText:"最近{$ScoreInfo['count']}次成绩",
+        xAxis:[
+            {$ScoreInfo['test_time']}
+        ],
+        seriesData:[ 
+            {$ScoreInfo['score']}
+        ]
+    });
+});
+</script>
+</body>
+</html>

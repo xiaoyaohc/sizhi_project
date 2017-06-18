@@ -1,0 +1,39 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <div class="main-title">
+        <h2>{$meta_title}</h2>
+    </div>
+    <form action="{:U('Abouts/update')}" method="post" class="form-horizontal">
+        
+        <div class="form-item">
+            <label class="item-label">标题<span class="check-tips">（不能为空）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="about_name" value="{$data.about_name}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">内容</label>
+            <textarea name="about_content">{$data.about_content}</textarea>
+            {:hook('adminArticleEdit', array('name'=>'about_content','value'=>$data['about_content']))}
+            
+        </div>
+        <div class="form-item">
+            <input type="hidden" name="about_id" value="{$data.about_id}">
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>           
+        </div>
+    </form>
+</block>
+
+<block name="script">
+    <script type="text/javascript"> 
+    highlight_subnav('{:U('Abouts/index')}');
+    <if condition="$data.parent_id">
+    $(document).ready(function() {
+        $('select[name=parent_id]').val({$data.parent_id});
+    });
+    </if>    
+    </script>
+</block>

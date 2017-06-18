@@ -1,0 +1,43 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <div class="main-title">
+        <h2>{$meta_title}</h2>
+    </div>
+    <form action="{:U('Subject/update')}" method="post" class="form-horizontal">
+         
+        <div class="form-item">
+            <label class="item-label">科目名称<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="subject_name" value="{$data.subject_name}">
+            </div>
+        </div>
+        <div class="form-item">
+            <input type="hidden" name="subject_id" value="{$data.subject_id
+        }">
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>           
+        </div>
+    </form>
+</block>
+
+<block name="script">
+    <script type="text/javascript"> 
+    highlight_subnav('{:U('Subject/index')}');
+    <if condition="$data.parent_id">
+    $(document).ready(function() {
+        $('select[name=case_type]').change(function(event) {
+             $('.check-tips_' + $(this).val()).show().siblings('.check-tips').hide();
+             if($(this).val() == 1 || $(this).val() == 5){
+                $('#bigPicBox').show();
+             }else{
+                $('#bigPicBox').hide();
+             }
+
+        });
+        $('select[name=case_type]').trigger('change');
+    });
+    </if>    
+    </script>
+</block>

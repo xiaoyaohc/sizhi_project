@@ -1,0 +1,23 @@
+<extend name="Base/inva_base" />
+<block name="content">
+	<!-- 内页  -->
+    <div class="hp-solutions">
+        <div class="hp-solutions-wrapper">
+            <div class="hp-title">
+                <img src="__INVA__/images/solutions-title.jpg">
+            </div>  
+            <volist name="solutions" id="vo"> 
+                <div class="hp-solutions-content">
+                    <div class="hp-solutions-img"><img src="{$vo.solution_thumb}"></div>
+                    <div class="hp-solutions-text">
+                        <h3>{$vo.solution_name}</h3>
+                        <p>
+                            {$vo.solution_area}                       
+                        </p>
+                    </div>
+                    <div style="clear:both;"></div> 
+                </div>  
+            </volist>    
+        </div>        
+    </div>
+</block>

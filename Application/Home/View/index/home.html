@@ -1,0 +1,140 @@
+<!doctype html>
+<html class="no-js">
+<include file="index/header" />
+<body>
+<div id="loading" class="popload">
+    <div class="popload-main">
+        <span class="popload-main-ico"></span>
+        <p class="popload-main-txt" id="progress">加载中...</p>
+    </div>
+</div>
+<?php if($_SESSION['is_login_agent'] == 0){ ?>
+<div class="load_box">
+    <div class="load_box_out">
+        <div class="load_box_in">
+            <i class="load_pic"></i>
+            <form action="{:U('Index/invite','','')}" method="post" id="load_sumbit">
+                <input type="text" name="inviteCode" placeholder="请填写您的邀请码" class="load_text" />
+                <p class="load_btn">
+                    <a href="javascript:;" class="load_sumbit">确定</a>
+                    <a href="javascript:;" class="load_link">跳过</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+<?php } ?>
+    <div class="wrapper">
+        <header data-am-widget="header" class="am-header am-header-default am-header-fixed">
+            <h1 class="am-header-title">
+                首页
+            </h1>
+            <div class="am-header-right am-header-nav">
+                <button class="am-btn am-btn-primary" data-am-collapse="{target: '#collapse-nav'}"><i class="am-icon-bars am-icon-sm"></i></button>
+            </div>
+            <include file="index/nav" />
+        </header>
+
+        <div class="am-slider am-slider-default" data-am-flexslider="{directionNav:false}">
+            <ul class="am-slides">
+            <foreach name="slideList" item="slide">
+                <li>
+                    <a href="{$slide.slide_url}">
+                        <img src="{$slide.slide_pic}" alt="{$slide.slide_name}" />
+                    </a>
+                </li>
+            </foreach>
+            </ul>
+        </div>
+
+        <ul class="subject-list am-avg-sm-4">
+        <!--      <li><a href="{:U('Teacher/teacherList?Sid=1')}"><i class="hi hi-yw"></i><span>语文</span></a></li>
+            <li><a href="{:U('Teacher/teacherList?Sid=2')}"><i class="hi hi-os"></i><span>数学</span></a></li>
+            <li><a href="{:U('Teacher/teacherList?Sid=3')}"><i class="hi hi-ky"></i><span>英语</span></a></li>
+            <li><a href="{:U('Teacher/teacherList?Sid=4')}"><i class="hi hi-wl"></i><span>美术</span></a></li>
+            <li><a href="{:U('Teacher/teacherList?Sid=5')}"><i class="hi hi-yy"></i><span>口语</span></a></li>
+            <li><a href="{:U('Teacher/teacherList?Sid=6')}"><i class="hi hi-ss"></i><span>作业辅导</span></a></li>  -->
+            
+            
+            <li><a href="{:U('Teacher/teacherList?Sid=5')}"><i class="hi" style="background: url(/Public/Home/assets/images/yy.png) no-repeat; width:5.25rem;height:5.275rem; background-size: 5.00rem 5.000rem;" ></i><span>口语</span></a></li>
+            <li><a href="{:U('Teacher/teacherList?Sid=10')}"><i class="hi" style="background: url(/Public/Home/assets/images/gq.png) no-repeat; width:5.25rem;height:5.275rem; background-size: 5.00rem 5.000rem;" ></i><span>钢琴</span></a></li> 
+            <li><a href="{:U('Teacher/teacherList?Sid=11')}"><i class="hi" style="background: url(/Public/Home/assets/images/hx.png) no-repeat; width:5.25rem;height:5.275rem; background-size: 5.00rem 5.000rem;" ></i><span>古筝</span></a></li>
+            <li><a href="{:U('Teacher/teacherList?Sid=17')}"><i class="hi" style="background: url(/Public/Home/assets/images/gh.png) no-repeat; width:5.25rem;height:5.275rem; background-size: 5.00rem 5.000rem;" ></i><span>国画</span></a></li> 
+            <li><a href="{:U('Teacher/teacherList?Sid=4')}"><i class="hi" style="background: url(/Public/Home/assets/images/sm.png) no-repeat; width:5.25rem;height:5.275rem; background-size: 5.00rem 5.000rem;" ></i><span>美术</span></a></li> 
+            <!-- <li><a href="{:U('Teacher/teacherList?Sid=13')}"><i class="hi" style="background: url(/Public/Home/assets/images/sj.png) no-repeat; width:5.25rem;height:5.275rem; background-size: 5.00rem 5.000rem;" ></i><span>设计</span></a></li>  --> 
+            <li><a href="{:U('Teacher/teacherList?Sid=14')}"><i class="hi" style="background: url(/Public/Home/assets/images/sf.png) no-repeat; width:5.25rem;height:5.275rem; background-size: 5.00rem 5.000rem;" ></i><span>书法</span></a></li>            
+            <li><a href="{:U('Teacher/teacherList?Sid=15')}"><i class="hi" style="background: url(/Public/Home/assets/images/tqd.png) no-repeat; width:5.25rem;height:5.275rem; background-size: 5.00rem 5.000rem;" ></i><span>跆拳道</span></a></li> 
+            <li><a href="{:U('Teacher/teacherList?Sid=16')}"><i class="hi" style="background: url(/Public/Home/assets/images/wd.png) no-repeat; width:5.25rem;height:5.275rem; background-size: 5.00rem 5.000rem;" ></i><span>舞蹈</span></a></li>
+            <li><a href="{:U('Teacher/teacherList?Sid=20')}"><i class="hi" style="background: url(/Public/Home/assets/images/yj.png) no-repeat; width:5.25rem;height:5.275rem; background-size: 5.00rem 5.000rem;" ></i><span>瑜伽</span></a></li> 
+            <li><a href="{:U('Teacher/teacherList?Sid=6')}"><i class="hi" style="background: url(/Public/Home/assets/images/ss.png) no-repeat; width:5.25rem;height:5.275rem; background-size: 5.00rem 5.000rem;" ></i><span>作业辅导</span></a></li>
+            <li><a href="{:U('Teacher/teacherList?Sid=1')}"><i class="hi" style="background: url(/Public/Home/assets/images/yw.png) no-repeat; width:5.25rem;height:5.275rem; background-size: 5.00rem 5.000rem;" ></i><span>语文</span></a></li>
+            <li><a href="{:U('Teacher/teacherList?Sid=2')}"><i class="hi" style="background: url(/Public/Home/assets/images/os.png) no-repeat; width:5.25rem;height:5.275rem; background-size: 5.00rem 5.000rem;" ></i><span>数学</span></a></li>
+            <li><a href="{:U('Teacher/teacherList?Sid=3')}"><i class="hi" style="background: url(/Public/Home/assets/images/ky.png) no-repeat; width:5.25rem;height:5.275rem; background-size: 5.00rem 5.000rem;" ></i><span>英语</span></a></li> 
+            <li><a href="{:U('Teacher/teacherList?Sid=18')}"><i class="hi" style="background: url(/Public/Home/assets/images/wl.png) no-repeat; width:5.25rem;height:5.275rem; background-size: 5.00rem 5.000rem;" ></i><span>物理</span></a></li> 
+            <li><a href="{:U('Teacher/teacherList?Sid=19')}"><i class="hi" style="background: url(/Public/Home/assets/images/hx2.png) no-repeat; width:5.25rem;height:5.275rem; background-size: 5.00rem 5.000rem;" ></i><span>化学</span></a></li>              
+        </ul>
+  <section class="am-padding-top-sm">
+            <div class="am-list-news am-list-news-default tj-teacher" >
+                <div class="am-list-news-hd am-cf"><a href="#" class=""><h2>推荐老师</h2></a></div>
+                <div class="am-list-news-bd">
+                    <ul class="am-avg-sm-2">
+                     <foreach name="teacherList" item="teacher">
+                        <li>
+
+                            <a href="{:U('Teacher/teacherClass',array('Tid'=>$teacher['teacher_id']))}" class="am-g">
+                                <div class="am-u-sm-5">
+                                    <img class="am-img-thumbnail am-circle am-img-responsive" src="{$teacher.pic1}" alt="" />
+                                    <h3>{$teacher.teacher_name}</h3>
+                                    <span class="am-badge am-badge-primary am-round">教龄：<?php echo $teacher['senority'];?> 年</span></h3>
+                                </div>
+                                <div class="am-u-sm-7">
+                                <div class="star-wrapper">
+                                        <i class="star on"></i>
+                                        <i class="star on"></i>
+                                        <i class="star on"></i>
+                                        <i class="star on"></i>
+                                        <i class="star on"></i>
+                                </div>
+                                <div class="am-list-item-text">
+                                       <h3>校区  <?php echo $teacher['area_name'];?> </h3>
+                                </div>
+                                </div>
+                            </a>
+                        </li>
+                     </foreach>   
+                    </ul>
+                </div>
+            </div>
+
+        </section>
+   
+        <footer class="am-footer am-footer-default">
+            <div class="am-footer-miscs">
+                <p>CopyRight©2016  四志教育 Inc.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="__ASSETS__/vendors/lib.min.js"></script>
+    <script src="__ASSETS__/scripts/app.min.js"></script>
+
+<?php if($_SESSION['is_login_agent'] == 0){ ?>
+    <script>
+        $('.load_link').click(function(){
+            var href="{:U('Index/inviteJump','','')}";
+            $('.load_box').fadeOut();
+            $.post(href,'',function(res){});
+        })
+        $('.load_sumbit').click(function(){
+            var $text=$('.load_text').val();
+            if($text!=''){
+                $('.load_box').fadeOut();
+                $('#load_sumbit').submit();
+            }else{
+                alert('请填写您的邀请码');
+            }
+        })
+    </script>
+<?php }?>
+</body>
+</html>

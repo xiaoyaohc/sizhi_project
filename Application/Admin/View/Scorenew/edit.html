@@ -1,0 +1,156 @@
+<extend name="Public/base" />
+
+<block name="body">
+    <!-- 标题栏 -->
+    <div class="main-title">
+        <h2>{$meta_title}</h2>
+    </div>
+    <div class="cf">
+        <div class="fl">
+            
+        </div>
+        <!-- 高级搜索 -->
+        <div class="search-form fr cf">
+            
+        </div>
+        
+    </div>
+    <!-- 数据列表 -->
+    <div class="data-table table-striped">
+    <table class="">
+    <thead>
+        <tr>
+            
+            <th class="">周期</th>
+            <th class="">分数</th>
+            
+            
+        </tr>
+    </thead>
+    <tbody>
+        <for start="0" end="20" name="i">
+        <tr>
+            <td>第{$i+1}周</td>
+            <td><input  type="text" name="score" id="{$i+1}_week" onblur="preScore({$i+1})" value="{$data[$i]['score']}"  /></td>
+            
+        </tr>
+        </for>
+    </tbody>
+    </table>
+    <div class="form-item">            
+        <button class="btn submit-btn ajax-post" id="submit" type="submit" onclick="sunbFunc()">确 定</button>
+        <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+    </div>
+    </div>
+    <div class="page">
+        {$_page}
+    </div>
+    <div id="scoreSubmit">
+        
+    </div>
+</block>
+
+<block name="script">
+    <script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+
+    <script type="text/javascript">
+    //搜索功能
+    $("#search").click(function(){
+        var url = $(this).attr('url');
+        var query  = $('form').serialize();
+        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+        query = query.replace(/^&/g,'');
+        if( url.indexOf('?')>0 ){
+            url += '&' + query;
+        }else{
+            url += '?' + query;
+        }
+        window.location.href = url;
+    });
+    //回车搜索
+    $(".search-input").keyup(function(e){
+        if(e.keyCode === 13){
+            $("#search").click();
+            return false;
+        }
+    });
+    //导航高亮
+    highlight_subnav('{:U('Scorenew/index')}');
+
+    $(document).ready(function() {
+        $('#select').val("{:U('Scorenew/index',array('parent_id'=>$parent_id))}"); 
+        $('#select').change(function(){
+            location.href = $(this).val();
+        });
+
+        $('select[name=info_type]').change(function(event) {
+            $('#search').click();
+        });
+    });
+    </script>
+    <script>
+    //写入隐藏input
+    var scoParam = $('#scoreSubmit');//分数
+    function preScore(i){
+        var score = $("#"+i+"_week").val();
+        var week  = i;
+        var student_id= {$student_id};
+        if(score==''){
+           return false;
+        }
+
+        var o = scoParam.find("[name='"+i+"']");
+        if(o.length == 0) {
+            scoParam.append('<input type="hidden" name="'+i+'" class="scoreSub" i="'+i+'">');
+        }
+    }
+
+    //提交数据
+    function sunbFunc(){
+        //分数
+        var result = true;
+        var sco = $('.scoreSub');
+        if(sco.length > 0) {
+            sco.each(function(i){
+                //调用分数提交方法
+                var res = score($(this).attr("i"));
+                if(res==false){
+                    result = false;
+                }
+            });
+        }
+        if(result == false){
+            return false;
+        }
+        // alert('提交成功');
+        window.location.reload();
+    }
+
+    function score(i){
+        var score = $("#"+i+"_week").val();
+        var week  = i;
+        var student_id= {$student_id};
+        if(score==''){
+           alert("请填写分数");
+           return false;
+        }
+        $.ajax({
+            url: "{:U('Scorenew/score')}",
+            type: 'post',
+            dataType: 'json',
+            data: {
+                score:score,week:week,student_id:student_id
+            },
+            success:function(data) {
+              if(data.code!=1){
+                 alert("更新失败");
+                 return false;
+              }
+            }
+        });
+    }
+
+    
+    </script>
+
+</block>

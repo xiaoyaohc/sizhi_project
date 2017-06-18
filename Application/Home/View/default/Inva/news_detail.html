@@ -1,0 +1,22 @@
+<extend name="Base/inva_base" />
+<block name="content">
+	<!-- 内页  -->
+    <div class="hp-news-detailed">
+        <div class="hp-news-detailed-wrapper">
+                       
+             <div class="hp-news-detailed-title">
+                {$item.info_name}
+             </div>
+             <div class="hp-news-detailed-date">
+                <!-- {$item.info_time|time_format='Y-m-d H:i'} -->
+             </div>
+             <div class="hp-news-detailed-contentext">
+
+                {$item.info_content}
+
+             </div>
+             <a href="{:U('newscenter')}"  class="hp-news-detailed-return">返回</a>
+
+        </div>
+    </div>
+</block>

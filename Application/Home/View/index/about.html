@@ -1,0 +1,53 @@
+<!doctype html>
+<html class="no-js">
+<include file="index/header" />
+<body>
+<div id="loading" class="popload">
+    <div class="popload-main">
+        <span class="popload-main-ico"></span>
+        <p class="popload-main-txt" id="progress">加载中...</p>
+    </div>
+</div>
+
+<div class="wrapper">
+    <header data-am-widget="header" class="am-header am-header-default am-header-fixed">
+        <div class="am-header-left am-header-nav">
+            <a href="{:U('Index/Home')}" class="am-btn">
+                <i class="am-header-icon am-icon-angle-left am-icon-sm"></i>
+            </a>
+        </div>
+        <h1 class="am-header-title">
+            中心简介
+        </h1>
+        <div class="am-header-right am-header-nav">
+            <button class="am-btn am-btn-primary" data-am-collapse="{target: '#collapse-nav'}"><i class="am-icon-bars am-icon-sm"></i></button>
+        </div>
+        <include file="index/nav" />
+    </header>
+
+    <div class="container">
+        <article class="am-article about-article">
+
+            <div class="am-g">
+                <div class="am-u-sm-4 am-u-sm-offset-4">
+                    <img src="__ASSETS__/images/sizhi.png" alt="" class="am-img-responsive am-img-thumbnail am-circle">
+                </div>
+            </div>
+
+            <div class="am-article-bd">
+               深圳市四志国际教育培训有限公司是由在教育领域拥有丰富教学经验的资深教师团队共同创立的培训机构。本机构致力于中小学各科专业辅导及其它特长培训，长年开设中小学语数理化英专业辅导班、午、晚托班，另设有少儿英语、奥数、美术、书法等兴趣班
+            </div>
+        </article>
+    </div>
+
+    <footer class="am-footer am-footer-default">
+        <div class="am-footer-miscs">
+            <p>CopyRight©2016  四志教育 Inc.</p>
+        </div>
+    </footer>
+</div>
+
+<script src="__ASSETS__/vendors/lib.min.js"></script>
+<script src="__ASSETS__/scripts/app.min.js"></script>
+</body>
+</html>

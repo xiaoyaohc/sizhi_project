@@ -1,0 +1,79 @@
+<extend name="Base/main" />
+<block name="left_cont">
+	<div class="idea">
+        <div class="con_pd idea-title"></div>
+        <div class="idea_cont group_cont">
+            <div id="fullpage" style="display:none;">
+                <div class="section">
+                    <div class="slide"> 
+                        <div class="group_cont_item group_cont_item2">
+                            <img src="__MAIN__/images/p3.jpg" alt="">
+                        </div>
+                        <div class="idea_txt_1">
+                            ENFORCE DIGITAL RELATIONSHIP TO SHAPE <br>YOURBUSINESS“ MAGNETIC EFFECTS”
+                        </div>
+                        <div class="idea_txt_2">
+                            博胜社会化资产运营磁石方法论
+                        </div>
+                    </div>
+                    <div class="slide"> 
+                        <div class="group_cont_item group_cont_item2">
+                            <img src="__MAIN__/images/p4.jpg" alt="">
+                            <div class="idea_txt_3">
+                                最好的体验是用心的去和用户建立<span>真正的朋友</span>关系<br>
+                                <span>只有朋友才能像磁石一样彼此吸引</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="script">
+    <link rel="stylesheet" href="__STATIC__/fullpage/jquery.fullpage.min.css">
+    <script type="text/javascript" src="__STATIC__/fullpage/jquery.fullpage.min.js"></script>
+	<script>
+    $(function(){
+        function windwoSize(){
+            var viewHeight = document.documentElement.clientHeight;
+            if(viewHeight > 735){
+                var nab_pd = (viewHeight-487)/5;
+                    $(".right-content").children(".nav").children("ul").children("li").children("a").css({
+                    'padding-top':nab_pd+'px',
+                });
+                var idea_pd = (viewHeight-615)/4;
+                $(".con_pd").css({
+                    'margin-top':idea_pd+'px'
+                });
+
+                $('.group_cont').removeClass('fix_1366');
+            
+            }
+            else{
+                var nab_pd = (626-487)/3;
+                    $(".right-content").children(".nav").children("ul").children("li").children("a").css({
+                    'padding-top':nab_pd+'px',
+                });
+                var idea_pd = (626-615)/3;
+                $(".con_pd").css({
+                    'margin-top':idea_pd+'px'
+                });
+
+                $('.group_cont').addClass('fix_1366');
+                
+            }
+        }
+        windwoSize();
+        window.addEventListener("resize", function () {
+            windwoSize();    
+        });
+
+        $('#fullpage').show().fullpage({
+            slidesNavigation: true,
+            slidesNavPosition: 'bottom'
+        });
+    })
+    
+</script>
+</block>

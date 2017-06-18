@@ -1,0 +1,160 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <div class="main-title">
+        <h2>{$meta_title}</h2>
+    </div>
+    <form action="{:U('Class/update')}" method="post" class="form-horizontal">
+         <div class="form-item">
+            <label class="item-label">课程名称<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="class_name" value="{$data.class_name}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">选择科目</label>
+            <div class="controls">
+                <select name="subject_id">
+                    <option value="0" >请选择</option>
+                    <foreach name="subject" item="opt" key="opt_k">
+                        <option value="{$opt.subject_id}" <eq name="data.subject_id" value="$opt.subject_id"> selected</eq>>{$opt.subject_name}</option>
+                    </foreach>
+                </select>
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">选择教师</label>
+            <div class="controls">
+                <select name="teacher_id">
+                    <option value="0" >请选择</option>
+                    <foreach name="teacher" item="opt" key="opt_k">
+                        <option value="{$opt.teacher_id}" <eq name="data.teacher_id" value="$opt.teacher_id"> selected</eq>>{$opt.teacher_name}</option>
+                    </foreach>
+                </select>
+            </div>
+        </div>
+         <div class="form-item">
+            <label class="item-label">课程类型</label>
+            <div class="controls">
+                 <input type="radio" class="px" id="class_type" value="1" name="class_type" <eq name="data.class_type" value="1"> checked</eq>/>大 &nbsp;&nbsp;
+                 <input type="radio" class="px" id="class_type" value="2" name="class_type" <eq name="data.class_type" value="2"> checked</eq>/>小
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">上课周期<span class="check-tips">(小班才需要选择)</label>
+            <div class="controls">
+                <select name="week_id">
+                    <option >请选择</option>
+                    <foreach name="week" item="opt" key="opt_k">
+                        <option value="{$opt.week_id}" <eq name="data.week_id" value="$opt.week_id"> selected</eq>>{$opt.week_name}</option>
+                    </foreach>
+                </select>
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">大班周期<span class="check-tips">(大班才需要选择)</span></label>
+            <div class="controls">
+                <select name="period">
+                    <foreach name="period" item="opt" key="opt_k">
+                        <option value="{$opt_k}" <eq name="data.period" value="$opt_k"> selected</eq>>{$opt}</option>
+                    </foreach>
+                </select>
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">销售状态</label>
+            <div class="controls">
+                <select name="sale_status">
+                    <foreach name="sale_status" item="opt" key="opt_k">
+                        <option value="{$opt_k}" <eq name="data.sale_status" value="$opt_k"> selected</eq>>{$opt}</option>
+                    </foreach>
+                </select>
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">上课时间段<span class="check-tips">(小班才需要填写)</label>
+            <div class="controls">
+                <input type="text" name="time_interval" class="text time" value="{$data.time_interval}"  />格式：上午10:00-12:00
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">上课地点<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="class_place" value="{$data.class_place}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">上课人数<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="class_num" value="{$data.class_num}">
+            </div>
+        </div>
+       <div class="form-item">
+            <label class="item-label">团购价格<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="class_price" value="{$data.class_price}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">原价<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="original_price" value="{$data.original_price}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">次数<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="times" value="{$data.times}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">教师提成比例<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="proportion" value="{$data.proportion}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">代理商提成比例<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="agent_ratio" value="{$data.agent_ratio}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">课室<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="class_room" value="{$data.class_room}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">课程描述<span class="check-tips"></span></label>
+            <div class="controls">
+                <div class="textarea input-large">
+                    <textarea name="class_desc" rows="7" cols="56">{$data.class_desc}</textarea>
+                </div>                
+            </div>
+        </div>
+        <div class="form-item">
+            <input type="hidden" name="class_id" value="{$data.class_id}">
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>           
+        </div>
+    </form>
+</block>
+
+<block name="script">
+    <script type="text/javascript"> 
+    highlight_subnav('{:U('Class/index')}');
+
+    $('select[name=info_type]').change(function(event) {
+         $('.check-tips_' + $(this).val()).show().siblings('.check-tips').hide();
+    });
+    $('select[name=info_type]').trigger('change');
+    
+    <if condition="$data.parent_id">
+    // $(document).ready(function() {
+    //     $('select[name=parent_id]').val({$data.parent_id});
+    // });
+    </if>    
+    </script>
+</block>

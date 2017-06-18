@@ -1,0 +1,118 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <div class="main-title">
+        <h2>{$meta_title}</h2>
+    </div>
+    <form action="{:U('Product/insert')}" method="post" class="form-horizontal">
+        <div class="form-item">
+            <label class="item-label">所属站点</label>
+            <div class="controls">
+                <select name="product_type">
+                    <foreach name="rs" item="opt" key="opt_k">
+                        <option value="{$opt_k}" <eq name="data.product_type" value="$opt_k"> selected</eq>>{$opt}</option>
+                    </foreach>
+                </select>
+            </div>
+        </div>
+       <div class="form-item">
+            <label class="item-label">seo标题<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="product_title" value="{$data.product_title}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">产品名称<span class="check-tips">（不能为空）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="product_name" value="{$data.product_name}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">产品图片</label>
+                <input type="file" id="upload_picture">
+                <input type="hidden" name="product_pic" id="product_pic" value="{$data['product_pic']|default=''}"/>
+                <div class="upload-img-box">
+                <notempty name="data['product_pic']">
+                    <div class="upload-pre-item" title="点击删除图片"><img src="{$data.product_pic|get_cover='path'}"/></div>
+                </notempty>
+                </div>
+            </div>
+            <script type="text/javascript">
+            //上传图片
+            /* 初始化上传插件 */
+            $("#upload_picture").uploadify({
+                "height"          : 30,
+                "swf"             : "__STATIC__/uploadify/uploadify.swf",
+                "fileObjName"     : "download",
+                "buttonText"      : "上传图片",
+                "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+                "width"           : 120,
+                'removeTimeout'   : 1,
+                'fileTypeExts'    : '*.jpg; *.png; *.gif;',
+                "onUploadSuccess" : uploadPicture,
+                'onFallback' : function() {
+                    alert('未检测到兼容版本的Flash.');
+                }
+            });
+            function uploadPicture(file, data){
+                var data = $.parseJSON(data);
+                var src = '';
+                if(data.status){
+                    $("#product_pic").val(data.path);
+                    src = data.url || '__ROOT__' + data.path;
+                    $("#product_pic").parent().find('.upload-img-box').html(
+                        '<div class="upload-pre-item" title="点击删除图片"><img src="' + src + '"/></div>'
+                    );
+                } else {
+                    updateAlert(data.info);
+                    setTimeout(function(){
+                        $('#top-alert').find('button').click();
+                        $(that).removeClass('disabled').prop('disabled',false);
+                    },1500);
+                }
+            }
+            </script>
+        <div class="form-item">
+            <label class="item-label">排序<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="product_sort" value="{$data.product_sort}">
+                
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">是否开启</label>
+            <div class="controls">
+                 <input type="radio" class="px" id="product_status" value="1" name="product_status" checked/>是 &nbsp;&nbsp;
+                 <input type="radio" class="px" id="product_status" value="0" name="product_status" />否
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">简介<span class="check-tips"></span></label>
+            <div class="controls">
+                <textarea name="product_area" rows="7" cols="56">{$data.product_area}</textarea>
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">内容</label>
+            <textarea name="product_content">{$data.product_content}</textarea>
+            {:hook('adminArticleEdit', array('name'=>'product_content','value'=>$data['product_content']))}
+            
+        </div>
+        <div class="form-item">
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>           
+        </div>
+    </form>
+</block>
+
+<block name="script">
+    <script type="text/javascript"> 
+    highlight_subnav('{:U('Product/index')}');
+    <if condition="$data.parent_id">
+    $(document).ready(function() {
+        $('select[name=parent_id]').val({$data.parent_id});
+    });
+    </if>    
+    </script>
+</block>

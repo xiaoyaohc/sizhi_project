@@ -1,0 +1,48 @@
+<extend name="Base/inva_base" />
+<script type="text/javascript" src="__INVA__/js/iva.case.js"></script>
+<block name="content">
+	<!-- 内页  -->
+    <div class="hp-newcenter">
+        <div class="hp-newcenter-wrapper">
+            <div class="hp-title">
+                <img src="__INVA__/images/news-title.jpg">
+            </div>  
+
+            <volist name="_list" id="item" key="k" >
+                <div class="hp-newcenter-content" onclick="location.href='{:U('news_detail',array('id'=>$item['info_id']))}'">
+                    <div class="hp-newcenter-img"><img src="{$item.info_pic|default='/Public/Home/inva/images/solution-img.jpg'}"></div>
+                    <div class="hp-newcenter-text">
+                        <a href="javascript:;">{$item.info_name}</a>
+                        <p>
+                            {$item.info_area}
+                        </p>
+                        <h5>
+                            <!-- {$item.info_time|time_format='Y-m-d H:i'} -->
+                        </h5>
+                    </div>
+                    <div style="clear:both;"></div> 
+                </div>
+            </volist>
+            
+            
+
+            <!-- <div class="hp-newcenter-content">
+                <div class="hp-newcenter-img"><img src="__INVA__/images/solution-img.jpg"></div>
+                <div class="hp-newcenter-text">
+                    <a href="news-Detailed.html">软硬结合布局无线互联 TCL与腾讯首推...</a>
+                    <p>
+                        [ 联手挖掘一个全新的细分市场——大屏平板电脑，腾讯已在移动互联时代布下一枚重要的棋子，而TCL则找到了拉拢“网络大军”的新方法]...                   
+                    </p>
+                    <h5>
+                        2014-04-26  11：00
+                    </h5>
+                </div>
+                <div style="clear:both;"></div> 
+            </div>  --> 
+            <div style="clear:both;"></div>             
+            <div class="hp-work-list hp-page">
+                {$page}
+            </div>
+        </div>        
+    </div>
+</block>

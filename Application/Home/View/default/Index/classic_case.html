@@ -1,0 +1,143 @@
+<extend name="Base/main" />
+<block name="left_cont">
+	<div class="case">
+        <div class="con-pd case-title"></div>
+        <notempty name="_list">
+        <div class="con-pd case-content">
+            <ul id="case_list">                
+                <volist name="_list" id="item" key="k" >
+                    <li data-id='{$item.case_id}'>
+                        <div class="litpic">
+                            <img src="{$item.case_thumb}">
+                        </div>
+                        <div class="text">
+                            <div class="text-main">
+                                <h3>
+                                    {$item.case_name}
+                                </h3>
+                                <p>
+                                    {$item.case_area|msubstr=0,40,'utf-8'}...
+                                </p>
+                                <!-- <span>
+                                    {$item.case_time|time_format='Y-m-d H:i'}
+                                </span> -->
+                            </div>
+                        </div>
+                    </li>
+                </volist>
+
+            </ul>
+            <div class="clear"></div>
+        </div>
+        <div class="paging">
+            {$page}
+        </div>
+        
+        <else/>
+            <p class="alert alert-warning text-center">还没有添加案例哦~~</p>
+        </notempty>
+    </div>
+
+<script type="text/html" id="tmpl">
+    <div class="case-modal" id="case-modal" style="display:block;">
+        <div class="case-modal-main">
+            <h3>
+                {{case_title}}
+            </h3>
+            <p class="time">
+                {{case_time}}
+            </p>
+            <div class="case_cont">
+                <p class="text-center">加载中...</p>
+            </div>
+        </div>
+        <a href="javascript:_hideModal()" class="case-modal-del"></a>
+    </div>
+</script>
+
+</block>
+<block name="script">
+<script>
+    $(function(){
+
+        function windwoSize(){
+            var viewHeight = document.documentElement.clientHeight;
+            if(viewHeight > 626){
+                var nab_pd = (viewHeight-487)/6;
+                    $(".right-content").children(".nav").children("ul").children("li").children("a").css({
+                    'padding-top':nab_pd+'px',
+                });
+                $(".con-pd").css({
+                    'margin-top':'0px'
+                });
+                var case_pdtop = (viewHeight-519)/2;
+                $(".case-title").css({
+                    'margin-top':case_pdtop+'px'
+                });
+            }
+            else{
+                var nab_pd = (626-487)/6;
+                    $(".right-content").children(".nav").children("ul").children("li").children("a").css({
+                    'padding-top':nab_pd+'px',
+                });
+                var caseCon_pd = (626 - 540)/2;
+                $(".con-pd").css({
+                    'margin-top':caseCon_pd+'px'
+                });
+            }
+            
+        }
+        windwoSize();
+        window.addEventListener("resize", function () {
+            windwoSize();    
+        });
+
+        $(".case-content ul li:nth-child(3n)").children(".text").css({
+            'background-color':'#f5f5f5'
+        });
+        $(".case-content ul li:nth-child(3n+2)").children(".text").css({
+            'background-color':'#f1f1f1'
+        });
+
+        var show_modal = function  (event) {
+            event.preventDefault()
+            var _this = $(this),
+                _html = $('#tmpl').html();
+            _html = _html.replace('{{case_title}}',_this.find('h3').text());
+            _html = _html.replace('{{case_time}}',_this.find('span').text());
+
+            $('body').css({
+                'overflow':'hidden'
+            })
+            .append(_html);
+
+            $.ajax({
+                url: '{:U("Index/case_detail")}',
+                dataType: 'json',
+                data: {id: _this.data('id')},
+            })
+            .done(function(data) {
+                if(data.code == 1){
+                    $("#case-modal").find('.case_cont').html(data.data.case_content);
+
+                    if(data.data.case_pic&&data.data.case_pic != ""){
+                        $('#case-modal').find('.case-modal-main').prepend('<div class="case-modal-top"><img src="'+ data.data.case_pic +'"><hr/></div>')
+                    }
+
+                }else{
+                    alert(data.msg);
+                }
+            });
+            
+        };
+
+        //close modal
+        window._hideModal = function(){
+            $('#case-modal').remove();
+            return false;
+        };
+
+        $(".case-content ul li").on('click',show_modal);
+    });
+</script>
+</block>

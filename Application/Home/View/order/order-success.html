@@ -1,0 +1,64 @@
+<!doctype html>
+<html class="no-js">
+<include file="index/header" />
+<body>
+<div id="loading" class="popload">
+    <div class="popload-main">
+        <span class="popload-main-ico"></span>
+        <p class="popload-main-txt" id="progress">加载中...</p>
+    </div>
+</div>
+
+<div class="wrapper">
+    <header data-am-widget="header" class="am-header am-header-default am-header-fixed">
+        <div class="am-header-left am-header-nav">
+            <a href="{:U('Index/Home')}" class="am-btn">
+                <i class="am-header-icon am-icon-angle-left am-icon-sm"></i>
+            </a>
+        </div>
+        <h1 class="am-header-title">
+            确认订单
+        </h1>
+        <div class="am-header-right am-header-nav">
+            <button class="am-btn am-btn-primary" data-am-collapse="{target: '#collapse-nav'}"><i class="am-icon-bars am-icon-sm"></i></button>
+        </div>
+        <nav>
+            <ul id="collapse-nav" class="am-nav am-collapse">
+                <li><a href="{:U('Index/Home')}">首页</a></li>
+                <li><a href="{:U('User/UserCenter','','')}">个人中心</a></li>
+                <li><a href="{:U('Index/Rank')}">进步之星排名</a></li>
+                <li><a href="{:U('Index/About')}">中心简介</a></li>
+                <li><a href="{:U('Index/Contact')}">联系我们</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="am-padding-sm order-status">
+        <div class="am-alert am-alert-secondary">
+            <div class="am-text-center">
+                <em>支付成功！</em>
+                您的订单号为：<strong class="am-text-danger">{$OrderId}</strong>
+            </div>
+            <div class="am-padding-top-sm">
+                3秒后将自动跳转到个人中心，你也可以直接点击进入 <a href="{:U('User/UserCenter','','')}">个人中心</a>....
+            </div>
+        </div>
+    </div>
+
+    <footer class="am-footer am-footer-default">
+        <div class="am-footer-miscs">
+            <p>CopyRight©2016  四志教育 Inc.</p>
+        </div>
+    </footer>
+</div>
+
+<script src="__ASSETS__/vendors/lib.min.js"></script>
+<script src="__ASSETS__/scripts/app.min.js"></script>
+<script language="javascript" type="">
+    setTimeout(jumpHref(),3000);
+    function jumpHref(){
+        window.location.href="{:U('User/UserCenter')}";
+    }
+</script>
+</body>
+</html>

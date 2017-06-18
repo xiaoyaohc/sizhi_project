@@ -1,0 +1,28 @@
+<extend name="Base/inva_base" />
+<block name="content">
+	<!-- 内页  -->
+    <div class="hp-work">
+    	<div class="hp-work-wrapper">
+    		<div class="hp-title">
+    			<img src="__INVA__/images/work-title.jpg">
+    		</div>
+            <div class="hp-work-box">
+
+                <volist name="_list" id="item" key="k" >
+                    <div class="hp-work-box-img">
+                        <div class="case-box-pic-hover">
+                            <a href="{:U('Inva/works_detail',array('id'=>$item['case_id']))}" class="case-box-pic-hover-more">MORE +</a>
+                        </div>                
+                        <img src="{$item.case_thumb}">
+                    </div>
+                </volist>
+
+                <div style="clear:both;"></div>
+            </div>
+            <div class="hp-work-list hp-page">
+                {$page}
+            </div>
+            
+    	</div>
+    </div>
+</block>

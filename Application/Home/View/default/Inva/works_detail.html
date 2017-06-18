@@ -1,0 +1,25 @@
+<extend name="Base/inva_base" />
+<block name="content">
+	<!-- 内页  -->
+    <div class="hp-news-detailed">
+        <div class="hp-news-detailed-wrapper">
+            <notempty name="item.case_pic">
+                <img src="{$item.case_pic}"> 
+            </notempty>
+             
+             <div class="hp-news-detailed-title">
+                {$item.case_name}
+             </div>
+             <div class="hp-news-detailed-date">
+                <!-- {$item.case_time|time_format='Y-m-d H:i'} -->
+             </div>
+             <div class="hp-news-detailed-contentext">
+
+                {$item.case_content}
+
+             </div>
+             <a href="{:U('Inva/works')}"  class="hp-news-detailed-return">返回</a>
+
+        </div>
+    </div>
+</block>

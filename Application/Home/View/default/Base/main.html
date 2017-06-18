@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>集团首页</title>
+
+    <!--核心配置-->
+    <link href="__MAIN__/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="__MAIN__/css/comm.css" rel="stylesheet" type="text/css" />
+    <!--web css-->
+    <link href="__MAIN__/css/layout.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="main">        
+        <div class="left-content">
+            <block name="left_cont"></block>
+        </div>
+        <div class="right-content">
+            <div class="logo" onclick="location.href='{:U('Index/index')}'"></div>
+            <div class="nav">
+                <ul>
+                    <li>
+                        <a href="{:U('Index/group')}" class="<?php echo $Think.ACTION_NAME=='group'?'active':''; ?>">
+                            集团
+                            <span>GROUP</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{:U('Index/team')}"  class="<?php echo $Think.ACTION_NAME=='team'?'active':''; ?>">
+                            团队
+                            <span>TEAM</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{:U('Index/idea')}"  class="<?php echo $Think.ACTION_NAME=='idea'?'active':''; ?>">
+                            理念
+                            <span>IDEA</span>
+                        </a>
+                    </li>
+                    <!-- <li>
+                        <a href="{:U('Index/classic_case')}"  class="<?php echo $Think.ACTION_NAME=='classic_case'?'active':''; ?>">
+                            经典案例
+                            <span>CLASSIC CASE</span>
+                        </a>
+                    </li> -->
+                    <li>
+                        <a href="{:U('Index/contact')}"  class="<?php echo $Think.ACTION_NAME=='contact'?'active':''; ?>">
+                            联系
+                            <span>CONTACT</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer">
+                © Copyright 2015 -<br/>
+                BOSIM Inc. All rights reserved.<br/>
+                粤ICP备13026683号
+            </div>
+        </div>
+    </div>
+    <!--bootstrap js-->
+    <script src="__MAIN__/js/jquery.min.js"></script>
+    <script src="__MAIN__/js/bootstrap.js"></script>
+    <block name="script"></block>
+</body>
+</html>

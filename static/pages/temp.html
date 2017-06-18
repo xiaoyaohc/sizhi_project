@@ -1,0 +1,75 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">-->
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <script>
+        var log;
+        ;(function(win){
+            var doc = win.document;
+            var docEl = doc.documentElement;
+            var ori = win.orientation || 0;
+            // 设计稿宽度
+            var dd = 640;
+            // 竖屏宽高比
+            var wh = 9/16;
+            // 默认rem设置
+            var defaultRem = 20;
+            // 像素比
+            var dpr = win.devicePixelRatio;
+
+            // 缩放
+            var scale = dpr?1/dpr:1;
+            // 输出viewport
+            doc.write('<meta name="viewport" content="initial-scale='+scale+',maximum-scale='+scale+',minimum-scale='+scale+',user-scalable=0">');
+            // 网页宽度
+            var docW = docEl.clientWidth;
+            var docH = docEl.clientHeight;
+            // 横屏换算
+            if (Math.abs(ori) == 90 || docW>docH) {
+                docW *= wh;
+            }
+            // html设置字号
+            docEl.style.fontSize = (docW/dpr)*defaultRem/(dd/dpr)+'px';
+
+            log = "ori:" + ori + "<br>"
+                    + "dpr:" + dpr + "<br>"
+                    + "scale:" + scale + "<br>"
+                    + "docH:" + docH + "<br>"
+                    + "docW:" + docW + "<br>"
+                    + "fontSize:" + (docW/dpr)*defaultRem/(dd/dpr) + "<br>"
+            ;
+
+
+        })(window);
+    </script>
+    <title>老师列表</title>
+
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+
+    <!-- build:css assets/styles/style.min.css -->
+    <link rel="stylesheet" href="../assets/styles/amazeui.css">
+    <link rel="stylesheet" href="../assets/styles/main.css">
+    <!-- endbuild -->
+
+</head>
+<body>
+<div id="loading" class="popload">
+    <div class="popload-main">
+        <span class="popload-main-ico"></span>
+        <p class="popload-main-txt" id="progress">加载中...</p>
+    </div>
+</div>
+
+<div id="log"></div>
+
+<script>
+    document.querySelector('#log').innerText = log;
+</script>
+
+</body>
+</html>

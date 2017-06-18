@@ -1,0 +1,97 @@
+<extend name="Public/base" />
+
+<block name="body">
+	<!-- 标题栏 -->
+	<div class="main-title">
+		<h2>{$meta_title}</h2>
+	</div>
+	<div class="cf">
+		<div class="fl">
+            
+            <button class="btn ajax-post confirm" url="{:U('deleteInfos')}" target-form="ids" target-form="ids">删 除</button>
+        </div>
+        <!-- 高级搜索 -->
+		<div class="search-form fr cf">
+			<div class="sleft">
+				<input type="text" name="member_tel" class="search-input" value="{:I('member_tel')}" placeholder="电话号码">
+				<a class="sch-btn" href="javascript:;" id="search" url="{:U('index')}"><i class="btn-search"></i></a>
+			</div>
+		</div>
+        
+    </div>
+    <!-- 数据列表 -->
+    <div class="data-table table-striped">
+	<table class="">
+    <thead>
+        <tr>
+	        <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+			<th class="">用户电话</th>
+			<th class="">用户名称</th>
+			<th class="">用户地址</th>
+			<th class="">时间</th>
+			<th class="">备注</th>
+			<th class="">操作</th>
+		</tr>
+    </thead>
+    <tbody>
+		<notempty name="info">
+		<volist name="info" id="vo">
+		<tr>
+			<td><input class="ids" type="checkbox" name="member_id[]" value="{$vo.member_id}" /></td>
+			<td>{$vo.member_tel}</td>
+			<td>{$vo.member_name}</td>
+			<td>{$vo.member_address}</td>
+			<td><span>{$vo.member_addtime|time_format}</span></td>
+			<td>{$vo.member_beizhu}</td>
+			<td><eq name="vo.status" value="1">
+                [<a href="{:U('Member/deleteInfos?member_id='.$vo['member_id'])}" class="confirm ajax-get">删除</a>]
+            </td>
+			
+		</tr>
+		</volist>
+		<else/>
+		<td colspan="9" class="text-center"> aOh! 暂时还没有内容! </td>
+		</notempty>
+	</tbody>
+    </table>
+	</div>
+    <div class="page">
+        {$_page}
+    </div>
+</block>
+
+<block name="script">
+	<script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+
+	<script type="text/javascript">
+	//搜索功能
+	$("#search").click(function(){
+		var url = $(this).attr('url');
+        var query  = $('.search-form').find('input').serialize();
+        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+        query = query.replace(/^&/g,'');
+        if( url.indexOf('?')>0 ){
+            url += '&' + query;
+        }else{
+            url += '?' + query;
+        }
+		window.location.href = url;
+	});
+	//回车搜索
+	$(".search-input").keyup(function(e){
+		if(e.keyCode === 13){
+			$("#search").click();
+			return false;
+		}
+	});
+    //导航高亮
+    highlight_subnav('{:U('Member/index')}');
+
+    $(document).ready(function() {
+    	$('#select').val("{:U('Member/index',array('parent_id'=>$parent_id))}");	
+    	$('#select').change(function(){
+    		location.href = $(this).val();
+    	});
+    });
+	</script>
+</block>

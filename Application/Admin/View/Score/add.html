@@ -1,0 +1,96 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <div class="main-title">
+        <h2>{$meta_title}</h2>
+    </div>
+    <form action="{:U('Score/insert')}" method="post" class="form-horizontal">
+        <div class="form-item">
+            <label class="item-label">学生</label>
+            <div class="controls">
+                <select name="student_id">
+                    <option value="0" >请选择</option>
+                    <foreach name="student" item="opt" key="opt_k">
+                        <option value="{$opt.student_id}" <eq name="data.student_id" value="$opt.student_id"> selected</eq>>{$opt.student_name}</option>
+                    </foreach>
+                </select>
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">选择科目</label>
+            <div class="controls">
+                <select name="subject_id">
+                    <option value="0" >请选择</option>
+                    <foreach name="subject" item="opt" key="opt_k">
+                        <option value="{$opt.subject_id}" <eq name="data.subject_id" value="$opt.subject_id"> selected</eq>>{$opt.subject_name}</option>
+                    </foreach>
+                </select>
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">选择教师</label>
+            <div class="controls">
+                <select name="teacher_id">
+                    <option value="0" >请选择</option>
+                    <foreach name="teacher" item="opt" key="opt_k">
+                        <option value="{$opt.teacher_id}" <eq name="data.teacher_id" value="$opt.teacher_id"> selected</eq>>{$opt.teacher_name}</option>
+                    </foreach>
+                </select>
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">考试时间<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="test_time" value="2016-2-2">格式:2016-2-2
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">分数<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="score" value="">
+            </div>
+        </div>
+
+        <div class="form-item">
+            <label class="item-label">描述<span class="check-tips"></span></label>
+            <div class="controls">
+                <div class="textarea input-large">
+                    <textarea name="score_desc" rows="7" cols="56">{$data.score_desc}</textarea>
+                </div>                
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">教师评语<span class="check-tips"></span></label>
+            <div class="controls">
+                <div class="textarea input-large">
+                    <textarea name="comment" rows="7" cols="56">{$data.comment}</textarea>
+                </div>                
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>           
+        </div>
+    </form>
+</block>
+
+<block name="script">
+    <script type="text/javascript"> 
+    highlight_subnav('{:U('Score/index')}');
+    <if condition="$data.parent_id">
+    $(document).ready(function() {
+        $('select[name=parent_id]').val({$data.parent_id});
+
+
+        $('select[name=info_type]').change(function(event) {
+             $('.check-tips_' + $(this).val()).show().siblings('.check-tips').hide();
+        });
+        $('select[name=info_type]').trigger('change');
+
+    });
+    </if>    
+    </script>
+</block>

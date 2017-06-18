@@ -1,0 +1,174 @@
+<!doctype html>
+<html class="no-js">
+<include file="index/header" />
+<body>
+<div id="loading" class="popload">
+    <div class="popload-main">
+        <span class="popload-main-ico"></span>
+        <p class="popload-main-txt" id="progress">加载中...</p>
+    </div>
+</div>
+
+<div class="wrapper">
+    <header data-am-widget="header" class="am-header am-header-default am-header-fixed">
+        <div class="am-header-left am-header-nav">
+            <a href="{:U('Index/Home')}" class="am-btn">
+                <i class="am-header-icon am-icon-angle-left am-icon-sm"></i>
+            </a>
+        </div>
+        <h1 class="am-header-title">
+            老师课程
+        </h1>
+        <div class="am-header-right am-header-nav">
+            <button class="am-btn am-btn-primary" data-am-collapse="{target: '#collapse-nav'}"><i class="am-icon-bars am-icon-sm"></i></button>
+        </div>
+        <include file="index/nav" />
+    </header>
+
+    <div class="courses-wrapper">
+        <div class="courses-tch-top am-g am-padding-bottom-sm am-padding-top-sm">
+            <div class="am-u-sm-4 am-u-sm-offset-4">
+                <i class="am-circle-area">{$Info.0.area_name}</i>
+				<br></br>
+                <img src="{$Info.0.pic1}" class="am-img-thumbnail am-circle" alt="">
+            </div>
+            <div class="am-u-sm-12 am-text-center">
+                <h3>{$Info.0.teacher_name}</h3>
+                <p id="tch-desc" class="ellipsis3">简介：{$Info.0.introduce}</p>
+                <div class="am-text-center courses-angle">
+                    <i class="am-icon-angle-down"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="courses-list">
+            <ul class="am-list" id="course-list">
+            <!-- 课程列表start -->
+            <?php $week = array('星期日','星期一','星期二','星期三','星期四','星期五','星期六');?>
+            <foreach name="Info" item="class" >
+                <li class="course-item">
+                    <gt name="class.class_num" value="0"><a href="{:U('Order/order',array('Cid'=>$class['class_id']))}"></gt>
+                        <h3>{$class.class_name}
+	                       <!--   <if condition="$class.class_type eq 1">  （大班）
+	                        <elseif condition="$class.class_type eq 2"/> （小班）
+	                        </if> -->
+	                    </h3>
+                    <gt name="class.class_num" value="0"></a></gt>
+                    <div class="desc">
+                        时间：{$week[$class['week_id']]}/{$class.time_interval} <br>
+                        地点：{$class.area_name} {$class.class_room} <br>
+                    </div>
+                    <div class="price-box">
+                        <span class="price">￥<strong>{$class.class_price}/
+                            <?php
+                                if($class['class_type']==2){
+                                    echo $class['times'].'</strong>次';
+                                }else{
+                                    $classTurn = array('星期','周','月','年','学期');
+                                    echo $classTurn[$class['period']].'</strong>';
+                                }
+                            ?>
+                            <br></span>
+                        <span class="xw">学位：<strong>{$class.class_num}</strong>位</span>
+                        <br>
+                        <span class="xw">原价：￥{$class.original_price}</span>
+                    </div>
+                    <i class="am-icon-angle-right"></i>
+                    <div class="course-control">
+                        <a  href="tel://<?php echo $Info['0']['add_phone']; ?>">电话预约</a>
+                    	<a href="{:U('Order/order',array('Cid'=>$class['class_id']))}"  class="buy">购买</a>
+                    </div>
+                </li>
+            </foreach>
+            <!-- 课程列表end -->
+            </ul>
+            <div class="list-more am-text-center">
+                点击加载更多
+            </div>
+        </div>
+    </div>
+
+    <footer class="am-footer am-footer-default">
+        <div class="am-footer-miscs">
+            <p>CopyRight©2016  四志教育 Inc.</p>
+        </div>
+    </footer>
+</div>
+
+<script src="__ASSETS__/vendors/lib.min.js"></script>
+<script src="__ASSETS__/scripts/app.min.js"></script>
+<script type="text/javascript">
+
+    wx.ready(function () {
+        var shareData = {
+            title: "四志教育~{$Info.0.teacher_name}课程介绍",
+
+            desc: <?php $desc = mb_substr(str_replace(array("\r\n", "\r", "\n"), "", str_replace(PHP_EOL, '', $Info['0']['introduce'])), 0, 30, 'utf-8');
+        echo '"'.$desc.'..."';
+        ?>,
+            link: "http://<?php echo C('WX_CONFIG.domain').'/Home/Teacher/TeacherClass/Tid/'.$_GET['Tid'].'/Cid/'.$_GET['Cid'].'.html';?>",
+            imgUrl: "http://<?php echo C('WX_CONFIG.domain');?><?php if(!empty($Info['0']['pic1'])){ echo $Info['0']['pic1'];}else{ echo 'Public/Home/assets/images/sizhi.png'; } ?>",
+            trigger: function (res) {
+                // alert('用户点击发送给朋友');
+            },
+            success: function (res) {
+                alert('已分享');
+            },
+            cancel: function (res) {
+                alert('已取消');
+            },
+            fail: function (res) {
+                alert(JSON.stringify(res));
+            }
+        };
+        wx.onMenuShareAppMessage(shareData);
+        wx.onMenuShareTimeline(shareData);
+//        var shareTimelineData = shareData;
+//        shareTimelineData.title = "四志教育~{$Info.0.teacher_name}课程介绍";
+//        wx.onMenuShareTimeline(shareTimelineData);
+    });
+
+    $(function(){
+        var page = 1;
+        var url = window.location.href;
+        $('.list-more').on("click",function(){
+            page = page+1;
+            $.getJSON(url,{p:page},function(res){
+                if(res!=null){
+                    var teacherClassUrl = "{:U('Order/order','','')}";
+                    var html = '';
+                    var classType={1:'（大班）',2:'（小班）'};
+                    var week = ['星期一','星期二','星期三','星期四','星期五','星期六','星期日'];
+                    $.each(res,function(i,v){
+                        html += '<li class="course-item">'
+				            +  '    <h3>'+v.class_name+classType[v.class_type]+'</h3>'
+				            +  '    <div class="desc">'
+				            +  '        时间：'+week[v.week_id]+'/'+v.time_interval +'<br>'
+				            +  '        地点：'+v.area_name +v.class_room +'<br>'
+				            +  '    </div>'
+				            +  '    <div class="price-box">'
+				            +  '        <a href="'+teacherClassUrl+'/Cid/'+v.class_id+'.html">'
+					        +  '            <span class="price">￥<strong>'+v.class_price+'/'+v.times+'</strong>'
+                            +  '';
+                        if(v.class_type==2){
+                            html += '次';
+                        }
+                        html += ' <br></span>'
+					        +  '            <span class="xw">学位：<strong>'+v.class_num+'</strong>位</span>'
+					        +  '        </a>'
+				            +  '    </div>'
+				            +  '    <i class="am-icon-angle-right"></i>'
+				            +  '</li>'
+
+                    });
+            
+                    $('#course-list').append(html);
+                }else{
+                    $('.list-more').html('加载完成')
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

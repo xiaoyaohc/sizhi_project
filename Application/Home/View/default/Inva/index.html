@@ -1,0 +1,127 @@
+<extend name="Base/inva_base" />
+<block name="content">
+	<div class="banner">
+		    <div class="wrapper" style="position:relative; ">
+				 <a href="javascript:void(0);" class="btn btnPre" id="banner_index_pre"></a>
+				 <a href="javascript:void(0);" class="btn btnNext" id="banner_index_next"></a>
+			</div>
+		<div class="banner_index">
+		    <ul class="banner_wrap" id="banner_index">
+		     <volist name="slides" id="vo">  
+			      <li>
+			      	<a href="{$vo.slide_url}" target="_blank"><img src="{$vo.slide_pic}"/></a>
+			      </li>
+		     </volist> 
+		    </ul>
+		</div>
+		
+		<script type="text/javascript">
+		var ShowPre1 = new ShowPre({box:"banner_index",Pre:"banner_index_pre",Next:"banner_index_next",numIco:"index_numIco",loop:1,auto:1});
+
+		</script>
+    	 
+    </div>   
+
+    <div class="work" >
+    	<div class="work-wrapper">
+    	    <div class="work-box">
+		    	<a href ="{:U('works')}" class="work-more">more</a>
+		    	<div class="work-content">
+		    		我们追求以更精致的服务和更超前的创新思维真正
+					做到网尽其能，在互联网的世界，为客户创想无限
+					未来！
+		    	</div>
+			</div>
+	    	<div style="clear:both;"></div>   		
+    	</div>
+    </div>
+    <div class="aboout" >
+        <div class="wrapper">
+	        <div class="solution-box">
+		    	<div class="solution-title"></div>
+		    	<div class="solution-text">
+			    	“以人为本”的博胜互动吸纳了国内资深的互联网营销及广告传媒界的专业人士，他们成为企业的强大根基，构成博胜互动参与市场竞争的核心力量...
+		    	</div>
+		    	<a href="{:U('solutions')}" class="solution-more">more</a>
+		    	<div style="clear:both;"></div>
+	        </div>
+	        <div class="about-img"></div>
+	        <div class="about-box">
+	        	<div class="about-title"></div>
+	        	<div class="about-content">
+	        		{$abouts.about_content|filter_html|msubstr=0,60,'utf-8'}
+	        	</div>
+	        	<a href="{:U('about')}" class="about-more">more</a>
+	        </div>
+    	</div>
+    </div>    
+    <div class="solution"  >
+    	<div class="wrapper">
+    	    <div class="solution-bg">
+    	        <a href="{:U('solutions')}" class="solution-text1">
+    	            {$solution[0]['solution_name']}
+    	        </a>
+    	        <div class="solution-text2">
+    	        	{$solution[0]['solution_area']}...
+    	        </div>
+    	        <a href="{:U('solutions')}" class="solution-text3">
+    	             {$solution[1]['solution_name']}
+    	        </a>
+    	        <div class="solution-text4">
+	    	        {$solution[1]['solution_area']}...
+    	        </div>
+    	    </div>
+    	    <div style="clear:both;"></div> 	
+    	</div>
+    </div>
+    <div class="news" >
+    	<div class="wrapper">
+	        <div class="news-bg">
+	        	<a href="{:U('solutions')}" class="news-text1">
+	        		{$solution[2]['solution_name']}
+	        	</a>
+	        	<div class="news-text2">
+		        	{$solution[2]['solution_area']}
+	        	</div>
+	        	<div class="news-text3">
+	        	    我们追求以更精致的服务和更超前的创新思
+					维真正做到网尽其能。
+	        	</div>
+	        	<a href="{:U('newscenter')}" class="news-more">more</a>
+	    	</div>
+	    	<div class="news-box">
+	    		<volist name="news" id="item" key="k" >
+	    			<div class="news-box-content">
+		    			<a href="{:U('news_detail',array('id'=>$item['info_id']))}" class="news-box-content-title">
+		    				{$item.info_name}
+		    			</a>
+		    			<div class="news-box-content-text">
+		    				{$item.info_area}
+		    			</div>
+		    		</div>
+	    		</volist>
+	    		<!-- <div class="news-box-content">
+	    			<a href="" class="news-box-content-title">
+	    				分析师称苹果近期不会推出电视服务分析师称苹果近期不会推出电视服务
+	    			</a>
+	    			<div class="news-box-content-text">
+	    				凤凰科技讯北京时间8月25日消息，据外国媒体报凤凰科技讯北京时间8月25日消息，据外国媒体报
+						道称，近期有关苹果计划推出电视机顶盒...
+	    			</div>
+	    		</div>
+	    		<div class="news-box-content">
+	    			<a href="" class="news-box-content-title">
+	    				分析师称苹果近期不会推出电视服务分析师称苹果近期不会推出电视服务
+	    			</a>
+	    			<div class="news-box-content-text">
+	    				凤凰科技讯北京时间8月25日消息，据外国媒体报
+						道称，近期有关苹果计划推出电视机顶盒...
+	    			</div>
+	    		</div>	     -->		
+	    	</div>
+	    	<div style="clear:both;"></div>    		
+    	</div>
+    </div>
+    
+</block>
+

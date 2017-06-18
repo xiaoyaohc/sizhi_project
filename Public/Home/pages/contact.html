@@ -1,0 +1,95 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <script>
+        (function(f){var h=f.document;var b=h.documentElement;var k=f.orientation||0;var j=640;var a=9/16;var d=20;var i=f.devicePixelRatio;var c=i?1/i:1;h.write('<meta name="viewport" content="initial-scale='+c+",maximum-scale="+c+",minimum-scale="+c+',user-scalable=0">');var g=b.clientWidth;var e=b.clientHeight;if(Math.abs(k)==90||g>e){g*=a}b.style.fontSize=(g/i)*d/(j/i)+"px"})(window);
+    </script>
+    <title>联系我们</title>
+
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+
+    <link rel="stylesheet" href="../assets/styles/style.min.css">
+
+</head>
+<body>
+<div id="loading" class="popload">
+    <div class="popload-main">
+        <span class="popload-main-ico"></span>
+        <p class="popload-main-txt" id="progress">加载中...</p>
+    </div>
+</div>
+
+<div class="wrapper">
+    <header data-am-widget="header" class="am-header am-header-default am-header-fixed">
+        <div class="am-header-left am-header-nav">
+            <a href="index.html" class="am-btn">
+                <i class="am-header-icon am-icon-angle-left am-icon-sm"></i>
+            </a>
+        </div>
+        <h1 class="am-header-title">
+            联系我们
+        </h1>
+        <div class="am-header-right am-header-nav">
+            <button class="am-btn am-btn-primary" data-am-collapse="{target: '#collapse-nav'}"><i class="am-icon-bars am-icon-sm"></i></button>
+        </div>
+        <nav>
+            <ul id="collapse-nav" class="am-nav am-collapse">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="usercenter.html">个人中心</a></li>
+                <li><a href="rank.html">进步之星排名</a></li>
+                <li><a href="about.html">中心简介</a></li>
+                <li><a href="contact.html">联系我们</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container order-wrapper app-form">
+        <ul class="am-list">
+            <li>
+                <span>
+                    电话
+                </span>
+                <span class="am-fr">020-88888888</span>
+            </li>
+            <li>
+                <span>
+                    地址
+                </span>
+                <span class="am-fr">安静的佛啤酒人头配套问题温柔</span>
+            </li>
+            <li>
+                <span>
+                    地图
+                </span>
+                <div class="contact-map">
+                    <div id="map"></div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+
+    <footer class="am-footer am-footer-default">
+        <div class="am-footer-miscs">
+            <p>CopyRight©2016  四志教育 Inc.</p>
+        </div>
+    </footer>
+</div>
+
+<script src="../assets/vendors/lib.min.js"></script>
+<script src="../assets/scripts/app.min.js"></script>
+
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=NBPEbYvG4LhwCDFtRI89N49N"></script>
+<script>
+    $(function () {
+        app.contact();
+    });
+</script>
+</body>
+</html>

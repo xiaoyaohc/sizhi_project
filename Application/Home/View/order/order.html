@@ -1,0 +1,134 @@
+<!doctype html>
+<html class="no-js">
+<include file="index/header" />
+<body>
+<div id="loading" class="popload">
+    <div class="popload-main">
+        <span class="popload-main-ico"></span>
+        <p class="popload-main-txt" id="progress">加载中...</p>
+    </div>
+</div>
+
+<div class="wrapper">
+    <header data-am-widget="header" class="am-header am-header-default am-header-fixed">
+        <div class="am-header-left am-header-nav">
+            <a href="{:U('Index/Home')}" class="am-btn">
+                <i class="am-header-icon am-icon-angle-left am-icon-sm"></i>
+            </a>
+        </div>
+        <h1 class="am-header-title">
+            确认订单
+        </h1>
+        <div class="am-header-right am-header-nav">
+            <button class="am-btn am-btn-primary" data-am-collapse="{target: '#collapse-nav'}"><i class="am-icon-bars am-icon-sm"></i></button>
+        </div>
+        <nav>
+            <ul id="collapse-nav" class="am-nav am-collapse">
+                    <li><a href="{:U('Index/Home')}">首页</a></li>
+                    <li><a href="{:U('User/UserCenter','','')}">个人中心</a></li>
+                    <li><a href="rank.html">进步之星排名</a></li>
+                    <li><a href="about.html">中心简介</a></li>
+                    <li><a href="contact.html">联系我们</a></li>
+                </ul>
+        </nav>
+    </header>
+
+    <div class="order-wrapper app-form">
+        <form action="{:U('Order/orderConfirm','','')}" method="post">
+            <ul class="am-list">
+                <li>
+                    <span>
+                        上课老师
+                    </span>
+                    <span class="am-fr">{$Info.teacher_name}</span>
+                </li>
+                <li>
+                    <span>
+                        科目
+                    </span>
+                    <span class="am-fr">{$Info.class_name}{$Info.class_type}</span>
+                </li>
+                <li>
+                    <span>
+                        课时费
+                    </span>
+                    <span class="am-fr"><strong>￥{$Info.class_price}/{$Info.times}次</strong></span>
+                </li>
+                <li>
+                    <span>
+                        上课时间
+                    </span>
+                    <span class="am-fr">周六 14：00-16：00</span>
+                </li>
+                <li>
+                    <span>
+                        上课地点
+                    </span>
+                    <span class="am-fr">{$Info.area_name} {$Info.class_room}</span>
+                </li>
+                <li>
+                    <span>
+                        订单合计
+                    </span>
+                    <span class="am-fr"><strong>￥{$Info.class_price}</strong></span>
+                </li>
+                <li>
+                    <span>
+                        姓名
+                    </span>
+                    <span class="am-fr form-ctrl"><input name="stu_name" type="text" placeholder="请输入姓名"></span>
+                </li>
+                <li class="am-cf">
+                    <span class="am-fl">
+                        联系方式
+                    </span>
+                    <span class="am-fr form-ctrl textarea">
+                        <textarea name="stu_contant" placeholder="请输入您的联系方式"></textarea>
+                    </span>
+                </li>
+                <li>
+                    <span>
+                        学校
+                    </span>
+                    <span class="am-fr form-ctrl"><input name="stu_school" type="text" placeholder="请输入学校"></span>
+                </li>
+                <li>
+                    <span>
+                        班级
+                    </span>
+                    <span class="am-fr form-ctrl">
+                        <input name="stu_class" type="text" placeholder="请输入班级">
+                        <input name="Cid" type="hidden" value="{$Info.class_id}">
+                    </span>
+                </li>
+                <li>
+                    <span>
+                        支付方式
+                    </span>
+                    <span class="am-fr form-ctrl">
+                        <select name="pay_type" id="">
+                            <option value="0" >微信支付</option>
+                            <option value="1" >支付宝支付</option>
+                            <option value="2" >银联支付</option>
+                        </select>
+                    </span>
+                </li>
+                <li>
+                    <button class="am-btn am-btn-danger am-btn-block am-btn-lg">确认</button>
+                </li>
+            </ul>
+        </form>
+    </div>
+
+
+    <footer class="am-footer am-footer-default">
+        <div class="am-footer-miscs">
+            <p>CopyRight©2016  四志教育 Inc.</p>
+        </div>
+    </footer>
+</div>
+
+<script src="__ASSETS__/vendors/lib.min.js"></script>
+<script src="__ASSETS__/scripts/app.min.js"></script>
+</body>
+</html>

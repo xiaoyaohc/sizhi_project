@@ -1,0 +1,113 @@
+<extend name="Public/base" />
+
+<block name="body">
+	<!-- 标题栏 -->
+	<div class="main-title">
+		<h2>{$meta_title}</h2>
+	</div>
+	<div class="cf">
+		<div class="fl">
+            <a class="btn" onclick="rank();">排 名</a>
+        </div>
+        <!-- 高级搜索 -->
+		<div class="search-form fr cf">
+			<form>
+				<div class="sleft">
+					<input type="text" name="student_name" class="search-input" value="{:I('student_name')}" placeholder="学生名字">
+					<a class="sch-btn" href="javascript:;" id="search" url="{:U('index')}"><i class="btn-search"></i></a>
+				</div>
+			</form>
+		</div>
+        
+    </div>
+    <!-- 数据列表 -->
+    <div class="data-table table-striped">
+	<table class="">
+    <thead>
+        <tr>
+	        
+			<th class="">学生</th>
+			
+		</tr>
+    </thead>
+    <tbody>
+		<notempty name="info">
+		<volist name="info" id="vo">
+		<tr>
+			
+			<td><a href="{:U('Score/edit',array('student_id'=>$vo['student_id']))}">{$vo.student_name}</a></td>
+			
+			
+		</tr>
+		</volist>
+		<else/>
+		<td colspan="9" class="text-center"> aOh! 暂时还没有内容! </td>
+		</notempty>
+	</tbody>
+    </table>
+	</div>
+    <div class="page">
+        {$_page}
+    </div>
+</block>
+
+<block name="script">
+	<script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+
+	<script type="text/javascript">
+	//搜索功能
+	$("#search").click(function(){
+		var url = $(this).attr('url');
+        var query  = $('form').serialize();
+        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+        query = query.replace(/^&/g,'');
+        if( url.indexOf('?')>0 ){
+            url += '&' + query;
+        }else{
+            url += '?' + query;
+        }
+		window.location.href = url;
+	});
+	//回车搜索
+	$(".search-input").keyup(function(e){
+		if(e.keyCode === 13){
+			$("#search").click();
+			return false;
+		}
+	});
+    //导航高亮
+    highlight_subnav('{:U('Score/index')}');
+
+    $(document).ready(function() {
+    	$('#select').val("{:U('Score/index',array('parent_id'=>$parent_id))}");	
+    	$('#select').change(function(){
+    		location.href = $(this).val();
+    	});
+
+    	$('select[name=info_type]').change(function(event) {
+    		$('#search').click();
+    	});
+    });
+	</script>
+	<script>
+	  function rank(){
+	  	var rank = 1;
+	    $.ajax({
+	        url: '{:U('Score/rank')}',
+	        type: 'post',
+	        dataType: 'json',
+	        data: {
+	            rank:rank
+	        },
+	        success:function(data) {
+	            alert("更新排名成功！");
+	            return false;
+	        }
+	    });
+	  }
+	</script>
+
+</block>
+
+
+

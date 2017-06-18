@@ -1,0 +1,302 @@
+<!doctype html>
+<html class="no-js">
+<include file="index/header" />
+<body>
+<div id="loading" class="popload">
+    <div class="popload-main">
+        <span class="popload-main-ico"></span>
+        <p class="popload-main-txt" id="progress">加载中...</p>
+    </div>
+</div>
+
+<div class="wrapper">
+    <header data-am-widget="header" class="am-header am-header-default am-header-fixed">
+        <div class="am-header-left am-header-nav">
+            <a href="{:U('Index/Home')}" class="am-btn">
+                <i class="am-header-icon am-icon-angle-left am-icon-sm"></i>
+            </a>
+        </div>
+        <h1 class="am-header-title">
+            老师列表
+        </h1>
+        <div class="am-header-right am-header-nav">
+            <button class="am-btn am-btn-primary" data-am-collapse="{target: '#collapse-nav'}"><i class="am-icon-bars am-icon-sm"></i></button>
+        </div>
+        <include file="index/nav" />
+    </header>
+
+    <div class="tch-filter-box" id="tch-filter-box">
+        <ul class="am-avg-sm-3">
+            <li>
+                <input type="hidden" name="Sid" id="Sid" value="<?php echo empty($TeacherListData['Sid'])?0:$TeacherListData['Sid']; ?>">
+                <input type="hidden" name="Aid" id="Aid" value="<?php echo empty($TeacherListData['Aid'])?0:$TeacherListData['Aid']; ?>">
+                <input type="hidden" name="Order" id="Order" value="<?php echo empty($TeacherListData['Order'])?0:$TeacherListData['Order']; ?>">
+                <input type="hidden" name="IsOrder" id="IsOrder" value="<?php echo empty($TeacherListData['IsOrder'])?0:$TeacherListData['IsOrder']; ?>">
+                <button class="am-btn am-btn-block" data-field="km">
+                    <span><?php echo empty($TeacherListData['SName'])?'科目':$TeacherListData['SName']; ?></span> <i class="am-icon-caret-down"></i>
+                </button>
+            </li>
+            <li>
+                <button class="am-btn am-btn-block" data-field="xq">
+                    <span><?php echo empty($TeacherListData['AName'])?'校区':$TeacherListData['AName']; ?></span> <i class="am-icon-caret-down"></i>
+                </button>
+            </li>
+            <li class="am-active">
+                <button class="am-btn am-btn-block" data-field="px">
+                    <span><?php echo empty($TeacherListData['OrderName'])?'综合排序':$TeacherListData['OrderName']; ?></span> <i class="am-icon-caret-down"></i>
+                </button>
+            </li>
+        </ul>
+        <div class="filter-box-options am-hide" id="filter-box-options">
+            <div>
+                <ul class="am-list am-list-static am-text-center animated fadeInDown">
+                </ul>
+            </div>
+        </div>
+        <div class="mask am-hide"></div>
+    </div>
+    <div data-am-widget="list_news" class="am-list-news am-list-news-default tch-list">
+        <div class="am-list-news-bd">
+            <ul class="am-list" id="teacherList">
+            <!-- 循环输出教师列表start -->
+            <foreach name="TeacherListData['Teacher']" item="teacher" >
+                <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left">
+                    <div class="am-u-sm-4 am-list-thumb">
+                        <a href="{:U('Teacher/teacherClass',array('Tid'=>$teacher['teacher_id']))}">
+                            <img src="{$teacher.pic1}" alt="" />
+                        </a>
+                    </div>
+                    <div class="am-u-sm-4 am-list-main">
+                        <h2 class="am-list-item-hd">
+                            <a href="{:U('Teacher/teacherClass',array('Tid'=>$teacher['teacher_id']))}">{$teacher.teacher_name}</a>
+                        </h2>
+                        <div class="am-list-item-text">
+                            简介：<?php echo $teacher['introduce'];?>
+                        </div>
+                    </div>
+                    <div class="am-u-sm-4 am-padding-top-sm">
+                        <div class="am-list-item-text am-padding-bottom-xs">
+                            教龄：<?php echo $teacher['senority'];?> 年
+                        </div>
+                        <a href="{:U('Teacher/teacherClass',array('Tid'=>$teacher['teacher_id']))}" class="am-btn am-btn-primary am-btn-block">找他教 <i class="am-icon-angle-double-right"></i></a>
+                    </div>
+                </li>
+            </foreach>
+            <!-- 循环输出教师列表end -->
+            </ul>
+            <div class="list-more am-text-center">
+                点击加载更多 <i class="am-icon-angle-right"></i>
+            </div>
+        </div>
+    </div>
+
+    <footer class="am-footer am-footer-default">
+        <div class="am-footer-miscs">
+            <p>CopyRight©2016  四志教育 Inc.</p>
+        </div>
+    </footer>
+</div>
+
+<script src="__ASSETS__/vendors/lib.min.js"></script>
+<!-- <script src="__ASSETS__/scripts/app.min.js"></script> -->
+<!-- <script src="__ASSETS__/scripts/home.js"></script> -->
+<script>
+!
+function(e) {
+    e.AMUI.progress.start();
+    var t = {
+        RUNTIME: {},
+        ready: function(e) {
+            "addEventListener" in document && document.addEventListener("DOMContentLoaded", e, !1)
+        },
+        initElement: function() {
+            var t = this.RUNTIME;
+            t.loading = e("#loading")
+        },
+        init: function() {
+            var t = this.RUNTIME;
+            this.initElement(), this.browser.versions.mobile || e("html").css({
+                "font-size": "12px",
+                "max-width": "640px",
+                margin: "auto"
+            }), e(document).ready(function() {
+                e.AMUI.progress.done(), t.loading.hide()
+            })
+        },
+        sprintf: function(e) {
+            var t = arguments,
+                n = !0,
+                i = 1;
+            return e = e.replace(/%s/g, function() {
+                var e = t[i++];
+                return "undefined" == typeof e ? (n = !1, "") : e
+            }), n ? e : ""
+        },
+        getSearchParams: function() {
+            for (var e, t = {}, n = /\+/g, i = /([^&=]+)=?([^&]*)/g, a = function(e) {
+                    return decodeURIComponent(e.replace(n, " "))
+                }, o = window.location.search.substring(1); e = i.exec(o);) t[a(e[1])] = a(e[2]);
+            return t
+        },
+        browser: {
+            versions: function() {
+                var e = navigator.userAgent;
+                navigator.appVersion;
+                return {
+                    trident: e.indexOf("Trident") > -1,
+                    presto: e.indexOf("Presto") > -1,
+                    webKit: e.indexOf("AppleWebKit") > -1,
+                    gecko: e.indexOf("Gecko") > -1 && -1 == e.indexOf("KHTML"),
+                    mobile: !! e.match(/AppleWebKit.*Mobile.*/),
+                    ios: !! e.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+                    android: e.indexOf("Android") > -1 || e.indexOf("Linux") > -1,
+                    iPhone: e.indexOf("iPhone") > -1,
+                    iPad: e.indexOf("iPad") > -1,
+                    webApp: -1 == e.indexOf("Safari")
+                }
+            }(),
+            language: (navigator.browserLanguage || navigator.language).toLowerCase()
+        },
+        request: function(e) {
+            return this.getSearchParams()[e]
+        },
+        tips: function(e, t, n) {
+            var i = {
+                content: e,
+                shade: !1,
+                style: n || "text-align:center;background:rgba(32,32,32,1);opacity:0.8;color:#fff;min-width: initial;border:0;"
+            };
+            return t && (i.time = t), layer.open(i)
+        },
+        getPx: function(e) {
+            return e * parseFloat(document.querySelector("html").style.fontSize)
+        }
+    };
+    e(function() {
+        t.init()
+    }), window.COMMON = t;
+    var n = {
+        initEvent: function() {},
+        bindEvent: function() {
+            e("#course-list").delegate("[show-desc]", "click", function() {
+                e(this).parents("li").toggleClass("am-active")
+            }), e("#tch-desc,.courses-angle").on("click", function() {
+                e("#tch-desc").toggleClass("ellipsis3").next(".courses-angle").toggleClass("am-active")
+            })
+        },
+        teacherList: function() {
+            var t, n, i = e("#tch-filter-box"),
+                a = e("#filter-box-options"),
+                o = a.next(".mask"),
+                r = e.AMUI.iScroll,
+                c = {
+                    km: ["所有",<foreach name="TeacherListData['Subject']" item="subName" >
+                            "{$subName.subject_name}",
+                        </foreach>
+                        ],
+                    xq: ["所有",<foreach name="TeacherListData['Area']" item="areaName" >
+                            "{$areaName.area_name}",
+                        </foreach>],
+                    px: ["综合排序", "价格排序", "评分最高", "人气最高"]
+                },
+                sel = {
+                    km: ["0",<foreach name="TeacherListData['Subject']" item="subId" >
+                            "{$subId.subject_id}",
+                        </foreach>
+                        ],
+                    xq: ["0",<foreach name="TeacherListData['Area']" item="areaId" >
+                            "{$areaId.id}",
+                        </foreach>],
+                    px: ["0", "1", "2", "3"]
+                },
+                param = {
+                    km: ["Sid"],
+                    xq: ["Aid"],
+                    px: ["Order"]
+                };
+            i.delegate(".am-btn", "click", function() {
+                if (n != e(this).data("field")) {
+                    n = e(this).data("field");
+                    var i = "";
+                    e.each(c[n], function(e, t) {
+                        i += "<li selname="+'"'+param[n][0]+'"'+" selid="+'"'+sel[n][e]+'"'+">" + t + "</li>"
+                    }), a.find("ul").html(i)
+                }
+                a.removeClass("am-hide"), o.removeClass("am-hide"), t ? t.refresh() : t = new r("#filter-box-options", {
+                    scrollbars: !0,
+                    click: !0
+                })
+            }), o.on("click", function() {
+                a.addClass("am-hide"), o.addClass("am-hide")
+            }), a.delegate("li", "click", function() {
+                var selName = e(this).attr('selname');
+                e("#"+selName).val(e(this).attr('selid'));
+                
+                console.log(e(this).text()), 
+                o.trigger("click"), 
+                e(this).addClass(".am-active").siblings().removeClass(".am-active"), 
+                e(".am-btn[data-field=" + n + "]").find("span").text(e(this).text()),
+                location.href="{:U('Teacher/teacherList','','')}/Sid/"+e("#Sid").val()+"/Aid/"+e("#Aid").val()+"/Order/"+e("#Order").val()
+            })
+        },
+        init: function() {
+            this.initEvent(), this.bindEvent()
+        }
+    };
+    n.rankHandle = function() {
+        var t = e("#rank-list");
+        t.children("li").on("click", function() {
+            e(this).toggleClass("am-active")
+        }), t.find(".comment").on("click", function(e) {
+            e.stopPropagation()
+        })
+    }, window.app = n, e(document).ready(function() {
+        n.init()
+    })
+}(jQuery);
+    $(function () {
+        app.teacherList();
+
+        //翻页加载
+        var page = 1;
+        var url = window.location.href;
+        $('.list-more').on("click",function(){
+            page = page+1;
+            $.getJSON(url,{p:page},function(res){
+                if(res!=null){
+                    var teacherClassUrl = "{:U('Teacher/teacherClass','','')}";
+                    var html = '';
+                    $.each(res,function(i,v){
+                    html += '<li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left">'
+                        +'    <div class="am-u-sm-4 am-list-thumb">'
+                        +'        <a href="courses.html">'
+                        +'            <img src="'+v.pic1+'" alt="" />'
+                        +'        </a>'
+                        +'    </div>'
+                        +'    <div class="am-u-sm-4 am-list-main">'
+                        +'        <h2 class="am-list-item-hd">'
+                        +'            <a href="courses.html">'+v.teacher_name+'</a>'
+                        +'        </h2>'
+                        +'        <div class="am-list-item-text">'
+                        +'            简介：哪里读取？'
+                        +'        </div>'
+                        +'    </div>'
+                        +'    <div class="am-u-sm-4 am-padding-top-sm">'
+                        +'        <div class="am-list-item-text am-padding-bottom-xs">'
+                        +'            教龄：哪里读取？'
+                        +'        </div>'
+                        +'        <a href="'+teacherClassUrl+'/Tid/'+v.teacher_id+'.html" class="am-btn am-btn-primary am-btn-block">找他教 <i class="am-icon-angle-double-right"></i></a>'
+                        +'    </div>'
+                        +'</li>'
+                    });
+            
+                    $('#teacherList').append(html);
+                }else{
+                    $('.list-more').html('加载完成 <i class="am-icon-angle-right"></i>')
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

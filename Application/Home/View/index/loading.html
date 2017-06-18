@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<include file="index/header" />
+<body class="load_bg">
+<div id="loading" class="popload">
+    <div class="popload-main">
+        <span class="popload-main-ico"></span>
+        <p class="popload-main-txt" id="progress">加载中...</p>
+    </div>
+</div>
+
+
+<div class="load_box">
+	<div class="load_box_in">
+        <i class="load_pic"></i>
+        <?php if(empty($Code)){ ?>
+        <form action="{:U('Index/invite','','')}" method="post" id="load_sumbit">
+            <input type="text" name="inviteCode" placeholder="请填写您的邀请码" class="load_text" />
+            <p class="load_btn">
+                <a href="javascript:;" class="load_sumbit">确定</a>
+                <a href="{:U('Index/inviteJump','','')}">跳过</a>
+            </p>
+        </form>
+        <?php }else{ ?>
+            <label class="load_text">已成功邀请，您的邀请码为：{$Code}</label>
+            <p class="load_btn">
+                <a href="{:U('Index/index','','')}">确定</a>
+            </p>
+        <?php } ?>
+    </div>
+</div>
+
+
+<script src="__ASSETS__/vendors/lib.min.js"></script>
+<script src="__ASSETS__/scripts/app.min.js"></script>
+<link rel="stylesheet" href="__ASSETS__/styles/loading.css">
+
+<script>
+$('.load_sumbit').click(function(){
+	var $text=$('.load_text').val();
+	if($text!=''){
+		$('#load_sumbit').submit();	
+	}else{
+		alert('请填写您的邀请码')	
+	}
+})
+</script>
+</body>
+</html>

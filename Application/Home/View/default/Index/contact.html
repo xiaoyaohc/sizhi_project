@@ -1,0 +1,116 @@
+<extend name="Base/main" />
+<block name="left_cont">
+	<div class="contact">
+	    <div class="contact-title"></div>
+        <!--此处放地图：博胜互动，尺寸为：宽967px,高305px-->
+	    <!-- <div class="sub-con show">
+	        <img src="{$item.contact_pic1}">
+	    </div>
+	    <div class="sub-con">
+	        <img src="{$item.contact_pic2}">
+	    </div>
+	    <div class="sub-con">
+	        <img src="{$item.contact_pic3}">
+	    </div>
+	    <div class="sub-con">
+	        <img src="{$item.contact_pic4}">
+	    </div> -->
+	    <volist name="contact_list" id="item" key="k" >
+            <div class="sub-con">
+		        <img src="{$item.contact_pic1}">
+		    </div>
+        </volist>
+	    <div class="contact-map-nav">
+	        <ul>
+	            <!-- <li>
+	                <a href="javascript:void(0);" class="active">
+	                    博胜科技
+	                </a>
+	            </li>
+	            <li>
+	                <a href="javascript:void(0);">
+	                    博胜互动
+	                </a>
+	            </li>
+	            <li>
+	                <a href="javascript:void(0);">
+	                    博胜电商
+	                </a>
+	            </li>
+	            <li>
+	                <a href="javascript:void(0);">
+	                    湖南博佳
+	                </a>
+	            </li> -->
+	            <volist name="contact_list" id="item" key="k" >
+                    <li data-addr="{$item.contact_address}" data-tel="{$item.contact_tel}" data-fax="{$item.contact_fax}" ><a href="javascript:void(0);">{$item.contact_name}</a></li>
+                </volist>
+	        </ul>
+	    </div>
+	    <div class="contact-text">
+	        <p>
+	            地址：<span rel="addr"></span>
+	        </p>
+	        <p>
+	            电话：<span rel="tel"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;传真号：<span rel="fax"></span>
+	        </p>
+	    </div>
+	</div>
+</block>
+<block name="script">
+<script>
+    $(function(){
+        function windwoSize(){
+            var viewWidth = document.documentElement.clientWidth;
+            var viewHeight = document.documentElement.clientHeight;
+            if(viewHeight > 626){
+                var nab_pd = (viewHeight-487)/5;
+                    $(".right-content").children(".nav").children("ul").children("li").children("a").css({
+                    'padding-top':nab_pd+'px',
+                });
+                var mapHeightScale = 305/967;
+                var mapHeight = (viewWidth-314)*mapHeightScale;
+                var contact_pdtop = (viewHeight-320-mapHeight)/2;
+                $(".contact-title").css({
+                    'margin-top':contact_pdtop+'px'
+                });
+            }
+            else{
+                var nab_pd = (626-487)/3;
+                    $(".right-content").children(".nav").children("ul").children("li").children("a").css({
+                    'padding-top':nab_pd+'px',
+                });
+                $(".contact-title").css({
+                    'margin-top':'15px'
+                });
+                
+
+
+            }
+            
+        }
+        windwoSize();
+        window.addEventListener("resize", function () {
+            windwoSize();    
+        });
+
+
+
+        $(".contact-map-nav ul li a").on('mouseover',function(){
+        	//鼠标点击也可以切换
+            $(".contact").find(".show").removeClass("show");
+            $(".sub-con").eq($(".contact-map-nav ul li a").index($(this))).addClass("show");
+            $(".contact-map-nav").find(".active").removeClass("active");
+            $(this).addClass("active");
+
+            var _p = $(this).parent();
+            $('span[rel=addr]').text(_p.data('addr'));
+            $('span[rel=tel]').text(_p.data('tel'));
+            $('span[rel=fax]').text(_p.data('fax'));
+
+        });
+        $(".contact-map-nav ul li a").eq(0).trigger('mouseover');
+    })
+    
+</script>
+</block>

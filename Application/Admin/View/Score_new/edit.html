@@ -1,0 +1,153 @@
+<extend name="Public/base" />
+
+<block name="body">
+    <!-- 标题栏 -->
+    <div class="main-title">
+        <h2>{$meta_title}</h2>
+    </div>
+    <div class="cf">
+        <div class="fl">
+            
+        </div>
+        <!-- 高级搜索 -->
+        <div class="search-form fr cf">
+            
+        </div>
+        
+    </div>
+    <!-- 数据列表 -->
+    <div class="data-table table-striped">
+    <table class="">
+    <thead>
+        <tr>
+            
+            <th class="">时间</th>
+            <th class="">语文</th>
+            <th class="">数学</th>
+            <th class="">英语</th>
+            <th class="">评论</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        <for start="0" end="12" name="i">
+        <tr>
+            <td><input  type="text" name="test-time" id="{$i}_time"   <if condition="$data[$i][y]"> value="{$data[$i]['y']}-{$data[$i]['m']}"
+    <else /> value = "2016-5"
+    </if> /></td>
+            <td><input  type="text" name="chinese" id="{$i}_1" onblur="score(1,{$i})" value="{$data[$i]['chinese']}"  /></td>
+            <td><input  type="text" name="math"   id="{$i}_2" onblur="score(2,{$i})" value="{$data[$i]['math']}" /></td>
+            <td><input  type="text" name="english" id="{$i}_3" onblur="score(3,{$i})" value="{$data[$i]['english']}" /></td>
+            <td><input  type="text" name="comment" id="{$i}_comment" onblur="comment({$i})" value="{$data[$i]['comment']}" size="60" /></td>
+        </tr>
+        </for>
+    </tbody>
+    </table>
+    </div>
+    <div class="page">
+        {$_page}
+    </div>
+</block>
+
+<block name="script">
+    <script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+
+    <script type="text/javascript">
+    //搜索功能
+    $("#search").click(function(){
+        var url = $(this).attr('url');
+        var query  = $('form').serialize();
+        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+        query = query.replace(/^&/g,'');
+        if( url.indexOf('?')>0 ){
+            url += '&' + query;
+        }else{
+            url += '?' + query;
+        }
+        window.location.href = url;
+    });
+    //回车搜索
+    $(".search-input").keyup(function(e){
+        if(e.keyCode === 13){
+            $("#search").click();
+            return false;
+        }
+    });
+    //导航高亮
+    highlight_subnav('{:U('Score/index')}');
+
+    $(document).ready(function() {
+        $('#select').val("{:U('Score/index',array('parent_id'=>$parent_id))}"); 
+        $('#select').change(function(){
+            location.href = $(this).val();
+        });
+
+        $('select[name=info_type]').change(function(event) {
+            $('#search').click();
+        });
+    });
+    </script>
+    <script>
+    
+    function score(obj,i){
+        var score = $("#"+i+"_"+obj).val();
+        var test_time = $("#"+i+"_time").val();
+        var student_id= {$student_id};
+        if(test_time==''){
+           alert("请填写时间");
+           return false;
+        }
+        $.ajax({
+            url: '{:U('Score/chinese')}',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                subject_id:1,score:score,test_time:test_time,student_id:student_id
+            },
+            success:function(data) {
+              if(data.code!=1){
+                 alert("更新失败");
+                 return false;
+              }
+            }
+        });
+    }
+
+    function comment(i){
+        var chinese = $("#"+i+"_1").val();
+        var math = $("#"+i+"_2").val();
+        var english = $("#"+i+"_3").val();
+        var test_time = $("#"+i+"_time").val();
+        var comment = $("#"+i+"_comment").val();
+        var student_id= {$student_id};
+        if(chinese=='' || math=='' || english=='' ){
+           alert("请填分数");
+           return false;
+        }
+        if(test_time==''){
+           alert("请填写时间");
+           return false;
+        }
+        if(comment==''){
+           alert("请填写评论");
+           return false;
+        }
+        $.ajax({
+            url: '{:U('Score/comment')}',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                test_time:test_time,student_id:student_id,comment:comment
+            },
+            success:function(data) {
+              if(data.code!=1){
+                 alert("更新失败");
+                 return false;
+              }
+            }
+        });
+    }
+    
+    </script>
+
+</block>

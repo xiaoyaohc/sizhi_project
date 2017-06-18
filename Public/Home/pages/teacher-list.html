@@ -1,0 +1,188 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <script>
+        (function(f){var h=f.document;var b=h.documentElement;var k=f.orientation||0;var j=640;var a=9/16;var d=20;var i=f.devicePixelRatio;var c=i?1/i:1;h.write('<meta name="viewport" content="initial-scale='+c+",maximum-scale="+c+",minimum-scale="+c+',user-scalable=0">');var g=b.clientWidth;var e=b.clientHeight;if(Math.abs(k)==90||g>e){g*=a}b.style.fontSize=(g/i)*d/(j/i)+"px"})(window);
+    </script>
+    <title>老师列表</title>
+
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+
+    <link rel="stylesheet" href="../assets/styles/style.min.css">
+
+</head>
+<body>
+<div id="loading" class="popload">
+    <div class="popload-main">
+        <span class="popload-main-ico"></span>
+        <p class="popload-main-txt" id="progress">加载中...</p>
+    </div>
+</div>
+
+<div class="wrapper">
+    <header data-am-widget="header" class="am-header am-header-default am-header-fixed">
+        <div class="am-header-left am-header-nav">
+            <a href="index.html" class="am-btn">
+                <i class="am-header-icon am-icon-angle-left am-icon-sm"></i>
+            </a>
+        </div>
+        <h1 class="am-header-title">
+            老师列表
+        </h1>
+        <div class="am-header-right am-header-nav">
+            <button class="am-btn am-btn-primary" data-am-collapse="{target: '#collapse-nav'}"><i class="am-icon-bars am-icon-sm"></i></button>
+        </div>
+        <nav>
+            <ul id="collapse-nav" class="am-nav am-collapse">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="usercenter.html">个人中心</a></li>
+                <li><a href="rank.html">进步之星排名</a></li>
+                <li><a href="about.html">中心简介</a></li>
+                <li><a href="contact.html">联系我们</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="tch-filter-box" id="tch-filter-box">
+        <ul class="am-avg-sm-3">
+            <li>
+                <button class="am-btn am-btn-block" data-field="km">
+                    <span>科目</span> <i class="am-icon-caret-down"></i>
+                </button>
+            </li>
+            <li>
+                <button class="am-btn am-btn-block" data-field="xq">
+                    <span>校区</span> <i class="am-icon-caret-down"></i>
+                </button>
+            </li>
+            <li class="am-active">
+                <button class="am-btn am-btn-block" data-field="px">
+                    <span>综合排序</span> <i class="am-icon-caret-down"></i>
+                </button>
+            </li>
+        </ul>
+        <div class="filter-box-options am-hide" id="filter-box-options">
+            <div>
+                <ul class="am-list am-list-static am-text-center animated fadeInDown">
+                </ul>
+            </div>
+        </div>
+        <div class="mask am-hide"></div>
+    </div>
+    <div data-am-widget="list_news" class="am-list-news am-list-news-default tch-list">
+        <div class="am-list-news-bd">
+            <ul class="am-list">
+
+                <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left">
+                    <div class="am-u-sm-4 am-list-thumb">
+                        <a href="courses.html">
+                            <img src="../assets/images/p1.jpg" alt="" />
+                        </a>
+                    </div>
+                    <div class="am-u-sm-4 am-list-main">
+                        <h2 class="am-list-item-hd">
+                            <a href="courses.html">张老师</a>
+                        </h2>
+                        <div class="am-list-item-text">
+                            简介：晒晒旅行中的那些囧晒晒旅行中的那些囧晒晒旅行中的那些囧
+                        </div>
+                    </div>
+                    <div class="am-u-sm-4 am-padding-top-sm">
+                        <div class="am-list-item-text am-padding-bottom-xs">
+                            教龄：3年
+                        </div>
+                        <a href="courses.html" class="am-btn am-btn-primary am-btn-block">找他教 <i class="am-icon-angle-double-right"></i></a>
+                    </div>
+                </li>
+                <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left">
+                    <div class="am-u-sm-4 am-list-thumb">
+                        <a href="courses.html">
+                            <img src="../assets/images/p1.jpg" alt="" />
+                        </a>
+                    </div>
+                    <div class="am-u-sm-4 am-list-main">
+                        <h2 class="am-list-item-hd">
+                            <a href="courses.html">张老师</a>
+                        </h2>
+                        <div class="am-list-item-text">
+                            简介：晒晒旅行中的那些囧晒晒旅行中的那些囧晒晒旅行中的那些囧
+                        </div>
+                    </div>
+                    <div class="am-u-sm-4 am-padding-top-sm">
+                        <div class="am-list-item-text am-padding-bottom-xs">
+                            教龄：3年
+                        </div>
+                        <a href="courses.html" class="am-btn am-btn-primary am-btn-block">找他教 <i class="am-icon-angle-double-right"></i></a>
+                    </div>
+                </li>
+                <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left">
+                    <div class="am-u-sm-4 am-list-thumb">
+                        <a href="courses.html">
+                            <img src="../assets/images/p1.jpg" alt="" />
+                        </a>
+                    </div>
+                    <div class="am-u-sm-4 am-list-main">
+                        <h2 class="am-list-item-hd">
+                            <a href="courses.html">张老师</a>
+                        </h2>
+                        <div class="am-list-item-text">
+                            简介：晒晒旅行中的那些囧晒晒旅行中的那些囧晒晒旅行中的那些囧
+                        </div>
+                    </div>
+                    <div class="am-u-sm-4 am-padding-top-sm">
+                        <div class="am-list-item-text am-padding-bottom-xs">
+                            教龄：3年
+                        </div>
+                        <a href="courses.html" class="am-btn am-btn-primary am-btn-block">找他教 <i class="am-icon-angle-double-right"></i></a>
+                    </div>
+                </li>
+                <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left">
+                    <div class="am-u-sm-4 am-list-thumb">
+                        <a href="courses.html">
+                            <img src="../assets/images/p1.jpg" alt="" />
+                        </a>
+                    </div>
+                    <div class="am-u-sm-4 am-list-main">
+                        <h2 class="am-list-item-hd">
+                            <a href="courses.html">张老师</a>
+                        </h2>
+                        <div class="am-list-item-text">
+                            简介：晒晒旅行中的那些囧晒晒旅行中的那些囧晒晒旅行中的那些囧
+                        </div>
+                    </div>
+                    <div class="am-u-sm-4 am-padding-top-sm">
+                        <div class="am-list-item-text am-padding-bottom-xs">
+                            教龄：3年
+                        </div>
+                        <a href="courses.html" class="am-btn am-btn-primary am-btn-block">找他教 <i class="am-icon-angle-double-right"></i></a>
+                    </div>
+                </li>
+            </ul>
+            <div class="list-more am-text-center">
+                点击加载更多 <i class="am-icon-angle-right"></i>
+            </div>
+        </div>
+    </div>
+
+    <footer class="am-footer am-footer-default">
+        <div class="am-footer-miscs">
+            <p>CopyRight©2016  四志教育 Inc.</p>
+        </div>
+    </footer>
+</div>
+
+<script src="../assets/vendors/lib.min.js"></script>
+<script src="../assets/scripts/app.min.js"></script>
+<script>
+    $(function () {
+        app.teacherList();
+    });
+</script>
+</body>
+</html>

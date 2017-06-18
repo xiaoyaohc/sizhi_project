@@ -1,0 +1,286 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <div class="main-title">
+        <h2>{$meta_title}</h2>
+    </div>
+    <form action="{:U('Contact/insert')}" method="post" class="form-horizontal">
+        
+       
+        <div class="form-item">
+            <label class="item-label">公司名称<span class="check-tips">（不能为空）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="contact_name" value="{$data.contact_name}">
+            </div>
+        </div>
+        <div id="part1">
+            <div class="form-item">
+                <label class="item-label">联系人<span class="check-tips"></span></label>
+                <div class="controls">
+                    <input type="text" class="text input-large" name="contact_member" value="{$data.contact_member}">
+                </div>
+            </div>
+            <div class="form-item">
+                <label class="item-label">QQ<span class="check-tips"></span></label>
+                <div class="controls">
+                    <input type="text" class="text input-large" name="contact_qq" value="{$data.contact_qq}">
+                </div>
+            </div>
+            <div class="form-item">
+                <label class="item-label">邮箱<span class="check-tips"></span></label>
+                <div class="controls">
+                    <input type="text" class="text input-large" name="contact_email" value="{$data.contact_email}">
+                </div>
+            </div>
+            <div class="form-item">
+                <label class="item-label">电话<span class="check-tips"></span></label>
+                <div class="controls">
+                    <input type="text" class="text input-large" name="contact_tel" value="{$data.contact_tel}">
+                </div>
+            </div>
+            <div class="form-item">
+                <label class="item-label">传真<span class="check-tips"></span></label>
+                <div class="controls">
+                    <input type="text" class="text input-large" name="contact_fax" value="{$data.contact_fax}">
+                </div>
+            </div>
+            <div class="form-item">
+                <label class="item-label">地址<span class="check-tips"></span></label>
+                <div class="controls">
+                    <input type="text" class="text input-large" name="contact_address" value="{$data.contact_address}">
+                </div>
+            </div>
+        </div>
+        <div id="contact_pic_box">
+             <div class="form-item contact_pic_box_1">
+            <label class="item-label">图片1</label>
+                <input type="file" id="upload_picture">
+                <input type="hidden" name="contact_pic1" id="contact_pic1" value="{$data['contact_pic1']|default=''}"/>
+                <div class="upload-img-box">
+                <notempty name="data['contact_pic1']">
+                    <div class="upload-pre-item" title="点击删除图片"><img src="{$data.contact_pic1|get_cover='path'}"/></div>
+                </notempty>
+                </div>
+            </div>
+            <script type="text/javascript">
+            //上传图片
+            /* 初始化上传插件 */
+            $("#upload_picture").uploadify({
+                "height"          : 30,
+                "swf"             : "__STATIC__/uploadify/uploadify.swf",
+                "fileObjName"     : "download",
+                "buttonText"      : "上传图片",
+                "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+                "width"           : 120,
+                'removeTimeout'   : 1,
+                'fileTypeExts'    : '*.jpg; *.png; *.gif;',
+                "onUploadSuccess" : uploadPicture,
+                'onFallback' : function() {
+                    alert('未检测到兼容版本的Flash.');
+                }
+            });
+            function uploadPicture(file, data){
+                var data = $.parseJSON(data);
+                var src = '';
+                if(data.status){
+                    $("#contact_pic1").val(data.path);
+                    src = data.url || '__ROOT__' + data.path;
+                    $("#contact_pic1").parent().find('.upload-img-box').html(
+                        '<div class="upload-pre-item" title="点击删除图片"><img src="' + src + '"/></div>'
+                    );
+                } else {
+                    updateAlert(data.info);
+                    setTimeout(function(){
+                        $('#top-alert').find('button').click();
+                        $(that).removeClass('disabled').prop('disabled',false);
+                    },1500);
+                }
+            }
+            </script>
+        <div class="form-item contact_pic_box_2">
+            <label class="item-label">图片2</label>
+                <input type="file" id="upload_picture1">
+                <input type="hidden" name="contact_pic2" id="contact_pic2" value="{$data['contact_pic2']|default=''}"/>
+                <div class="upload-img-box">
+                <notempty name="data['contact_pic2']">
+                    <div class="upload-pre-item" title="点击删除图片"><img src="{$data.contact_pic2|get_cover='path'}"/></div>
+                </notempty>
+                </div>
+            </div>
+            <script type="text/javascript">
+            //上传图片
+            /* 初始化上传插件 */
+            $("#upload_picture1").uploadify({
+                "height"          : 30,
+                "swf"             : "__STATIC__/uploadify/uploadify.swf",
+                "fileObjName"     : "download",
+                "buttonText"      : "上传图片",
+                "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+                "width"           : 120,
+                'removeTimeout'   : 1,
+                'fileTypeExts'    : '*.jpg; *.png; *.gif;',
+                "onUploadSuccess" : uploadPicture,
+                'onFallback' : function() {
+                    alert('未检测到兼容版本的Flash.');
+                }
+            });
+            function uploadPicture(file, data){
+                var data = $.parseJSON(data);
+                var src = '';
+                if(data.status){
+                    $("#contact_pic2").val(data.path);
+                    src = data.url || '__ROOT__' + data.path;
+                    $("#contact_pic2").parent().find('.upload-img-box').html(
+                        '<div class="upload-pre-item" title="点击删除图片"><img src="' + src + '"/></div>'
+                    );
+                } else {
+                    updateAlert(data.info);
+                    setTimeout(function(){
+                        $('#top-alert').find('button').click();
+                        $(that).removeClass('disabled').prop('disabled',false);
+                    },1500);
+                }
+            }
+            </script>
+
+            <div class="form-item contact_pic_box_3">
+            <label class="item-label">图片3</label>
+                <input type="file" id="upload_picture2">
+                <input type="hidden" name="contact_pic3" id="contact_pic3" value="{$data['contact_pic3']|default=''}"/>
+                <div class="upload-img-box">
+                <notempty name="data['contact_pic3']">
+                    <div class="upload-pre-item" title="点击删除图片"><img src="{$data.contact_pic3|get_cover='path'}"/></div>
+                </notempty>
+                </div>
+            </div>
+            <script type="text/javascript">
+            //上传图片
+            /* 初始化上传插件 */
+            $("#upload_picture2").uploadify({
+                "height"          : 30,
+                "swf"             : "__STATIC__/uploadify/uploadify.swf",
+                "fileObjName"     : "download",
+                "buttonText"      : "上传图片",
+                "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+                "width"           : 120,
+                'removeTimeout'   : 1,
+                'fileTypeExts'    : '*.jpg; *.png; *.gif;',
+                "onUploadSuccess" : uploadPicture,
+                'onFallback' : function() {
+                    alert('未检测到兼容版本的Flash.');
+                }
+            });
+            function uploadPicture2(file, data){
+                var data = $.parseJSON(data);
+                var src = '';
+                if(data.status){
+                    $("#contact_pic3").val(data.path);
+                    src = data.url || '__ROOT__' + data.path;
+                    $("#contact_pic3").parent().find('.upload-img-box').html(
+                        '<div class="upload-pre-item" title="点击删除图片"><img src="' + src + '"/></div>'
+                    );
+                } else {
+                    updateAlert(data.info);
+                    setTimeout(function(){
+                        $('#top-alert').find('button').click();
+                        $(that).removeClass('disabled').prop('disabled',false);
+                    },1500);
+                }
+            }
+            </script>
+        <div class="form-item contact_pic_box_4">
+            <label class="item-label">图片4</label>
+                <input type="file" id="upload_picture3">
+                <input type="hidden" name="contact_pic4" id="contact_pic4" value="{$data['contact_pic4']|default=''}"/>
+                <div class="upload-img-box">
+                <notempty name="data['contact_pic4']">
+                    <div class="upload-pre-item" title="点击删除图片"><img src="{$data.contact_pic4|get_cover='path'}"/></div>
+                </notempty>
+                </div>
+            </div>
+            <script type="text/javascript">
+            //上传图片
+            /* 初始化上传插件 */
+            $("#upload_picture3").uploadify({
+                "height"          : 30,
+                "swf"             : "__STATIC__/uploadify/uploadify.swf",
+                "fileObjName"     : "download",
+                "buttonText"      : "上传图片",
+                "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+                "width"           : 120,
+                'removeTimeout'   : 1,
+                'fileTypeExts'    : '*.jpg; *.png; *.gif;',
+                "onUploadSuccess" : uploadPicture,
+                'onFallback' : function() {
+                    alert('未检测到兼容版本的Flash.');
+                }
+            });
+            function uploadPicture3(file, data){
+                var data = $.parseJSON(data);
+                var src = '';
+                if(data.status){
+                    $("#contact_pic4").val(data.path);
+                    src = data.url || '__ROOT__' + data.path;
+                    $("#contact_pic4").parent().find('.upload-img-box').html(
+                        '<div class="upload-pre-item" title="点击删除图片"><img src="' + src + '"/></div>'
+                    );
+                } else {
+                    updateAlert(data.info);
+                    setTimeout(function(){
+                        $('#top-alert').find('button').click();
+                        $(that).removeClass('disabled').prop('disabled',false);
+                    },1500);
+                }
+            }
+            </script>
+        </div>
+        <div class="form-item" id="part3">
+            <label class="item-label">内容</label>
+            <textarea name="contact_content">{$data.contact_content}</textarea>
+            {:hook('adminArticleEdit', array('name'=>'contact_content','value'=>$data['contact_content']))}
+            
+        </div>
+        <div class="form-item">
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>           
+        </div>
+    </form>
+</block>
+
+<block name="script">
+    <script type="text/javascript"> 
+    highlight_subnav('{:U('Contact/index')}');
+    <if condition="$data.parent_id">
+    $(document).ready(function() {
+        $('select[name=parent_id]').val({$data.parent_id});
+
+        $('select[name=contact_type]').change(function(event) {
+            $('.check-tips_' + $(this).val()).show().siblings('.check-tips').hide();
+
+            if($(this).val() == 1 || $(this).val() == 5){
+                $('#part1').show();
+            }else{
+                $('#part1').hide();
+            }
+
+             if($(this).val() != 1){
+                $('#contact_pic_box').hide();
+            }else{
+                $('#contact_pic_box').show();
+            }
+
+            if($(this).val() == 1 || $(this).val() == 5){
+                $('#part3').hide();
+            }else{
+                $('#part3').show();
+            }
+
+        });
+        $('select[name=contact_type]').trigger('change');
+
+
+    });
+    </if>    
+    </script>
+</block>

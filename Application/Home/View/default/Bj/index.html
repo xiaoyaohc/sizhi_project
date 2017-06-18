@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>博佳-首页</title>
+    <!--核心配置-->
+    <!--<link href="__BJ__/css/bootstrap-theme.css" rel="stylesheet" type="text/css" />-->
+    <link href="__BJ__/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="__BJ__/css/comm.css" rel="stylesheet" type="text/css" />
+    <!--web css-->
+    <link href="__BJ__/css/layout.css" rel="stylesheet" type="text/css" />    
+    <style type="text/css">
+        body{ position: relative; }
+        .case-icon { float: right; height: 40px; margin: 2px 0 0 382px;} 
+        #case_loading1,#case_loading2{ color: #fff; }
+    </style>
+</head>
+<body data-spy="scroll" data-target="#nav">
+<div class="main">
+    <div class="header" >       
+        <div class="header-main">
+            <div class="header-logo"></div>
+            <div class="header-nav" id="nav">
+                <ul class="nav" role="tablist">
+                    <li class="active">
+                        <a href="#f">
+                            首页
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#a">
+                            关于我们
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#b">
+                            客户案例
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#c">
+                            博佳服务
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#d">
+                            新闻中心
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#e">
+                            联系我们
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="box86"></div>
+    <div class="index">
+        <div class="banner">
+            <div class="cat" name="f" id="f"></div>
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <volist name="slides" id="item" key="k" >
+                        <li data-target="#carousel-example-generic" data-slide-to="{$k-1}" class="{$k==1?'active':''}"></li>   
+                    </volist>
+                </ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                    <volist name="slides" id="item" key="k" >
+                        <div class="item {$k==1?'active':''}">
+                            <img src="{$item.slide_pic}" alt="">
+                        </div>
+                    </volist>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="line singular">
+                <div class="cat" id="a"></div>
+                <div class="box-main">
+                    <div class="box left">
+                        <div class="about-title red-title">
+                            <h3>
+                                ABOUT .<span>关于博佳</span>
+                            </h3>
+                            <p class="fs-22">
+                                <!-- One of China's largest<br/>
+                                industrial<br/>
+                                design company -->
+                                致力于电视、电影、自制剧等<br>内容生产、推广服务
+                            </p>
+                            <p class="fs-14">
+                                <!-- 中国最具规模的工业设计公司之一 -->
+                            </p>
+                        </div>
+                    </div>
+                    <div class="box right">
+                        <div class="about-content">
+                            <!-- <p class="fs-12 fc-fff">
+                                {$abouts['about_name']}
+                            </p> -->
+                            <p class="fs-12 fc-fff text-alignment">
+                                {$abouts['about_content']}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+
+                </div>
+            </div>
+            <div class="line complex">
+                <div class="cat" id="b"></div>
+                <div class="box-main">
+                    <div class="box left">
+                        <div class="example-content">
+                            <div class="example-show">
+                                <ul class="example-list">
+                                    <volist name="cases" id="vo">
+                                        <li>
+                                            <div class="litpic">
+                                                <img src="{$vo.case_thumb}">
+                                            </div>
+                                            <div class="more-hover">
+                                                <a href="{:U('Bj/page?case_id='.$vo['case_id'])}">
+                                                    MORE+
+                                                </a>
+                                            </div>
+                                        </li>
+                                    </volist>
+                                </ul>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box right">                        
+                        <div class="example-title red-title">
+                            <h3>
+                                CASE .<span>博佳案例</span>
+                            </h3>
+                            <p class="fs-22">
+                                “台网互动”经典案例呈现
+                            </p>
+                            <p class="fs-14">
+                                <!-- 得心应手的跨界设计应用和创新能力 -->
+                            </p>
+                            <a class="more" href="{:U('Bj/cases')}">
+                                更多案例
+                            </a>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <div class="line singular">
+                <div class="cat" id="c"></div>
+                <div class="box-main">
+                    <div class="box left">
+                        <div class="service-title red-title">
+                            <h3>
+                                TEAM .<span>博佳服务</span>
+                            </h3>
+                            <p class="fs-22">
+                                Your satisfaction is<br/>
+                                always my pursuit
+                            </p>
+                            <p class="fs-14">
+                                你的始终满意是我的执着追求
+                            </p>
+                        </div>
+                    </div>
+                    <div class="box right">
+                        <div class="service-content">
+                            <ul>
+                                <li>
+                                    <div class="icon">
+                                        <img src="__BJ__/images/service-icon1.png">
+                                    </div>
+                                    <h3>
+                                        <!-- Product Design<br/>
+                                        <span>产品设计</span> -->
+                                        内容生产
+                                    </h3>
+                                    <p>
+                                        “脑洞大开”的话题打造、“不嫌事大”的事件策划、“惊为天人”的创意碰撞…… <br>
+                                        以专业态度和专业精神定制独一无二的内容策划 <br>
+                                        我们不仅仅是娱乐圈的搬运工
+                                    </p>
+                                </li>
+                                <li>
+                                    <div class="icon">
+                                        <img src="__BJ__/images/service-icon2.png">
+                                    </div>
+                                    <h3>
+                                        <!-- Branding<br/>
+                                        <span>品牌策划</span> -->
+                                        跨界联合
+                                    </h3>
+                                    <p>
+                                        娱乐+音乐、娱乐+游戏、娱乐+吃、穿、住、行各类热门APP…… <br>
+                                        以“红娘”的心态促进内容和各个渠道的“牵手” <br>
+                                        1+1＞2
+                                    </p>
+                                </li>
+                                <li>
+                                    <div class="icon">
+                                        <img src="__BJ__/images/service-icon3.png">
+                                    </div>
+                                    <h3>
+                                        <!-- Product Design<br/>
+                                        <span>产品设计</span> -->
+                                        线下联动
+                                    </h3>
+                                    <p> 
+                                        新闻发布会、明星见面会、媒体探班及其他地推活动…… <br>
+                                        以踏实步伐打造区域影响，深耕“真实”受众 <br>
+                                        我们就是要影响“活”的受众 
+                                    </p>
+                                </li>
+                                <li>
+                                    <div class="icon">
+                                        <img src="__BJ__/images/service-icon4.png">
+                                    </div>
+                                    <h3>
+                                        <!-- Branding<br/>
+                                        <span>品牌策划</span> -->
+                                        社会化媒体营销
+                                    </h3>
+                                    <p>
+                                        微博、微信、病毒视频、论坛、QQ……各种新兴社会化媒体 <br>
+                                        以敏锐的洞察力与用户互动，打造与受众兴趣契合度最高的内容 <br>
+                                        我们就是要给受众“感兴趣的”
+                                    </p>
+                                </li>
+                            </ul>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <div class="line complex">
+                <div class="cat" id="d"></div>
+                <div class="box-main">
+                    <div class="box left">
+                        <div class="news-content">
+                            <div id="case_loading2">加载中，请稍后...</div>
+                            <ul class="news-list" id="news_ul"></ul>
+                            <div class="case-icon">
+                               <ul class="paging" id="paging2"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box right">
+                        <div class="new-title red-title">
+                            <h3>
+                                News .<span>新闻中心</span>
+                            </h3>
+                            <p class="fs-22">
+                                The latest industry information express
+                            </p>
+                            <p class="fs-14">
+                                最新行业资讯速递
+                            </p>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <div class="line singular">
+                <div class="cat" id="e"></div>
+                <div class="box-main">
+                    <div class="box left">
+                        <div class="contact-title red-title">
+                            <h3>
+                                CONTACT.<span>联系我们</span>
+                            </h3>
+                            <p class="fs-22">
+                                Join us, To be Irreplaceable.
+                            </p>
+                            <p class="fs-14">
+                                加入我们，成为不可取代的人
+                            </p>
+                        </div>
+                    </div>
+                    <div class="box right">
+                        <div class="contact-content">
+                            <ul>
+                                <li>
+                                    <h3>
+                                        我们的办公室 :
+                                    </h3>
+                                    <p>
+                                        {$contact['contact_address']}
+                                    </p>
+                                </li>
+                                <li>
+                                    <h3>
+                                        联系信息 :
+                                    </h3>
+                                    <p>
+                                        电话 : {$contact['contact_tel']}<br/>
+                                        传真 : {$contact['contact_fax']}<br/>
+                                        <!-- 邮 箱 : {$contact['contact_email']} -->
+                                    </p>
+                                </li>
+                            </ul>
+                            <div class="clear"></div>
+                            <div class="links">
+                                <a target="_blank" href="{:U('Index/index')}">
+                                    博胜集团
+                                </a>
+                                <a target="_blank" href="{:U('Inva/index')}">
+                                    博胜互动
+                                </a>
+                                <a target="_blank" href="{:U('Tech/index')}">
+                                    博胜科技
+                                </a>  
+                                <!-- <a target="_blank" href="{:U('Bj/index')}">
+                                    湖南博佳
+                                </a> -->
+                                <a target="_blank" href="{:U('Ds/index')}">
+                                    博胜电商
+                                </a>                              
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer-main">
+            版权所有 SiteServer All Rights Reserved
+        </div>
+    </div>
+</div>
+
+    <!--bootstrap js-->
+    <script src="__BJ__/js/jquery.min.js"></script>
+    <script src="__STATIC__/jquery.scrollTo.min.js"></script>
+    <script src="__BJ__/js/bootstrap.js"></script>
+    <script src="__BJ__/js/bj.case.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var liClass = ['one','two','three','four','five','six','seven','eight'];
+            var liLenght = $(".example-show ul li").length;
+            var li  = $(".example-show ul li");
+            for(var i = 0 ; i < liLenght ; i++){
+                var _item = li.eq(i);
+                var _img = _item.find('img');
+
+                _item.addClass(liClass[i]);
+
+                if(_img.height()>_item.height()){
+                    var _top = (_img.height()-_item.height())/2;
+                    _img.css({'position':'relative','top': -_top +'px'})
+                }
+            }
+
+              $('.header-nav ul li').click(function(){
+                  $('.header-nav ul li').removeClass('active');
+                  $(this).addClass('active');
+              });     
+
+              if(location.hash == '#e'){
+                $('.header-nav ul li').last().addClass('active').siblings('li').removeClass('active');
+              }
+
+            $('body').scrollspy({ target: '#nav' });
+
+            $('#nav').find('a').click(function(event) {
+                event.preventDefault();
+                var _target = $($(this).attr('href'))
+                $('body').scrollTo(_target,{duration:400});
+            });
+        });
+
+    </script>
+
+</body>
+</html>

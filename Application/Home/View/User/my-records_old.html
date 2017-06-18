@@ -1,0 +1,119 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <script>
+        (function(f){var h=f.document;var b=h.documentElement;var k=f.orientation||0;var j=640;var a=9/16;var d=20;var i=f.devicePixelRatio;var c=i?1/i:1;h.write('<meta name="viewport" content="initial-scale='+c+",maximum-scale="+c+",minimum-scale="+c+',user-scalable=0">');var g=b.clientWidth;var e=b.clientHeight;if(Math.abs(k)==90||g>e){g*=a}b.style.fontSize=(g/i)*d/(j/i)+"px"})(window);
+    </script>
+    <title>个人中心</title>
+
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+
+    <link rel="stylesheet" href="__ASSETS__/styles/style.min.css">
+
+</head>
+<body>
+<div id="loading" class="popload">
+    <div class="popload-main">
+        <span class="popload-main-ico"></span>
+        <p class="popload-main-txt" id="progress">加载中...</p>
+    </div>
+</div>
+
+<div class="wrapper">
+    <header data-am-widget="header" class="am-header am-header-default am-header-fixed">
+        <div class="am-header-left am-header-nav">
+            <a href="{:U('Index/Home')}" class="am-btn">
+                <i class="am-header-icon am-icon-angle-left am-icon-sm"></i>
+            </a>
+        </div>
+        <h1 class="am-header-title">
+            个人中心
+        </h1>
+        <div class="am-header-right am-header-nav">
+            <button class="am-btn am-btn-primary" data-am-collapse="{target: '#collapse-nav'}"><i class="am-icon-bars am-icon-sm"></i></button>
+        </div>
+        <nav>
+            <ul id="collapse-nav" class="am-nav am-collapse">
+                    <li><a href="{:U('Index/Home')}">首页</a></li>
+                    <li><a href="{:U('User/UserCenter','','')}">个人中心</a></li>
+                    <li><a href="{:U('Index/Rank')}">进步之星排名</a></li>
+                    <li><a href="{:U('Index/About')}">中心简介</a></li>
+                    <li><a href="{:U('Index/Contact')}">联系我们</a></li>
+                </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!--<div class="uc-header am-g am-padding-xs">-->
+            <!--<div class="am-u-sm-4">-->
+                <!--<img src="__ASSETS__/images/p1.jpg" alt="" class="am-img-thumbnail am-img-responsive am-circle">-->
+            <!--</div>-->
+            <!--<div class="am-u-sm-8">-->
+                <!--<h3>-->
+                    <!--张三，欢迎登陆~-->
+                <!--</h3>-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <div class="am-tabs am-tabs-d2 am-no-layout uc-top-tabs">
+            <ul class="am-tabs-nav am-cf">
+                <li>
+                    <a href="{:U('User/UserCenter')}">
+                        我的课程
+                    </a>
+                </li>
+                <li class="am-active">
+                    <a href="">
+                        历史成绩
+                    </a>
+                </li>
+                <li>
+                    <a href="{:U('User/UserInfo')}">
+                        个人信息
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="am-padding-top">
+            <div class="recordCharts" id="recordCharts"></div>
+        </div>
+
+    </div>
+
+    <footer class="am-footer am-footer-default">
+        <div class="am-footer-miscs">
+            <p>CopyRight©2016  四志教育 Inc.</p>
+        </div>
+    </footer>
+</div>
+
+<script src="__ASSETS__/vendors/lib.min.js"></script>
+<!--echarts-->
+<script src="__ASSETS__/vendors/echarts/echarts.min.js"></script>
+<script src="__ASSETS__/scripts/app.min.js"></script>
+<script>
+$(function () {
+    app.myReccords({
+        text:"历史成绩",
+        subText:"最近{$ScoreInfo[0]['score']['count']}次成绩",
+        xAxis:[
+        <foreach name="ScoreInfo" item="score" >
+                <neq name="score.score.add_time" value="">'{$score.score.add_time}'<else /></neq>
+        </foreach>
+        ],
+        seriesData:[ 
+        <foreach name="ScoreInfo" item="score" >
+                <neq name="score.score.add_time" value="">'{$score.score.score}'<else /></neq>
+        </foreach>
+        ]
+    });
+});
+</script>
+</body>
+</html>

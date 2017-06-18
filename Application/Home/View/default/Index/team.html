@@ -1,0 +1,190 @@
+<extend name="Base/main" />
+<block name="left_cont">
+	<div class="team">
+            <div class="team-title"></div>
+            <div class="team-main">
+
+                <volist name="items" id="item" key="k" >                    
+                    <div class="sub-con {$k==1?'show':''}">
+                        <div class="team-text">
+                            <h3>
+                                {$item.team_name} <span>{$item.team_ename}</span>
+                            </h3>
+                            <h4>
+                                {$item.team_position}
+                            </h4>
+                            <p class="title">
+                                <!-- {$item.team_ename} <br/>-->
+                                {$item.team_eposition}
+                            </p>
+                            <p class="cn">
+                                {$item.team_area}
+                            </p>
+                            <p class="en">
+                                {$item.team_earea}                                
+                            </p>
+                        </div>
+                        <div class="team-image">
+                            <empty name="item.team_pic">
+                                <img src=" http://placehold.it/288x432">
+                                <else/>
+                                <img src="{$item.team_pic}">
+                            </empty>
+                        </div>
+                    </div>
+                </volist>               
+                
+                <div class="team-list">
+                    <a href="#1" rel="next" class="pre"></a>
+                    <div class="team-list-main">
+                        <ul>
+
+                            <volist name="items" id="item" key="k" >
+                                <li class="{$k==1?'active':''}">
+                                    <div class="team-list-text">
+                                        <div class="team-list-text-main">
+                                            <h3>
+                                                {$item.team_name} {$item.team_position}
+                                            </h3>
+                                            <p>
+                                                {$item.team_area|msubstr=0,22,'utf-8'}...
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="team-list-litpic">
+                                        <!-- <img src="{$item.team_thumb}"> -->
+                                        <empty name="item.team_thumb">
+                                            <img src=" http://placehold.it/91x84">
+                                            <else/>
+                                            <img src="{$item.team_thumb}">
+                                        </empty>
+                                    </div>
+                                </li>
+                            </volist>                           
+
+                        </ul>
+                    </div>
+                    <a href="#1" rel="pre" class="next"></a>
+                </div>
+            </div>
+        </div>
+</block>
+<block name="script">
+    <script type="text/javascript" src="__STATIC__/jquery.mousewheel.min.js"></script>
+	<script type="text/javascript">
+    $(function(){
+        function windwoSize(){
+            var viewHeight = document.documentElement.clientHeight;
+            if(viewHeight > 640){
+                var nab_pd = (viewHeight-487)/5;
+                    $(".right-content").children(".nav").children("ul").children("li").children("a").css({
+                    'padding-top':nab_pd+'px',
+                });
+
+                var team_pd = (viewHeight-591)/2;
+                $(".team-title").css({
+                    'margin-top':team_pd+'px',
+                    'height':'141px'
+                })
+            
+            }
+            else{
+                var nab_pd = (626-487)/3;
+                    $(".right-content").children(".nav").children("ul").children("li").children("a").css({
+                    'padding-top':nab_pd+'px',
+                });
+                $(".team-title").css({
+                    'margin-top':'12px',
+                    'height':'105px'
+                });               
+            }
+        }
+        windwoSize();
+        window.addEventListener("resize", function () {
+            windwoSize();    
+        });
+
+
+
+        $(".team-list-main ul li").click(function(){
+        	//鼠标点击也可以切换
+            $(".team-main").find(".show").removeClass("show");
+            $(".sub-con").eq($(".team-list-main ul li").index($(this))).addClass("show").hide().fadeIn();
+            $(".team-list-main ul").find(".active").removeClass("active");
+            $(this).addClass("active");
+        });
+
+        //上翻滚动
+        var listNum = $(".team-list-main ul li").length;
+        var listScroll = $(".team-list-main ul li").length * 86;
+        var listScrollDis = 0;
+        var listScrollOut = listScroll- 430;
+        if(listNum<=5){
+            $("a[rel=pre]").hide();
+            $("a[rel=next]").hide();
+        }
+        else{
+            $("a[rel=next]").hide();
+        }
+        $(".team-list-main ul").css({
+            "-webkit-transition":"all ease 0.2s"
+        });
+        var canpre = true,candown = false;
+        $("a[rel=pre]").on('click',function(){
+            listScrollDis +=86;
+            if(listScrollDis == listScrollOut){
+                $(".team-list-main ul").css({
+                    "-webkit-transform":"translateY(-"+ listScrollDis +"px)"
+                });
+                $("a[rel=next]").show();
+                $("a[rel=pre]").hide();
+                canpre = false;
+                candown = true;
+            }
+            else{
+                $(".team-list-main ul").css({
+                    "-webkit-transform":"translateY(-"+ listScrollDis +"px)"
+                });
+                $("a[rel=next]").show();
+                candown = true;
+            }
+        });
+
+        $("a[rel=next]").on('click',function(){
+            listScrollDis-= 86 ;
+            if(listScrollDis==0){
+                $(".team-list-main ul").css({
+                    "-webkit-transform":"translateY(-"+ listScrollDis +"px)"
+                });
+                $("a[rel=next]").hide();
+                $("a[rel=pre]").show();
+                canpre = true;
+                candown = false;
+            }
+            else{
+                $(".team-list-main ul").css({
+                    "-webkit-transform":"translateY(-"+ listScrollDis +"px)"
+                });
+                $("a[rel=pre]").show();
+                canpre = true;
+            }
+        });
+
+        var tm;
+        $('.team-list').on('mousewheel', function(event) {
+            if(tm) clearTimeout(tm);
+            tm = setTimeout(function () {
+                if(event.deltaY == -1 && canpre){
+                    // up
+                    $("a[rel=pre]").trigger('click');
+                }else if(event.deltaY == 1 && candown){
+                    // down
+                    $("a[rel=next]").trigger('click');
+                }
+            },200);
+        });
+
+    });
+
+</script>
+</block>

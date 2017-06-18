@@ -1,0 +1,61 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <div class="main-title">
+        <h2>{$meta_title}</h2>
+    </div>
+    <form action="{:U('Clique/update')}" method="post" class="form-horizontal">
+    
+        <div class="form-item">
+            <label class="item-label">微信昵称</label>
+            <div class="controls">
+                {$data.nick_name}
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">学生列表<span class="check-tips"></span></label>
+            <div class="controls">
+             <TABLE class="ListProduct" style='text-align:center;' border="1" cellSpacing="0" cellPadding="0" width="100%">
+                <TR>
+                    <TH >学生姓名</TH>
+                    <TH >学生联系方式</TH>
+                    <TH >学校</TH>
+                    <TH >班级</TH>
+                </TR>
+                <volist name="data_stu" id="vo">
+                    <tr>
+                        <td>{$vo['student_name']}</td>
+                        <td>{$vo['contact']}</td>
+                        <td>{$vo['school']}</td>
+                        <td>{$vo['class']}</td>
+                    </tr>
+                </volist>
+
+            </TABLE>
+            </div>
+        </div>
+
+
+        <div class="form-item">
+            <input type="hidden" name="slide_id" value="{$data.slide_id}">
+           
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>           
+        </div>
+    </form>
+</block>
+
+<block name="script">
+    <script type="text/javascript"> 
+    highlight_subnav('{:U('Clique/index')}');
+    <if condition="$data.parent_id">
+    // $(document).ready(function() {
+    //     $('select[name=parent_id]').val({$data.parent_id});
+    // });
+    $('select[name=slide_type]').change(function(event) {
+         $('.check-tips_' + $(this).val()).show().siblings('.check-tips').hide();
+    });
+    $('select[name=slide_type]').trigger('change');
+    </if>    
+    </script>
+</block>

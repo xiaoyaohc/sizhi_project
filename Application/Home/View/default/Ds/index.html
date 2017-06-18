@@ -1,0 +1,327 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>博胜电商</title>
+		<link rel="stylesheet" type="text/css" href="__DS__/css/lrtk.css"/>
+		<link rel="stylesheet" type="text/css" href="__DS__/css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="__DS__/css/styles.css"/>
+		<script type="text/javascript" src="__DS__/js/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="__DS__/js/common.js"></script>
+	</head>
+	<body>
+		<!-- 弹窗 -->
+		<div class="win-wrapper" id="win-wrapper">
+			<div class="win-main">
+				<a href="javascript:;" class="win-close"></a>
+				<div class="win-title">
+				</div>
+				<div class="win-date">
+				</div>
+				<div class="win-contentext">
+				</div>
+				<a href="javascript:;"  class="win-return">返回</a>
+			</div>
+		</div>
+		<div class="header-title">
+			<div class="header-innner">
+				<div class="header-nav">
+					<ul>
+						<li><a href="#">首页</a></li>
+						<li><a href="#001">关于我们</a></li>
+						<li><a href="#002">客户案例</a></li>
+						<li><a href="#003">电商服务</a></li>
+						<li><a href="#004">新闻中心</a></li>
+						<li><a href="#005">联系我们</a></li>
+					</ul>
+				</div>
+				<div class="header-logo"></div>
+			</div>
+		</div>
+		<div class="banner" name="000" id="000">
+			<div class="wrapper">
+				<div class="banner_index">
+					<ul class="banner_wrap" id="banner_index">
+						<volist name="slides" id="item" key="k" >
+						<empty name="item.slide_pic">
+							<li><a href="javascript:void(0);" ><img src="{$item.slide_pic}" alt=""></a></li>
+							<else />
+							<li><a href="{$item.slide_url}" ><img src="{$item.slide_pic}" alt=""></a></li>
+						</empty>
+						</volist>
+					</ul>
+				</div>
+				<div class="indexBanner_num" id="index_numIco"></div>
+				<script type="text/javascript">
+				var ShowPre1 = new ShowPre({box:"banner_index",Pre:"banner_index_pre",Next:"banner_index_next",numIco:"index_numIco",loop:1,auto:1});
+				</script>
+			</div>
+		</div>
+		<div class="aboout">
+			<div class="cat" name="001" id="001"></div>
+			<div class="main1024">
+				<div class="about-title">
+					关于我们<br />
+					<span class="title-big">ABOUT US</span>
+				</div>
+				<div class="about-text">
+					{$about.about_content}
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+		</div>
+		<div class="work" >
+			<div class="cat" name="002" id="002"></div>
+			<div class="main1024">
+				<div class="work-title">
+					客户案例<br />
+					<span class="title-big">WORK</span>
+				</div>
+				<div class="work-tab">
+					<ul>
+						<volist name="case_list" id="item" >
+							<li>
+		                    	<volist name="item" id="item2" key="k" >
+									<!-- <a href="javascript:caseDetail({$item2.case_id},'{$item2.case_name}');" class="work-tab-pic"> -->
+									<a href="javascript:;" class="work-tab-pic">
+										<div class="work-tab-pic-img">
+											<img src="{$item2.case_thumb}">
+										</div>
+										<div class="work-tab-pic-text">
+											<div class="work-tab-pic-text-title">
+												{$item2.case_name}
+											</div>
+											<div class="work-tab-pic-text-content">
+												{$item2.case_area}
+											</div>
+										</div>
+									</a>
+				                </volist>
+		                    </li>
+		                </volist>
+					</ul>
+				</div>
+				<div class="work-tab-icon">
+					<ul>
+						<volist name="case_list" id="item" key="k" >
+							<li></li>
+		                </volist>
+					</ul>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+		</div>
+		<script type="text/javascript">
+		//最后一个margin-right 为0
+				$(".work-tab-pic").each(function(){
+					var e = $(this).index();
+								var f = (e+1)%3;
+					if(f==0){
+						$(this).css("margin-right","0px");
+					}
+				});
+					
+				var h = $('.work-tab ul li').width();
+				
+				var j = $('.work-tab ul li').length;
+				var k = h*j;
+				$('.work-tab ul').css('width',k);
+				$('.work-tab-icon ul li').eq(0).css('background','url(__DS__/css/images/work-icon-hover.jpg)no-repeat center top');
+				$('.work-tab-icon ul li').hover(function(){
+					var g = $(this).index();
+					var i = -(g*h);
+					$('.work-tab ul').css('margin-left',i);
+					$('.work-tab-icon ul li').css('background','url(__DS__/css/images/work-icon.jpg)no-repeat center top');
+					$(this).css('background','url(__DS__/css/images/work-icon-hover.jpg)no-repeat center top');
+				});
+		</script>
+		<div class="service">
+			<div class="cat" name="003" id="003"></div>
+			<div class="main1024">
+				<div class="service-left">
+					<div class="service-title">
+						电商服务<br />
+						<span class="title-big">SERVICE</span>
+					</div>
+					<div class="service-text">
+						<span class="service-text-big">BOSIM SERVICE</span><BR />
+						逐步发展为以“博胜空间理论”为基础；以互联网平台的应用为核心，整合品牌网络口碑、无线广告、电子商务为传播领域一体化的综合营销服务体系，将客户的推广价值最大化。
+					</div>
+				</div>
+				<div class="service-right">
+					<a href="" class="service-box1">
+						<div class="service-box-ch1">
+							品牌与电子商务顾问
+						</div>
+						<div class="service-box-en">
+							BRAND AND E-COMMERCE <br />
+							CONSULTANT
+						</div>
+					</a>
+					<a href="" class="service-box2">
+						<div class="service-box-ch1">
+							商城托管服务
+						</div>
+						<div class="service-box-en">
+							MALL HOSTING SERVICE
+						</div>
+					</a>
+					<a href="" class="service-box3">
+						<div class="service-box-ch1">
+							运营单项托管
+						</div>
+						<div class="service-box-en">
+							MANAGED OPERTIONS
+						</div>
+					</a>
+					<a href="" class="service-box4">
+						<div class="service-box-ch1">
+							客服外包服务
+						</div>
+						<div class="service-box-en">
+							OUTSOURCING SERVICE
+						</div>
+					</a>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+		</div>
+		<div class="news">
+			<div class="cat"  name="004" id="004"></div>
+			<div class="main1024">
+				<div class="news-title">
+					新闻中心<br />
+					<span class="title-big">NEWS</span>
+				</div>
+				<div class="news-icon">
+					<ul id="paging">
+						<!-- <li class="news-icon-bg news-icon-bgRed">1</li>
+						<li class="news-icon-bg" style="margin-right: 0px;">2</li> -->
+					</ul>
+				</div>
+				<div class="news-content">
+					<ul id="news_ul">
+						<!-- <li>
+								<a href="javascript:();">
+										<div class="news-content-por">
+														<img src="__DS__/images/news-por1.jpg">
+												</div>
+												<div class="news-content-main">
+														<div class="news-content-title">
+																张近东称京东不是威胁
+														</div>
+														<div class="news-content-text">
+																“不信你们可以问问中信证券，我们当天（8月15日）就打了4亿元现金进去购买，结果涨停板...
+														</div>
+														<div class="news-content-date">
+																2015.05.16
+														</div>
+												</div>
+											</a>
+								</li>
+								<li>
+									<a href="javascript:();">
+												<div class="news-content-por">
+														<img src="__DS__/images/news-por2.jpg">
+													</div>
+												<div class="news-content-main">
+														<div class="news-content-title">
+																支付方式多商品资源少
+														</div>
+														<div class="news-content-text">
+																价格上不占优势，那么银行系电商比传统电商平台的优势在哪里呢？记者了解到...
+														</div>
+														<div class="news-content-date">
+																2015.05.16
+														</div>
+													</div>
+																						</a>
+								</li>
+								<li>
+									<a href="javascript:();">
+												<div class="news-content-por">
+														<img src="__DS__/images/news-por3.jpg">
+													</div>
+												<div class="news-content-main">
+														<div class="news-content-title">
+																支付方式多商品资源少
+														</div>
+														<div class="news-content-text">
+																“我们其实不想被拖进这样一场价格战。”苏宁易购执行副总裁李斌谈到
+																与京东的这场价格战时...
+														</div>
+														<div class="news-content-date">
+																2015.05.18
+														</div>
+													</div>
+																						</a>
+								</li>
+								<li>
+									<a href="javascript:();">
+												<div class="news-content-por">
+														<img src="__DS__/images/news-por4.jpg">
+													</div>
+												<div class="news-content-main">
+														<div class="news-content-title">
+																支付方式多商品资源少
+														</div>
+														<div class="news-content-text">
+																价格上不占优势，那么银行系电商比传统电商平台的优势在哪里呢？记者了解到...
+														</div>
+														<div class="news-content-date">
+																2015.05.18
+														</div>
+										</div>
+									</a>
+						</li> -->
+					</ul>
+					<div id="case_loading">加载中，请稍后...</div>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+		</div>
+		<div class="contact" >
+			<div class="cat"  name="005" id="005"></div>
+			<div class="main1024">
+				<div class="contact-title">
+					联系我们<br />
+					<span class="title-big">CONTACT US</span>
+				</div>
+				<div class="main1024" style="float:left;padding-top: 30px;">
+					<div class="content-text">
+						英 雄不问出处，博胜电商鸣鼓征将
+						为了梦想我们从不懈怠，面对挑战我们从不畏惧
+						如果你和我们一样，觉得自己足够优秀
+						拿出看家本领，在电商一战成名！
+					</div>
+					<div class="content-add">
+						<!-- 地 址：湖南省长沙市侯家塘摩天轮旁边摩天一号2栋929号<br />
+												电话：0731-89968590（前台及外联接待）<br />
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												0731-89968590（代运营业务咨询）<br />
+						邮箱：candy-tan@bosim.com.cn（谭小姐）<br /> -->
+						{$contact.contact_content}
+					</div>
+					<div style="clear:both;"></div>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+		</div>
+		<div class="footer">
+			<div class="main1024">
+				<ul>
+					<li><a href="{:U('Index/index')}" target="_blank">博胜集团</a></li>
+					<li><a href="{:U('Inva/index')}" target="_blank">博胜互动</a></li>
+					<li><a href="{:U('Tech/index')}" target="_blank">博胜科技</a></li>
+					<li><a href="{:U('Bj/index')}" target="_blank">湖南博佳</a></li>
+					<!-- <li><a href="{:U('index')}">博胜电商</a></li> -->
+				</ul>
+				<div class="footer-copy">
+					版权所有 SiteServer All Rights Reserved
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="__DS__/js/text.js"></script>
+	<script type="text/javascript" src="__DS__/js/ds.news.js"></script>
+</html>

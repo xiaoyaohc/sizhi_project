@@ -1,0 +1,78 @@
+<extend name="Public/base" />
+
+<block name="body">
+	<link rel="stylesheet" href="__STATIC__/fancy/jquery.fancybox.css">
+    <script src="__STATIC__/fancy/jquery.fancybox.js"></script>
+	<!-- 标题栏 -->
+	<div class="main-title">
+		<h2>行业资讯列表</h2>
+	</div>
+	<div class="cf">
+		<div class="fl">
+			<a class="btn" href="{:U('industryEdit',array('parent_id'=>$parent_id))}">
+           		新增
+            </a>
+            <button class="btn ajax-post confirm" url="{:U('deleteIndustryInfos')}" target-form="ids">删 除</button>
+        </div>
+    </div>
+    <!-- 数据列表 -->
+    <div class="data-table table-striped">
+    	<table class="">
+		    <thead>
+		        <tr>
+				<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+				<th class="">标题</th>
+				<th class="">时间</th>
+				<th class="">封面/图片</th>
+				<th class="">操作</th>
+				</tr>
+		    </thead>
+		    <tbody>    	
+				<notempty name="_list">
+				<volist name="_list" id="vo">
+				<tr>
+		            <td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}" /></td>
+					<td>{$vo.name}</td>
+					<td><span>{$vo.create_time|time_format}</span></td>
+					<td><span><a class="fancy" href="{$vo.img}">预览</a></span></td>
+					<td>
+		                <a href="{:U('industryEdit',array('id'=>$vo['id'] ,'parent_id'=>$vo['parent_id']))}">[编辑]</a>
+		                <eq name="vo.status" value="1">
+							<a href="{:U('changeIndustryStatus?method=forbid&id='.$vo['id'])}" class="ajax-get">[禁用]</a>
+							<else/>
+							<a href="{:U('changeIndustryStatus?method=resume&id='.$vo['id'])}" class="ajax-get">[启用]</a>
+						</eq>
+		                <a href="{:U('deleteIndustryInfos',array('id' => $vo['id']))}" class="confirm ajax-get">[删除]</a>
+		            </td>
+				</tr>
+				</volist>
+				<else/>
+				<td colspan="9" class="text-center"> aOh! 暂时还没有内容! </td>
+				</notempty>
+			</tbody>
+		</table>
+	</div>
+    <div class="page">
+        {$_page}
+    </div>
+</block>
+
+<block name="script">
+	<script type="text/javascript">
+	$(document).ready(function() {
+    	$('.fancy').fancybox({
+			openEffect  : 'none',
+			closeEffect : 'none',
+			prevEffect : 'none',
+			nextEffect : 'none',
+			helpers : {
+				title : {
+					type : 'inside'
+				}
+			}
+		});
+    });
+    //导航高亮
+    highlight_subnav('{:U('News/industry')}');
+	</script>
+</block>

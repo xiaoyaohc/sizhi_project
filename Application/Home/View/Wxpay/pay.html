@@ -1,0 +1,267 @@
+<!doctype html>
+<html class="no-js">
+<include file="index/header" />
+<body>
+<div id="loading" class="popload">
+    <div class="popload-main">
+        <span class="popload-main-ico"></span>
+        <p class="popload-main-txt" id="progress">加载中...</p>
+    </div>
+</div>
+
+<div class="wrapper">
+    <header data-am-widget="header" class="am-header am-header-default am-header-fixed">
+        <div class="am-header-left am-header-nav">
+            <a href="{:U('Index/Home')}" class="am-btn">
+                <i class="am-header-icon am-icon-angle-left am-icon-sm"></i>
+            </a>
+        </div>
+        <h1 class="am-header-title">
+            确认订单
+        </h1>
+        <div class="am-header-right am-header-nav">
+            <button class="am-btn am-btn-primary" data-am-collapse="{target: '#collapse-nav'}"><i class="am-icon-bars am-icon-sm"></i></button>
+        </div>
+        <include file="index/nav" />
+    </header>
+
+    <div class="order-wrapper app-form">
+        	<div class="order_default">
+            	<a href="{:U('Order/selectInfo','','')}/order_sn/{$res['order_sn']}/wx_id/{$openId}">
+					<ul>
+						<li>学生姓名：<span id="stu_name">{$stuList[0]['student_name']}</span></li>
+						<li>电话：<span id="stu_contant"  class="xw">{$stuList[0]['contact']}</span></li>
+						<li id="stu_school">{$stuList[0]['school']}</li>
+						<li id="stu_class">{$stuList[0]['class']}</li>
+					</ul>
+                    <input type="hidden" value="{$stuList[0]['student_id']}" id="stu_id"/>
+					<i class="am-icon-angle-right"></i>
+                </a>
+            </div>
+            <ul class="am-list">
+                <li>
+                    <span>
+                        上课老师
+                    </span>
+                    <span class="am-fr">{$Info.teacher_name}</span>
+                </li>
+                <li>
+                    <span>
+                        课程
+                    </span>
+                    <span class="am-fr">{$Info.class_name}</span>
+                </li>
+                <li>
+                    <span>
+                        课时费
+                    </span>
+                    <span class="am-fr"><strong>￥{$Info.class_price}/{$Info.times}次</strong></span>
+                </li>
+                <li>
+                    <span>
+                        上课时间
+                    </span>
+					
+		            <?php $week = array('星期日','星期一','星期二','星期三','星期四','星期五','星期六');?>
+                    <span class="am-fr">{$week[$Info['week_id']]}/{$Info.time_interval}</span>
+                </li>
+                <li>
+                    <span>
+                        地点：
+                    </span>
+                    <span class="am-fr">{$Info.area_name}{$Info.class_room}</span>
+                </li>
+                <li>
+                    <span>
+                        订单合计
+                    </span>
+                    <span class="am-fr"><strong>￥{$Info.class_price}</strong></span>
+                </li>
+				<li>
+                    <span>
+                        开始上课时间
+                    </span>
+                    <span class="am-fr class_start_time" set-date>
+                        请选择
+                    </span>
+                </li>
+                <li>
+                    <span>
+                        支付方式
+                    </span>
+                    <span class="am-fr form-ctrl">
+                        <select name="pay_type" id="">
+                            <option value="0" >微信支付</option>
+                            <!-- <option value="1" >支付宝支付</option>   -->
+                            <!-- <option value="2" >银联支付</option>      -->
+                        </select>
+                    </span>
+                </li>
+                <li>
+                    <button class="am-btn am-btn-danger am-btn-block am-btn-lg" onclick="callpay();">确认支付</button>
+                </li>
+            </ul>
+    </div>
+
+
+    <footer class="am-footer am-footer-default">
+        <div class="am-footer-miscs">
+            <p>CopyRight©2016  四志教育 Inc.</p>
+        </div>
+    </footer>
+</div>
+
+<script src="__ASSETS__/vendors/lib.min.js"></script>
+<script src="__ASSETS__/scripts/app.min.js"></script>
+<script type="text/javascript">
+    var order_sn = "{$res['order_sn']}";
+    //调用微信JS api 支付
+    function jsApiCall(){
+        WeixinJSBridge.invoke(
+            'getBrandWCPayRequest',
+            <?php echo $jsApiParameters; ?>,
+            function(res){
+                //如果支付成功
+                if (res.err_msg == 'get_brand_wcpay_request:ok') {
+                    //支付成功后跳转的地址
+                    location.href = 'http://www.sage-edu.com/Home/Wxpay/success/?order_sn='+order_sn;
+                }else if (res.err_msg == 'get_brand_wcpay_request:cancel') {
+                    alert('请尽快完成支付哦！');
+                }else if (res.err_msg == 'get_brand_wcpay_request:fail') {
+                    alert('支付失败');
+                }else {
+                    alert('意外错误');
+                }
+                //WeixinJSBridge.log(res.err_msg);
+                //alert(res.err_code+res.err_desc+res.err_msg);
+                /*if (res.err_msg == 'get_brand_wcpay_request:ok') {
+                    alert('支付成功');
+                }else {
+                    alert('取消支付');
+                }*/
+            }
+        );
+    }
+    function callpay(){
+        var stu_id = $('#stu_id').val();
+        var stu_name = $('#stu_name').html();
+        var stu_contant = $('#stu_contant').html();
+        var stu_school = $('#stu_school').html();
+        var stu_class = $('#stu_class').html();
+        var class_start_time = $('.class_start_time').html();
+        if(stu_name  == ""){
+            alert('请输入姓名');
+            return false;
+        }
+        if(stu_contant  == ""){
+            alert('请输入联系方式');
+            return false;
+        }
+        if(stu_school  == ""){
+            alert('请输入学校');
+            return false;
+        }
+        if(stu_class  == ""){
+            alert('请输入班级');
+            return false;
+        }
+		if(class_start_time  == "请选择"){
+            alert('请选择开始上课时间');
+            return false;
+        }
+
+        $.ajax({
+            url:"/Home/Order/SaveInfo",
+            dataType:'json',
+            type:"post",
+            data: {order_sn:order_sn,stu_id:stu_id,stu_name:stu_name,stu_contant:stu_contant,stu_school:stu_school,stu_class:stu_class,class_start_time:class_start_time},
+            success:function(data){
+                if(data.status == 0){
+                    //alert(data.message);
+                    if (typeof WeixinJSBridge == "undefined"){
+                        if( document.addEventListener ){
+                            document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+                        }else if (document.attachEvent){
+                            document.attachEvent('WeixinJSBridgeReady', jsApiCall); 
+                            document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+                        }
+                    }else{
+                        jsApiCall();
+                    }
+                    
+                }else{
+                    alert('支付异常');
+                }
+            }
+        });  
+    }
+     /*
+    function callpay(){
+       
+        var stu_name = $('#stu_name').val();
+        var stu_contant = $('#stu_contant').val();
+        var stu_school = $('#stu_school').val();
+        var stu_class = $('#stu_class').val();
+
+        $.ajax({
+            url:"/Home/Order/saveInfo",
+            dataType:'json',
+            type:"post",
+            data: {order_sn:order_sn,stu_name:stu_name,stu_contant:stu_contant,stu_school:stu_school,stu_class:stu_class},
+            success:function(data){
+                if(data.status == 0){
+                    
+                    if (typeof WeixinJSBridge == "undefined"){
+                        if( document.addEventListener ){
+                            document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+                        }else if (document.attachEvent){
+                            document.attachEvent('WeixinJSBridgeReady', jsApiCall); 
+                            document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+                        }
+                    }else{
+                        jsApiCall();
+                    }
+                    
+                }else{
+                    alert('支付异常');
+                }
+            }
+        });   
+
+    }
+    */
+</script>
+<script>
+    $(function () {
+        $('#cuc').find('select').on('change', function () {
+
+            $('input[name=name]').attr("disabled",false);
+            $('#stu_contant').attr("disabled",false);
+            $('#stu_school').attr("disabled",false);
+            $('#stu_class').attr("disabled",false);
+
+            $('input[name=name]').val( $(this).find('option:selected').text() );
+            $('#stu_contant').val($('#stu_contant_'+$(this).val()).val());
+            $('#stu_school').val($('#stu_school_'+$(this).val()).val());
+            $('#stu_class').val($('#stu_class_'+$(this).val()).val());
+
+            $('input[name=name]').attr("disabled",true);
+            $('#stu_contant').attr("disabled",true);
+            $('#stu_school').attr("disabled",true);
+            $('#stu_class').attr("disabled",true);
+		});
+
+       $('[set-date]').mobiscroll().calendar({
+            theme: 'mobiscroll',
+            lang: 'zh',
+            display: 'bottom',
+            onSelect: function (v,ins) {
+                $(this).text(v);
+            }
+        });
+    });
+</script>
+</body>
+</html>
+
+

@@ -1,0 +1,152 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <script>
+        !function(a,b){function c(){var b=f.getBoundingClientRect().width;b/i>540&&(b=540*i);var c=b/32;f.style.fontSize=c+"px",k.rem=a.rem=c}var d,e=a.document,f=e.documentElement,g=e.querySelector('meta[name="viewport"]'),h=e.querySelector('meta[name="flexible"]'),i=0,j=0,k=b.flexible||(b.flexible={});if(g){var l=g.getAttribute("content").match(/initial\-scale=([\d\.]+)/);l&&(j=parseFloat(l[1]),i=parseInt(1/j))}else if(h){var m=h.getAttribute("content");if(m){var n=m.match(/initial\-dpr=([\d\.]+)/),o=m.match(/maximum\-dpr=([\d\.]+)/);n&&(i=parseFloat(n[1]),j=parseFloat((1/i).toFixed(2))),o&&(i=parseFloat(o[1]),j=parseFloat((1/i).toFixed(2)))}}if(!i&&!j){var p=a.navigator.userAgent,q=(!!p.match(/android/gi),!!p.match(/iphone/gi)),r=q&&!!p.match(/OS 9_3/),s=a.devicePixelRatio;i=q&&!r?s>=3&&(!i||i>=3)?3:s>=2&&(!i||i>=2)?2:1:1,j=1/i}if(f.setAttribute("data-dpr",i),!g)if(g=e.createElement("meta"),g.setAttribute("name","viewport"),g.setAttribute("content","initial-scale="+j+", maximum-scale="+j+", minimum-scale="+j+", user-scalable=no"),f.firstElementChild)f.firstElementChild.appendChild(g);else{var t=e.createElement("div");t.appendChild(g),e.write(t.innerHTML)}a.addEventListener("resize",function(){clearTimeout(d),d=setTimeout(c,300)},!1),a.addEventListener("pageshow",function(a){a.persisted&&(clearTimeout(d),d=setTimeout(c,300))},!1),"complete"===e.readyState?e.body.style.fontSize=12*i+"px":e.addEventListener("DOMContentLoaded",function(){e.body.style.fontSize=12*i+"px"},!1),c(),k.dpr=a.dpr=i,k.refreshRem=c,k.rem2px=function(a){var b=parseFloat(a)*this.rem;return"string"==typeof a&&a.match(/rem$/)&&(b+="px"),b},k.px2rem=function(a){var b=parseFloat(a)/this.rem;return"string"==typeof a&&a.match(/px$/)&&(b+="rem"),b}}(window,window.lib||(window.lib={}));
+    </script>
+    <title>个人中心</title>
+
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+
+    <!-- build:css assets/styles/style.min.css -->
+    <link rel="stylesheet" href="../assets/styles/amazeui.css">
+    <link rel="stylesheet" href="../assets/styles/main.css">
+    <!-- endbuild -->
+
+</head>
+<body>
+<div id="loading" class="popload">
+    <div class="popload-main">
+        <span class="popload-main-ico"></span>
+        <p class="popload-main-txt" id="progress">加载中...</p>
+    </div>
+</div>
+
+<div class="wrapper">
+    <header data-am-widget="header" class="am-header am-header-default am-header-fixed">
+        <div class="am-header-left am-header-nav">
+            <a href="index.html" class="am-btn">
+                <i class="am-header-icon am-icon-angle-left am-icon-sm"></i>
+            </a>
+        </div>
+        <h1 class="am-header-title">
+            个人中心
+        </h1>
+        <div class="am-header-right am-header-nav">
+            <button class="am-btn am-btn-primary" data-am-collapse="{target: '#collapse-nav'}"><i class="am-icon-bars am-icon-sm"></i></button>
+        </div>
+        <nav>
+            <ul id="collapse-nav" class="am-nav am-collapse">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="usercenter.html">个人中心</a></li>
+                    <li><a href="rank.html">进步之星排名</a></li>
+                    <li><a href="about.html">中心简介</a></li>
+                    <li><a href="contact.html">联系我们</a></li>
+                </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!--<div class="uc-header am-g am-padding-xs">-->
+            <!--<div class="am-u-sm-4">-->
+                <!--<img src="../assets/images/p1.jpg" alt="" class="am-img-thumbnail am-img-responsive am-circle">-->
+            <!--</div>-->
+            <!--<div class="am-u-sm-8">-->
+                <!--<h3>-->
+                    <!--张三，欢迎登陆~-->
+                <!--</h3>-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <div class="am-tabs am-tabs-d2 am-no-layout uc-top-tabs">
+            <ul class="am-tabs-nav am-cf">
+                <li>
+                    <a href="usercenter.html">
+                        我的课程
+                    </a>
+                </li>
+                <li>
+                    <a href="my-records.html">
+                        历史成绩
+                    </a>
+                </li>
+                <li class="am-active">
+                    <a href="my-info.html">
+                        个人信息
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="order-wrapper app-form">
+            <form action="">
+                <ul class="am-list">
+                    <li>
+                        <span>
+                            头像
+                        </span>
+                        <span class="am-fr form-ctrl">
+                            <img src="../assets/images/p1.jpg" class="head-img" alt="">
+                            <button class="am-btn am-btn-default"><i class="am-icon-upload"></i> 点我上传</button>
+                        </span>
+                    </li>
+                    <li>
+                        <span>
+                            昵称
+                        </span>
+                        <span class="am-fr form-ctrl"><input type="text" placeholder="昵称"></span>
+                    </li>
+                    <li>
+                        <span>
+                            姓名
+                        </span>
+                        <span class="am-fr form-ctrl"><input type="text" placeholder="请输入姓名"></span>
+                    </li>
+                    <li>
+                        <span>
+                            电话
+                        </span>
+                        <span class="am-fr form-ctrl"><input type="text" placeholder="请输入电话"></span>
+                    </li>
+                    <li>
+                        <span>
+                            学校
+                        </span>
+                        <span class="am-fr form-ctrl"><input type="text" placeholder="请输入学校"></span>
+                    </li>
+                    <li>
+                        <span>
+                            班级
+                        </span>
+                        <span class="am-fr form-ctrl"><input type="text" placeholder="请输入班级"></span>
+                    </li>
+                    <li>
+                        <button class="am-btn am-btn-danger am-btn-block am-btn-lg">确认修改</button>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+
+    <footer class="am-footer am-footer-default">
+        <div class="am-footer-miscs">
+            <p>CopyRight©2016  四志教育 Inc.</p>
+        </div>
+    </footer>
+</div>
+
+<!-- build:js assets/vendors/lib.min.js -->
+<script src="../assets/vendors/jquery/2.2.0/jquery.min.js"></script>
+<script src="../assets/vendors/amaze/js/amazeui.min.js"></script>
+<script src="../assets/vendors/mobiscroll/js/mobiscroll.custom-2.17.1.min.js"></script>
+<!-- endbuild -->
+<!-- build:js assets/scripts/app.min.js -->
+<script src="../assets/scripts/app.js"></script>
+<!-- endbuild -->
+</body>
+</html>
