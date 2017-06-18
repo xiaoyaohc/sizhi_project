@@ -43,8 +43,8 @@ return array(
     //'DB_HOST'   => '10.144.213.183,10.161.45.186', // 服务器地址
 
     'DB_NAME'   => 'dbsizhi', // 数据库名
-    'DB_USER'   => 'dbsizhi', // 用户名
-    'DB_PWD'    => 'wriet9220144sss#@@s',  // 密码
+    'DB_USER'   => 'root', // 用户名
+    'DB_PWD'    => '123456',  // 密码
     'DB_PORT'   => '3306', // 端口
     'DB_PREFIX' => 'otk_', // 数据库表前缀
 

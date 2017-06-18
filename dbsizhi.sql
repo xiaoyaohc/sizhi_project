@@ -6866,7 +6866,7 @@ CREATE TABLE `otk_ucenter_member` (
 -- ----------------------------
 -- Records of otk_ucenter_member
 -- ----------------------------
-INSERT INTO `otk_ucenter_member` VALUES ('1', 'admin', '28d6ee1808c9624b85a70c612b2f4b17', '463681151@qq.com', '', '1408699174', '1902709050', '1495633487', '3683031013', '1408699174', '1');
+INSERT INTO `otk_ucenter_member` VALUES ('1', 'admin', '3923ec8b1e7b6ab21748c1221e09c156', '463681151@qq.com', '', '1408699174', '1902709050', '1495633487', '3683031013', '1408699174', '1');
 INSERT INTO `otk_ucenter_member` VALUES ('2', 'xuming', 'a20a59765690fd0991a8cc2038417808', '541267669@qq.com', '', '1409279547', '1902709050', '0', '0', '1409279547', '1');
 INSERT INTO `otk_ucenter_member` VALUES ('3', 'iknow', 'f4d869e72a494e751ca9d11cc44ea19b', 'a@abc.com', '', '1411720972', '1902709050', '1411721050', '1902709050', '1411720972', '1');
 INSERT INTO `otk_ucenter_member` VALUES ('4', 'test', '3923ec8b1e7b6ab21748c1221e09c156', '474794259@qq.com', '', '1456199861', '236796436', '1461236841', '2030997156', '1456199861', '1');
