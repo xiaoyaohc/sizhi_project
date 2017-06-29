@@ -7410,3 +7410,6 @@ INSERT INTO `otk_wx_user` VALUES ('373', '0', 'oEjhSwjnwYlm-Z3K8PomN95sU-PQ', ''
 INSERT INTO `otk_wx_user` VALUES ('374', '0', 'oEjhSwmPRh30StsekHBdt52jQAnM', '', '', '1', '', '广东', '', '', 'A贝可·曾可', '1495590379', '', null, null, '1', '0', 'http://wx.qlogo.cn/mmopen/MKXc1opU6m6UJqdyErE1N3iamG6XZicIibN7LBZy2UAq088HSx9zJ3icaxsUSBQVACFskzvibPic4y3bfxtSM8fEEhXQQSBeHfiaKWm/0', '', '', '', null);
 INSERT INTO `otk_wx_user` VALUES ('375', '0', 'oEjhSwnGSyXCvnDL_4lwNfC8SNhE', '', '', '1', '', '广东', '', '', '排长', '1495597330', '', null, null, '1', '0', 'http://wx.qlogo.cn/mmopen/MicRxsN3nIMOBSygmMdarqCnz1mZ8ww2p2QQXSNzkvfasV8rA194osLdFJ7VpibNkGHXYggfraQY3ULNUibpMo4RY95SZhmeFGO/0', '', '', '', null);
 INSERT INTO `otk_wx_user` VALUES ('376', '0', 'oEjhSwpwkluZpd1FaX79fyHMlc5U', '', '', '1', '', '广东', '', '', 'Mark', '1495717950', '', null, null, '1', '0', 'http://wx.qlogo.cn/mmopen/MicRxsN3nIMNe1ibtibic2BQe6G7GcCrSR99J6ic9wNhcGWcuxJeJia6pSia7hK83M0BKufkQEvMhHZOKkrQ2RpYaEy9QvlIkI6wIQp/0', '', '', '', null);
+
+
+ALTER TABLE `otk_class` ADD `course_dates` VARCHAR(800) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '上课日期' AFTER `week_id`;

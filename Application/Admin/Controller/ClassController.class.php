@@ -132,14 +132,6 @@ class ClassController extends AdminController {
             $data = $db->create();
             if($data){
                 $list  = $db->add($_POST);
-                if($_POST['class_type']==2){
-                    $add['class_id']      = $list;
-                    $add['week_id']       = $_POST['week_id'];
-                    $add['time_interval'] = $_POST['time_interval'];
-//                    D('Class_times')->add($add);
-
-
-                }
                 if($list){
                     $this->success('添加成功',U('Class/index',array('info_type'=>$_POST['info_type'])));
                 } else {

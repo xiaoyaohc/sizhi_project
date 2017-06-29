@@ -2,6 +2,9 @@
 
 <block name="body">
     <script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <!--引入日历控件Kalendae-->
+    <link rel="stylesheet" href="__STATIC__/kalendae/kalendae.css" type="text/css">
+    <script type='text/javascript' src='__STATIC__/kalendae/kalendae.standalone.js'></script>
     <div class="main-title">
         <h2>{$meta_title}</h2>
     </div>
@@ -34,40 +37,19 @@
                 </select>
             </div>
         </div>
-         <div class="form-item">
-            <label class="item-label">课程类型</label>
+        <div class="form-item">
+            <label class="item-label">上课日期</label>
             <div class="controls">
-                 <input type="radio" class="px" id="class_type" value="1" name="class_type" checked/>大 &nbsp;&nbsp;
-                 <input type="radio" class="px" id="class_type" value="2" name="class_type" />小
+                <input type="text" name="course_dates" class="auto-kal" data-kal="mode:'multiple'">
             </div>
         </div>
         <div class="form-item">
-            <label class="item-label">上课周期<span class="check-tips">(小班才需要选择)</span></label>
-            <div class="controls">
-                <select name="week_id">
-                    <option  >请选择</option>
-                    <foreach name="week" item="opt" key="opt_k">
-                        <option value="{$opt.week_id}" <eq name="data.week_id" value="$opt.week_id"> selected</eq>>{$opt.week_name}</option>
-                    </foreach>
-                </select>
-            </div>
-        </div>
-        <div class="form-item">
-            <label class="item-label">上课时间段<span class="check-tips">(小班才需要填写)</span></label>
+            <label class="item-label">上课时间段</label>
             <div class="controls">
                 <input type="text" name="time_interval" class="text time" value="{$data.time_interval}"  />格式：上午10:00-12:00
             </div>
         </div>
-        <div class="form-item">
-            <label class="item-label">大班周期<span class="check-tips">(大班才需要选择)</span></label>
-            <div class="controls">
-                <select name="period">
-                    <foreach name="period" item="opt" key="opt_k">
-                        <option value="{$opt_k}" <eq name="data.period" value="$opt_k"> selected</eq>>{$opt}</option>
-                    </foreach>
-                </select>
-            </div>
-        </div>
+
         <div class="form-item">
             <label class="item-label">销售状态</label>
             <div class="controls">
