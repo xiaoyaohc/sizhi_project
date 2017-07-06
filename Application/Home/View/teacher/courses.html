@@ -1,7 +1,9 @@
 <!doctype html>
 <html class="no-js">
 <include file="index/header" />
+
 <body>
+
 <div id="loading" class="popload">
     <div class="popload-main">
         <span class="popload-main-ico"></span>
@@ -44,31 +46,24 @@
         <div class="courses-list">
             <ul class="am-list" id="course-list">
             <!-- 课程列表start -->
-            <?php $week = array('星期日','星期一','星期二','星期三','星期四','星期五','星期六');?>
             <foreach name="Info" item="class" >
                 <li class="course-item">
                     <gt name="class.class_num" value="0"><a href="{:U('Order/order',array('Cid'=>$class['class_id']))}"></gt>
                         <h3>{$class.class_name}
-	                       <!--   <if condition="$class.class_type eq 1">  （大班）
-	                        <elseif condition="$class.class_type eq 2"/> （小班）
-	                        </if> -->
 	                    </h3>
                     <gt name="class.class_num" value="0"></a></gt>
                     <div class="desc">
-                        时间：{$week[$class['week_id']]}/{$class.time_interval} <br>
+                        日期：<a href="javascript:;" onclick='date_show("{$class.course_dates}");'>查看</a>(共:{$class.course_dates|explode=',',###|count}天)<br>
+                        时间：{$class.time_interval}<br>
                         地点：{$class.area_name} {$class.class_room} <br>
                     </div>
                     <div class="price-box">
                         <span class="price">￥<strong>{$class.class_price}/
                             <?php
-                                if($class['class_type']==2){
                                     echo $class['times'].'</strong>次';
-                                }else{
-                                    $classTurn = array('星期','周','月','年','学期');
-                                    echo $classTurn[$class['period']].'</strong>';
-                                }
                             ?>
-                            <br></span>
+                            <br>
+                        </span>
                         <span class="xw">学位：<strong>{$class.class_num}</strong>位</span>
                         <br>
                         <span class="xw">原价：￥{$class.original_price}</span>
@@ -94,11 +89,45 @@
         </div>
     </footer>
 </div>
+<style>
+    .date_status {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 10000;
+    }
+    .date_status ul {
+        padding-left: 0em;
+    }
+</style>
+<!--日期弹出层-->
+<div class="date_status" style="display: none;">
+    <div id="calendar" class="calendar" style="position:relative">
+        <img src="__ASSETS__/images/risk-bg02.png" onclick="date_remove();" style="position:absolute;top:0; right:0;">
+    </div>
+</div>
+<!--移除生成的日期标签-->
+<script>
+    function date_remove() {
+        $('.date_status').hide();
+        $(".calendar-title").remove();
+        $(".calendar-week").remove();
+        $(".calendar-date").remove();
+    }
+</script>
 
 <script src="__ASSETS__/vendors/lib.min.js"></script>
 <script src="__ASSETS__/scripts/app.min.js"></script>
+<!--引入日历控件calendar-->
+<link rel="stylesheet" href="__STATIC__/calendar/css/calendar.css">
+<script src="__STATIC__/jquery-2.0.3.min.js"></script>
+<script src="__STATIC__/calendar/js/calendar.js"></script>
 <script type="text/javascript">
-
     wx.ready(function () {
         var shareData = {
             title: "四志教育~{$Info.0.teacher_name}课程介绍",
@@ -137,13 +166,15 @@
                 if(res!=null){
                     var teacherClassUrl = "{:U('Order/order','','')}";
                     var html = '';
-                    var classType={1:'（大班）',2:'（小班）'};
-                    var week = ['星期一','星期二','星期三','星期四','星期五','星期六','星期日'];
+                    //var classType={1:'（大班）',2:'（小班）'};
+                    //var week = ['星期一','星期二','星期三','星期四','星期五','星期六','星期日'];
                     $.each(res,function(i,v){
                         html += '<li class="course-item">'
-				            +  '    <h3>'+v.class_name+classType[v.class_type]+'</h3>'
+				            +  '    <h3>'+v.class_name+'</h3>'
 				            +  '    <div class="desc">'
-				            +  '        时间：'+week[v.week_id]+'/'+v.time_interval +'<br>'
+				            +  '        日期：'+week[v.week_id]+'/'+v.time_interval +'<br>'
+                            +  '        日期：<a href="javascript:;" onclick="date_show('+v.course_dates+');">'+'查看(共:{'+v.course_dates.length+'天)</a><br>'
+                            +  '        时间：'+v.time_interval +'<br>'
 				            +  '        地点：'+v.area_name +v.class_room +'<br>'
 				            +  '    </div>'
 				            +  '    <div class="price-box">'
@@ -161,7 +192,7 @@
 				            +  '</li>'
 
                     });
-            
+
                     $('#course-list').append(html);
                 }else{
                     $('.list-more').html('加载完成')

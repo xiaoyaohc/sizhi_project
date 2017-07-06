@@ -1049,7 +1049,7 @@ Kalendae.Input = function (targetElement, options) {
 
 Kalendae.Input.prototype = util.merge(Kalendae.prototype, {
 	defaults : util.merge(Kalendae.prototype.defaults, {
-		format: 'MM/DD/YYYY',
+		format: 'YYYYMMDD',//'MM/DD/YYYY',
 		side: 'bottom',
 		closeButton: true,
 		offsetLeft: 0,

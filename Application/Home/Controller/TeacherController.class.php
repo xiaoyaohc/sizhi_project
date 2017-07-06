@@ -76,6 +76,7 @@ class TeacherController extends HomeController {
 		$Cid = I('Cid',0,'int');	//课程id
     	$page = I('p',1,'int');	//翻页参数
     	$Info = TeacherModel::getInfo($Tid,$Cid);	//教师列表
+
     	if ($page>1){	//ajax翻页
     		$this->ajaxReturn($Info);
     		exit;

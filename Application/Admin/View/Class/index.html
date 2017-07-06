@@ -31,9 +31,8 @@
 			<th class="">课程名称</th>
 			<th class="">所属科目</th>
 			<th class="">教师</th>
-			<th class="">类型</th>
-			<th class="">小班时间段</th>
-			<th class="">大班周期</th>
+			<th class="">上课日期</th>
+			<th class="">上课时间</th>
 			<th class="">上课地点</th>
 			<th class="">团购价格</th>
 			<th class="">原价</th>
@@ -53,9 +52,8 @@
 			<td>{$vo.class_name}</td>
 			<td>{$vo.subject_name}</td>
 			<td>{$vo.teacher_name}</td>
-			<td>{$vo.class_type}</td>
-			<td><span>{$vo.time_interval}</span></td>
-			<td><span>{$vo.period_name}</span></td>
+			<td title="{$vo.course_dates}">{$vo.course_dates|substr=###,0,10}...</td>
+			<td>{$vo.time_interval}</td>
 			<td>{$vo.class_place}</td>
 			<td>{$vo.class_price}</td>
 			<td>{$vo.original_price}</td>
@@ -67,7 +65,6 @@
 				[<a href="{:U('Class/edit?class_id='.$vo['class_id'])}" class="authorize">编辑</a>]
                 [<a href="{:U('Class/deleteInfos?class_id='.$vo['class_id'])}" class="confirm ajax-get">删除</a>]
             </td>
-			
 		</tr>
 		</volist>
 		<else/>

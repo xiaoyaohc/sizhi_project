@@ -130,7 +130,7 @@ class TeacherModel extends Model{
 		}
 
 		/*if(!empty($return)){
-		
+
 			//剩余学位
 			foreach($return as $k => $v){
 				//未完成课程
@@ -138,12 +138,12 @@ class TeacherModel extends Model{
 				$courseUnDoneNum = M()->table('otk_pay')
 				->where(array('class_id'=>$v['class_id'],'class_status'=>0))
 				->count();
-				
+
 				$return[$k]['class_num'] = $v['class_num'] - $courseUnDoneNum;
 			}
 		}*/
 
-		if(!empty($return)){
+		/*if(!empty($return)){
 			foreach($return as $k => $v){
 				if($v['class_type']==2){
 					//获取小班上课时间
@@ -163,7 +163,7 @@ class TeacherModel extends Model{
 				}
 
 			}
-		}
+		}*/
 
 		return $return;
 	}
