@@ -11,6 +11,18 @@
             <div class="controls">
                 <input type="text" class="text input-large" name="subject_name" value="{$data.subject_name}">
             </div>
+           <label class="item-label">科目地址<span class="check-tips"></span></label>
+           <div class="controls">
+               <input type="text" class="text input-large" name="subject_url" value="{$data.subject_url}">
+           </div>
+           <label class="item-label">科目图片路径<span class="check-tips"></span></label>
+           <div class="controls">
+               <input type="text" class="text input-large" name="subject_image" value="{$data.subject_image}">
+           </div>
+           <label class="item-label">科目顺序<span class="check-tips"></span></label>
+           <div class="controls">
+               <input type="text" class="text input-large" name="subject_order" value="{$data.subject_order}" style="width: 60px;">
+           </div>
         </div>
         <div class="form-item">
             <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>

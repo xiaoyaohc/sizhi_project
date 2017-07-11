@@ -10,7 +10,7 @@ class SubjectModel extends Model{
 	 * 获取科目列表
 	 */
 	public static function getList(){
-		return M()->table('otk_subject')->select();
+		return M()->table('otk_subject')->order('subject_order asc')->select();
 	}
 	
 	/**

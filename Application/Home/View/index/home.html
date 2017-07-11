@@ -54,14 +54,15 @@
             <li><a href="{:U('Teacher/teacherList?Sid=4')}"><i class="hi hi-wl"></i><span>美术</span></a></li>
             <li><a href="{:U('Teacher/teacherList?Sid=5')}"><i class="hi hi-yy"></i><span>口语</span></a></li>
             <li><a href="{:U('Teacher/teacherList?Sid=6')}"><i class="hi hi-ss"></i><span>作业辅导</span></a></li>  -->
-            
-            
-            <li><a href="{:U('Teacher/teacherList?Sid=5')}"><i class="hi" style="background: url(/Public/Home/assets/images/yy.png) no-repeat; width:5.25rem;height:5.275rem; background-size: 5.00rem 5.000rem;" ></i><span>口语</span></a></li>
+            <foreach name="subjectList" item="subject">
+            <li><a href="{$subject.subject_url}"><i class="hi" style="background: url({$subject.subject_image}) no-repeat; width:5.25rem;height:5.275rem; background-size: 5.00rem 5.000rem;" ></i><span>{$subject.subject_name}</span></a></li>
+            </foreach>
+            <!--<li><a href="{:U('Teacher/teacherList?Sid=5')}"><i class="hi" style="background: url(/Public/Home/assets/images/yy.png) no-repeat; width:5.25rem;height:5.275rem; background-size: 5.00rem 5.000rem;" ></i><span>口语</span></a></li>
             <li><a href="{:U('Teacher/teacherList?Sid=10')}"><i class="hi" style="background: url(/Public/Home/assets/images/gq.png) no-repeat; width:5.25rem;height:5.275rem; background-size: 5.00rem 5.000rem;" ></i><span>钢琴</span></a></li> 
             <li><a href="{:U('Teacher/teacherList?Sid=11')}"><i class="hi" style="background: url(/Public/Home/assets/images/hx.png) no-repeat; width:5.25rem;height:5.275rem; background-size: 5.00rem 5.000rem;" ></i><span>古筝</span></a></li>
             <li><a href="{:U('Teacher/teacherList?Sid=17')}"><i class="hi" style="background: url(/Public/Home/assets/images/gh.png) no-repeat; width:5.25rem;height:5.275rem; background-size: 5.00rem 5.000rem;" ></i><span>国画</span></a></li> 
             <li><a href="{:U('Teacher/teacherList?Sid=4')}"><i class="hi" style="background: url(/Public/Home/assets/images/sm.png) no-repeat; width:5.25rem;height:5.275rem; background-size: 5.00rem 5.000rem;" ></i><span>美术</span></a></li> 
-            <!-- <li><a href="{:U('Teacher/teacherList?Sid=13')}"><i class="hi" style="background: url(/Public/Home/assets/images/sj.png) no-repeat; width:5.25rem;height:5.275rem; background-size: 5.00rem 5.000rem;" ></i><span>设计</span></a></li>  --> 
+            &lt;!&ndash; <li><a href="{:U('Teacher/teacherList?Sid=13')}"><i class="hi" style="background: url(/Public/Home/assets/images/sj.png) no-repeat; width:5.25rem;height:5.275rem; background-size: 5.00rem 5.000rem;" ></i><span>设计</span></a></li>  &ndash;&gt;
             <li><a href="{:U('Teacher/teacherList?Sid=14')}"><i class="hi" style="background: url(/Public/Home/assets/images/sf.png) no-repeat; width:5.25rem;height:5.275rem; background-size: 5.00rem 5.000rem;" ></i><span>书法</span></a></li>            
             <li><a href="{:U('Teacher/teacherList?Sid=15')}"><i class="hi" style="background: url(/Public/Home/assets/images/tqd.png) no-repeat; width:5.25rem;height:5.275rem; background-size: 5.00rem 5.000rem;" ></i><span>跆拳道</span></a></li> 
             <li><a href="{:U('Teacher/teacherList?Sid=16')}"><i class="hi" style="background: url(/Public/Home/assets/images/wd.png) no-repeat; width:5.25rem;height:5.275rem; background-size: 5.00rem 5.000rem;" ></i><span>舞蹈</span></a></li>
@@ -71,7 +72,7 @@
             <li><a href="{:U('Teacher/teacherList?Sid=2')}"><i class="hi" style="background: url(/Public/Home/assets/images/os.png) no-repeat; width:5.25rem;height:5.275rem; background-size: 5.00rem 5.000rem;" ></i><span>数学</span></a></li>
             <li><a href="{:U('Teacher/teacherList?Sid=3')}"><i class="hi" style="background: url(/Public/Home/assets/images/ky.png) no-repeat; width:5.25rem;height:5.275rem; background-size: 5.00rem 5.000rem;" ></i><span>英语</span></a></li> 
             <li><a href="{:U('Teacher/teacherList?Sid=18')}"><i class="hi" style="background: url(/Public/Home/assets/images/wl.png) no-repeat; width:5.25rem;height:5.275rem; background-size: 5.00rem 5.000rem;" ></i><span>物理</span></a></li> 
-            <li><a href="{:U('Teacher/teacherList?Sid=19')}"><i class="hi" style="background: url(/Public/Home/assets/images/hx2.png) no-repeat; width:5.25rem;height:5.275rem; background-size: 5.00rem 5.000rem;" ></i><span>化学</span></a></li>              
+            <li><a href="{:U('Teacher/teacherList?Sid=19')}"><i class="hi" style="background: url(/Public/Home/assets/images/hx2.png) no-repeat; width:5.25rem;height:5.275rem; background-size: 5.00rem 5.000rem;" ></i><span>化学</span></a></li>-->
         </ul>
   <section class="am-padding-top-sm">
             <div class="am-list-news am-list-news-default tj-teacher" >

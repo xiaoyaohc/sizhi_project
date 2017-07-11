@@ -7413,3 +7413,40 @@ INSERT INTO `otk_wx_user` VALUES ('376', '0', 'oEjhSwpwkluZpd1FaX79fyHMlc5U', ''
 
 
 ALTER TABLE `otk_class` ADD `course_dates` VARCHAR(800) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '上课日期' AFTER `week_id`;
+
+ALTER TABLE `otk_subject` ADD `subject_url` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '链接地址' AFTER `subject_name`;
+ALTER TABLE `otk_subject` ADD `subject_image` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '课程图片地址' AFTER `subject_url`;
+ALTER TABLE `otk_subject` ADD `subject_order` TINYINT(2) NOT NULL COMMENT '排序数字' AFTER `subject_url`;
+UPDATE `dbsizhi`.`otk_subject` SET `subject_url` = '/index.php?s=/home/teacher/teacherlist/Sid/1.html' WHERE `otk_subject`.`subject_id` = 1;
+UPDATE `dbsizhi`.`otk_subject` SET `subject_image` = '/Public/Home/assets/images/yw.png' WHERE `otk_subject`.`subject_id` = 1;
+UPDATE `dbsizhi`.`otk_subject` SET `subject_url` = '/index.php?s=/home/teacher/teacherlist/Sid/2.html' WHERE `otk_subject`.`subject_id` = 2;
+UPDATE `dbsizhi`.`otk_subject` SET `subject_image` = '/Public/Home/assets/images/os.png' WHERE `otk_subject`.`subject_id` = 2;
+UPDATE `dbsizhi`.`otk_subject` SET `subject_url` = '/index.php?s=/home/teacher/teacherlist/Sid/3.html' WHERE `otk_subject`.`subject_id` = 3;
+UPDATE `dbsizhi`.`otk_subject` SET `subject_image` = '/Public/Home/assets/images/ky.png' WHERE `otk_subject`.`subject_id` = 3;
+UPDATE `dbsizhi`.`otk_subject` SET `subject_url` = '/index.php?s=/home/teacher/teacherlist/Sid/4.html' WHERE `otk_subject`.`subject_id` = 4;
+UPDATE `dbsizhi`.`otk_subject` SET `subject_image` = '/Public/Home/assets/images/sm.png' WHERE `otk_subject`.`subject_id` = 4;
+UPDATE `dbsizhi`.`otk_subject` SET `subject_url` = '/index.php?s=/home/teacher/teacherlist/Sid/5.html' WHERE `otk_subject`.`subject_id` = 5;
+UPDATE `dbsizhi`.`otk_subject` SET `subject_image` = '/Public/Home/assets/images/yy.png' WHERE `otk_subject`.`subject_id` = 5;
+UPDATE `dbsizhi`.`otk_subject` SET `subject_url` = '/index.php?s=/home/teacher/teacherlist/Sid/6.html' WHERE `otk_subject`.`subject_id` = 6;
+UPDATE `dbsizhi`.`otk_subject` SET `subject_image` = '/Public/Home/assets/images/ss.png' WHERE `otk_subject`.`subject_id` = 6;
+UPDATE `dbsizhi`.`otk_subject` SET `subject_url` = '/index.php?s=/home/teacher/teacherlist/Sid/10.html' WHERE `otk_subject`.`subject_id` = 10;
+UPDATE `dbsizhi`.`otk_subject` SET `subject_image` = '/Public/Home/assets/images/gq.png' WHERE `otk_subject`.`subject_id` = 10;
+UPDATE `dbsizhi`.`otk_subject` SET `subject_url` = '/index.php?s=/home/teacher/teacherlist/Sid/11.html' WHERE `otk_subject`.`subject_id` = 11;
+UPDATE `dbsizhi`.`otk_subject` SET `subject_image` = '/Public/Home/assets/images/hx.png' WHERE `otk_subject`.`subject_id` = 11;
+UPDATE `dbsizhi`.`otk_subject` SET `subject_url` = '/index.php?s=/home/teacher/teacherlist/Sid/13.html' WHERE `otk_subject`.`subject_id` = 13;
+UPDATE `dbsizhi`.`otk_subject` SET `subject_image` = '/Public/Home/assets/images/sj.png' WHERE `otk_subject`.`subject_id` = 13;
+UPDATE `dbsizhi`.`otk_subject` SET `subject_url` = '/index.php?s=/home/teacher/teacherlist/Sid/14.html' WHERE `otk_subject`.`subject_id` = 14;
+UPDATE `dbsizhi`.`otk_subject` SET `subject_image` = '/Public/Home/assets/images/sf.png' WHERE `otk_subject`.`subject_id` = 14;
+UPDATE `dbsizhi`.`otk_subject` SET `subject_url` = '/index.php?s=/home/teacher/teacherlist/Sid/15.html' WHERE `otk_subject`.`subject_id` = 15;
+UPDATE `dbsizhi`.`otk_subject` SET `subject_image` = '/Public/Home/assets/images/tqd.png' WHERE `otk_subject`.`subject_id` = 15;
+UPDATE `dbsizhi`.`otk_subject` SET `subject_url` = '/index.php?s=/home/teacher/teacherlist/Sid/16.html' WHERE `otk_subject`.`subject_id` = 16;
+UPDATE `dbsizhi`.`otk_subject` SET `subject_image` = '/Public/Home/assets/images/wd.png' WHERE `otk_subject`.`subject_id` = 16;
+UPDATE `dbsizhi`.`otk_subject` SET `subject_url` = '/index.php?s=/home/teacher/teacherlist/Sid/17.html' WHERE `otk_subject`.`subject_id` = 17;
+UPDATE `dbsizhi`.`otk_subject` SET `subject_image` = '/Public/Home/assets/images/gh.png' WHERE `otk_subject`.`subject_id` = 17;
+UPDATE `dbsizhi`.`otk_subject` SET `subject_url` = '/index.php?s=/home/teacher/teacherlist/Sid/18.html' WHERE `otk_subject`.`subject_id` = 18;
+UPDATE `dbsizhi`.`otk_subject` SET `subject_image` = '/Public/Home/assets/images/wl.png' WHERE `otk_subject`.`subject_id` = 18;
+UPDATE `dbsizhi`.`otk_subject` SET `subject_url` = '/index.php?s=/home/teacher/teacherlist/Sid/19.html' WHERE `otk_subject`.`subject_id` = 19;
+UPDATE `dbsizhi`.`otk_subject` SET `subject_image` = '/Public/Home/assets/images/hx2.png' WHERE `otk_subject`.`subject_id` = 19;
+UPDATE `dbsizhi`.`otk_subject` SET `subject_url` = '/index.php?s=/home/teacher/teacherlist/Sid/20.html' WHERE `otk_subject`.`subject_id` = 20;
+UPDATE `dbsizhi`.`otk_subject` SET `subject_image` = '/Public/Home/assets/images/yj.png' WHERE `otk_subject`.`subject_id` = 20;
+

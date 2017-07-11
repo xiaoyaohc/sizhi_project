@@ -29,6 +29,9 @@
 	        <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
 	        <th class="">科目id</th>
 			<th class="">科目名称</th>
+			<th class="">科目地址</th>
+			<th class="">科目图片路径</th>
+			<th class="">科目顺序</th>
 			<th class="">添加时间</th>
 			<th class="">操作</th>
 		</tr>
@@ -40,6 +43,9 @@
 			<td><input class="ids" type="checkbox" name="subject_id[]" value="{$vo.subject_id}" /></td>
 			<td>{$vo.subject_id}</td>
 			<td>{$vo.subject_name}</td>
+			<td>{$vo.subject_url}</td>
+			<td>{$vo.subject_image}</td>
+			<td>{$vo.subject_order}</td>
 			<td><span>{$vo.add_time|time_format}</span></td>
 			<td><eq name="vo.status" value="1">
 				[<a href="{:U('Subject/edit?subject_id='.$vo['subject_id'])}" class="authorize">编辑</a>]
