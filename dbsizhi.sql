@@ -7450,3 +7450,5 @@ UPDATE `dbsizhi`.`otk_subject` SET `subject_image` = '/Public/Home/assets/images
 UPDATE `dbsizhi`.`otk_subject` SET `subject_url` = '/index.php?s=/home/teacher/teacherlist/Sid/20.html' WHERE `otk_subject`.`subject_id` = 20;
 UPDATE `dbsizhi`.`otk_subject` SET `subject_image` = '/Public/Home/assets/images/yj.png' WHERE `otk_subject`.`subject_id` = 20;
 
+ALTER TABLE `otk_teacher` ADD `album` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '教师相册路径' AFTER `pic3`;
+

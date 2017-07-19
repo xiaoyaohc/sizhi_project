@@ -107,50 +107,101 @@
             </script>
         </div>
         <div id="contact_pic_box">
-             <div class="form-item contact_pic_box_1">
-            <label class="item-label">图片3</label>
+            <div class="form-item contact_pic_box_1">
+                <label class="item-label">图片3</label>
                 <input type="file" id="upload_picture3">
                 <input type="hidden" name="pic3" id="pic3" value="{$data['pic3']|default=''}"/>
                 <div class="upload-img-box">
-                <notempty name="data['pic3']">
-                    <div class="upload-pre-item" title="点击删除图片"><img src="{$data.pic3}"/></div>
-                </notempty>
+                    <notempty name="data['pic3']">
+                        <div class="upload-pre-item" title="点击删除图片"><img src="{$data.pic3}"/></div>
+                    </notempty>
                 </div>
             </div>
             <script type="text/javascript">
-            //上传图片
-            /* 初始化上传插件 */
-            $("#upload_picture3").uploadify({
-                "height"          : 30,
-                "swf"             : "__STATIC__/uploadify/uploadify.swf",
-                "fileObjName"     : "download",
-                "buttonText"      : "上传图片",
-                "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
-                "width"           : 120,
-                'removeTimeout'   : 1,
-                'fileTypeExts'    : '*.jpg; *.png; *.gif;',
-                "onUploadSuccess" : uploadPicture,
-                'onFallback' : function() {
-                    alert('未检测到兼容版本的Flash.');
+                //上传图片
+                /* 初始化上传插件 */
+                $("#upload_picture3").uploadify({
+                    "height": 30,
+                    "swf": "__STATIC__/uploadify/uploadify.swf",
+                    "fileObjName": "download",
+                    "buttonText": "上传图片",
+                    "uploader": "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+                    "width": 120,
+                    'removeTimeout': 1,
+                    'fileTypeExts': '*.jpg; *.png; *.gif;',
+                    "onUploadSuccess": uploadPicture,
+                    'onFallback': function () {
+                        alert('未检测到兼容版本的Flash.');
+                    }
+                });
+                function uploadPicture(file, data) {
+                    var data = $.parseJSON(data);
+                    var src = '';
+                    if (data.status) {
+                        $("#pic3").val(data.path);
+                        src = data.url || '__ROOT__' + data.path;
+                        $("#pic3").parent().find('.upload-img-box').html(
+                            '<div class="upload-pre-item" title="点击删除图片"><img src="' + src + '"/></div>'
+                        );
+                    } else {
+                        updateAlert(data.info);
+                        setTimeout(function () {
+                            $('#top-alert').find('button').click();
+                            $(that).removeClass('disabled').prop('disabled', false);
+                        }, 1500);
+                    }
                 }
-            });
-            function uploadPicture(file, data){
-                var data = $.parseJSON(data);
-                var src = '';
-                if(data.status){
-                    $("#pic3").val(data.path);
-                    src = data.url || '__ROOT__' + data.path;
-                    $("#pic3").parent().find('.upload-img-box').html(
-                        '<div class="upload-pre-item" title="点击删除图片"><img src="' + src + '"/></div>'
-                    );
-                } else {
-                    updateAlert(data.info);
-                    setTimeout(function(){
-                        $('#top-alert').find('button').click();
-                        $(that).removeClass('disabled').prop('disabled',false);
-                    },1500);
+            </script>
+        </div>
+        <br>
+        <div>
+            <div class="form-item contact_pic_box_1">
+                <label class="item-label">教师相册（多选：一次可上传多张）</label>
+                <input type="file" id="upload_picture3">
+                <input type="hidden" name="album" id="album" value="{$data['album']|default=''}"/>
+                <div class="upload-img-box">
+                    <notempty name="data['album']">
+                        <div class="upload-pre-item" title="点击删除图片"><img src="{$data.album}"/></div>
+                    </notempty>
+                </div>
+            </div>
+            <script type="text/javascript">
+                //上传图片
+                /* 初始化上传插件 */
+                $("#upload_picture3").uploadify({
+                    "height"          : 30,
+                    "swf"             : "__STATIC__/uploadify/uploadify.swf",
+                    "fileObjName"     : "download",
+                    "buttonText"      : "上传图片",
+                    "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+                    "width"           : 120,
+                    'removeTimeout'   : 1,
+                    'fileTypeExts'    : '*.jpg; *.png; *.gif;',
+                    "onUploadSuccess" : uploadPicture,
+                    'onFallback' : function() {
+                        alert('未检测到兼容版本的Flash.');
+                    }
+                });
+
+                var path = '';
+                function uploadPicture(file, data){
+                    var data = $.parseJSON(data);
+                    var src = '';
+                    if(data.status){
+                        path += data.path+',';
+                        $("#album").val(path);
+                        src = data.url || '__ROOT__' + data.path;
+                        $("#album").parent().find('.upload-img-box').append(
+                            '<div class="upload-pre-item" title="点击删除图片"><img src="' + src + '"/></div>'
+                        );
+                    } else {
+                        updateAlert(data.info);
+                        setTimeout(function(){
+                            $('#top-alert').find('button').click();
+                            $(that).removeClass('disabled').prop('disabled',false);
+                        },1500);
+                    }
                 }
-            }
             </script>
         </div>
         <div class="form-item">
