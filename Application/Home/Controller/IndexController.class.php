@@ -19,10 +19,10 @@ class IndexController extends HomeController {
      * 初始化
      */
     protected function _initialize(){
-       // $_SESSION['wx_id'] = 'oEjhSwiytpQ8_Kmf-EZV-h-veOoM';
+          $_SESSION['wx_id'] = 'oEjhSwiytpQ8_Kmf-EZV-h-veOoM';
 //        $_SESSION['wx_id'] = 'oEjhSwq5k8Jhb-KQ_hHxB1rhsrmI';
 //        $_SESSION['wx_id'] = 'oEjhSwnDMvwOByAujlDEFp9Meuco';
-        $_SESSION['wx_id'] = 'oEjhSwkPDVqPNjaOOc4B1EzwxC4Y';
+        //$_SESSION['wx_id'] = 'oEjhSwkPDVqPNjaOOc4B1EzwxC4Y';
         if(!empty($_SERVER['HTTP_HOST']) && !empty($_SERVER['REQUEST_URI'])){
             $reUrl = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
         }else{

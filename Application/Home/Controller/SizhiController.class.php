@@ -88,17 +88,18 @@ class SizhiController extends Controller{
                 $receiver_address=$res['order']['receiver_address'];//配送地址
                 $url_template='https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='.$access_token;
                 $arr_openid=array(
-                    0=>'oxQVwxLr2BIXW9t5jMdWdghAHvBI',//黄志涛
-                    1=>'oxQVwxCpEhKPgJgiWFar46I-UE1E',//老板
-                    2=>'oxQVwxALyL92fQW0VuimFm3DP3U8'//用户3
+                    0=>$res['order']['buyer_openid'],//购买用户
+                    1=>'oxQVwxLr2BIXW9t5jMdWdghAHvBI',//黄志涛
+                    2=>'oxQVwxCpEhKPgJgiWFar46I-UE1E',//老板
+                    3=>'oxQVwxALyL92fQW0VuimFm3DP3U8'//用户3
                 );//商户接收订单信息的用户openid,可能有多个
-                foreach($arr_openid as $openid){
+                foreach($arr_openid as $k=> $openid){
                     $postTemplateJson=json_encode(array(
                         'touser'=>$openid,//接收者openid
                         "template_id"=>$template_id,
                         'data'=>array(
                             'first'=>array(
-                                'value'=>'有位顾客下单成功了，请您在后台注意查收！',
+                                'value'=>$k==0?'恭喜您下单成功！':'有位顾客下单成功了，请您在后台注意查收！',
                                 'color'=>'#173177'
                             ),
                             'keyword1'=>array(

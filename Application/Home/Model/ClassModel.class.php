@@ -32,7 +32,7 @@ class ClassModel extends Model{
 			}*/
 
             //上课时间
-            if($return['class_type']==2){
+           /* if($return['class_type']==2){
 				$classWeek = array();
 				$classWeek = M('class_times')->field('time_interval,week_id')->where('class_id='.$Cid)->find();
 				$return['time_interval'] = $classWeek['time_interval'];
@@ -44,7 +44,7 @@ class ClassModel extends Model{
                 $return['week_id'] = null;
 				$classTurn = array('星期','周','月','年');
 				$return['times'] = $classTurn[$return['period']];
-            }
+            }*/
 
         }
 

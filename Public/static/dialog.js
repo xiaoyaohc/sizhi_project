@@ -17,7 +17,13 @@ var dialog={
             },
         });
     },
-
+    //成功弹出层(不跳转)
+    success_href_no : function(message) {
+        layer.open({
+            content : message,
+            icon : 1
+        });
+    },
     // 确认弹出层
     confirm : function(message, url) {
         layer.open({

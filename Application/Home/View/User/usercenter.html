@@ -111,10 +111,24 @@
                             </ul>
                             <div class="desc am-padding-sm">
                                 简介：{$class.class_desc} <br />
-                                上课日期：
-                                <foreach name="class.class_times" item="classTime" >
-                                    {$classTime.class_time|date="Y-m-d",###}<?php $timeNow = strtotime(date('Ymd')); if($classTime['class_time']<$timeNow){ echo '(已上完)'; } ?>&nbsp;&nbsp;
-                                </foreach>
+                                <!--上课日期：-->
+                                <?php $arr_class_time=explode(',',$class['class_times']);?>
+                                <!--<foreach name="arr_class_time" item="classTime" >
+                                    {$classTime}&lt;!&ndash;<?php $timeNow = strtotime(date('Ymd')); if($classTime['class_time']<$timeNow){ echo '(已上完)'; } ?>&ndash;&gt;
+                                </foreach>-->
+                                <table width="100%">
+                                    <tr>
+                                        <td width="33.3%" style="text-align: center;">
+                                            <a href="javascript:;" onclick='date_show("{$class.class_times}");'>上课时间</a> [4/<?=count($arr_class_time);?>]
+                                        </td>
+                                        <td width="33.3%" style="text-align: center;">
+                                            <a href="javascript:;" onclick='date_show("{$class.class_times}");'>签到</a>
+                                        </td>
+                                        <td width="33.3%" style="text-align: center;">
+                                            <a href="javascript:;" onclick='date_show("");'>请假(解除请假)</a>
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
                         </li>
                         </eq>
@@ -141,8 +155,84 @@
         </div>
     </footer>
 </div>
+<style>
+    .date_status {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 10000;
+    }
+    .date_status ul {
+        padding-left: 0em;
+    }
+</style>
+<!--日期弹出层-->
+<div class="date_status" style="display: none;">
+    <div id="calendar" class="calendar" style="position:relative">
+        <img src="__ASSETS__/images/risk-bg02.png" onclick="date_remove();" style="position:absolute;top:0; right:0;">
+    </div>
+</div>
+<!--移除生成的日期标签-->
+<script>
+    function date_remove() {
+        $('.date_status').hide();
+        $(".calendar-title").remove();
+        $(".calendar-week").remove();
+        $(".calendar-date").remove();
+    }
+</script>
 
 <script src="__ASSETS__/vendors/lib.min.js"></script>
 <script src="__ASSETS__/scripts/app.min.js"></script>
+
+<!--引入日历控件calendar-->
+<link rel="stylesheet" href="__STATIC__/calendar/css/calendar.css">
+<script src="__STATIC__/calendar/js/calendar.js"></script>
+<!--引入layer弹出层插件-->
+<script src="__STATIC__/layer/layer.js"></script>
+<script src="__STATIC__/dialog.js"></script>
+
+<!--<style>
+    .active {
+        background: red !important;
+    }
+</style>-->
+<script>
+    //一位数则补零
+    function Appendzero(obj) {
+        if (obj < 10) return "0" + obj; else return obj;
+    }
+    $('body').on('click','.calendar-date', function (e) {
+        if (e.target.nodeName === 'LI') {
+            var that = $(e.target);
+
+            var class_times=localStorage.getItem("price");//获取课程的时间
+            var sel_times=e.target.getAttribute("data");//获取选中的时间
+            //jquery获取时间
+            var myDate = new Date();
+            var at_times=String(Appendzero(myDate.getFullYear()))+String(Appendzero(myDate.getMonth()+1))+String(Appendzero(myDate.getDate()));
+            var data_start=class_times.indexOf(sel_times);
+            if (data_start!="-1") {
+                if(sel_times>at_times) {
+                    dialog.success_href_no("签到成功");
+                    that.css({"background-color": "red"});
+                }else{
+                    dialog.error("签到时间不能小于当前的时间");
+                }
+            }
+//            that.css({"background-color": "red"});
+           /* if (!that.hasClass("active")) {
+                that.addClass("active");
+            } else {
+                that.removeClass("active");
+            }*/
+        }
+    })
+</script>
 </body>
 </html>

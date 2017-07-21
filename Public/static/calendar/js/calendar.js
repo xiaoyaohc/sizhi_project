@@ -104,8 +104,7 @@ function date_show(price) {
             this.$calendar_title = $('<div class="calendar-title"></div>');
             this.$calendar_week = $('<ul class="calendar-week"></ul>');
             this.$calendar_date = $('<ul class="calendar-date"></ul>');
-            this.$calendar_today = $('<!--<div class="calendar-today"></div>-->');
-
+            this.$calendar_today = $('<div <!--class="calendar-today"-->></div>');
 
             var _titleStr = '<a href="#" class="title"></a>'+
                 '<a href="javascript:;" id="backToday">T</a>'+

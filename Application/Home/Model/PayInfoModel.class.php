@@ -34,7 +34,9 @@ class PayInfoModel extends Model{
 //				$classInfo['class_type'] = $classType[$classInfo['class_type']];
 				$v['class_status'] = $classStatus[$v['class_status']];
 				$v['pay_status'] = $payStatus[$v['pay_status']];
-				$v['class_times'] = ClassReserveModel::classStartTime($v['order_id']);
+				//$v['class_times'] = ClassReserveModel::classStartTime($v['order_id']);
+                $v['class_times'] =$classInfo['course_dates'];
+                //获取上课时间
 				$return[$k] = array_merge($v,$classInfo);	//课程信息
 			}
 		}
