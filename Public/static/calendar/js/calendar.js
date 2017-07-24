@@ -1,9 +1,10 @@
 // 关于月份： 在设置时要-1，使用时要+1
 /*$(function () {*/
-function date_show(price,sign_in) {
+function date_show(price,sign_in,beg_off) {
     $('.date_status').show();
-    localStorage.setItem("price", price);//通过html5的localStorage存储变量
-    localStorage.setItem("sign_in", sign_in);//通过html5的localStorage存储变量
+    localStorage.setItem("price", price);//通过html5的localStorage存储变量(课程时间)
+    localStorage.setItem("sign_in", sign_in);//通过html5的localStorage存储变量(签到时间)
+    localStorage.setItem("beg_off", beg_off);//通过html5的localStorage存储变量(请假时间)
     $('#calendar').calendar({
         ifSwitch: true, // 是否切换月份
         hoverDate: true, // hover是否显示当天信息
@@ -89,12 +90,17 @@ function date_show(price,sign_in) {
 
                 var date_array=localStorage.getItem("price");
                 var sign_in_array=localStorage.getItem("sign_in");
+                var beg_off_array=localStorage.getItem("beg_off");
                 var type_array=localStorage.getItem("type");
                /* if (returnDateStr(new Date()) === allDay_str) {*/
                 var data_start=date_array.indexOf(allDay_str);
                 var sign_in_start=sign_in_array.indexOf(allDay_str);
+                var beg_off_start=beg_off_array.indexOf(allDay_str);
                 if (data_start!="-1") {
                     $(this).attr('class', 'item item-curDay');
+                    if(beg_off_start!="-1"){
+                        $(this).attr('class', 'item item-curDay_status2');
+                    }
                     if(sign_in_start!="-1"){
                         if(type_array==1){
                             $(this).attr('class', 'item item-curDay_status1');

@@ -62,8 +62,9 @@ class OrderController extends HomeController {
         $OrderInfo['pay_time'] = time();
         $OrderInfo['subject_id'] = $Info['subject_id'];
         $OrderInfo['class_id'] = $Cid;
-//        $OrderInfo['class_start_time'] = empty($res['class_start_time'])?strtotime(date('Ymd')):$_POST['class_start_time'];
-
+        //$OrderInfo['class_start_time'] = empty($res['class_start_time'])?strtotime(date('Ymd')):$_POST['class_start_time'];
+        $course_dates=explode(',',$Info['course_dates']);
+        $OrderInfo['class_start_time']=$course_dates[0]." ".$Info['time_interval'];
         // 保存信息
         $res = OrderModel::confirm($OrderInfo);
         if($res){

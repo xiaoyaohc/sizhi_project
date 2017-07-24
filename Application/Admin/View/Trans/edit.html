@@ -27,6 +27,14 @@
                 
         </div>
         <div class="form-item">
+            <label class="item-label">老师评价:<span class="check-tips"></span></label>
+            <div class="controls">
+                <div class="textarea input-large">
+                    <textarea name="comment" rows="7" cols="56">{$data.comment}</textarea>
+                </div>
+            </div>
+        </div>
+        <!--<div class="form-item">
             <label class="item-label">上课时间<span class="check-tips"></span></label>
             <div class="controls">
                 <input type="text" name="class_stime" class="text  time" value="{$current|date='Y-m-d H:i',###}"  />格式：2016-01-02 10:00
@@ -38,7 +46,7 @@
                  <input type="radio" class="px" id="class_status" value="1" name="class_status" <eq name="data.class_status" value="1"> checked</eq>/>已完成 &nbsp;&nbsp;
                  <input type="radio" class="px" id="class_status" value="0" name="class_status" <eq name="data.class_status" value="0"> checked</eq> />未完成
             </div>
-        </div>
+        </div>-->
         <div class="form-item">
             <input type="hidden" name="id" value="{$data.id}">
             <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>

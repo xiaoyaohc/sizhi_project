@@ -132,6 +132,33 @@ class UserController extends HomeController {
         }else{
             echo json_encode(array('status'=>0,'message'=>"签到失败"));
         }
-
+    }
+    /**
+     * 实现请假功能
+     */
+    public function leave(){
+        $order_id=I('order_id','','trim');
+        $beg_off=I("beg_off");
+        $sql="update otk_pay set beg_off=CONCAT(beg_off,',',$beg_off) where order_id=".$order_id;
+        $res = M()->execute($sql);
+        if($res){
+            echo json_encode(array('status'=>1,'message'=>"请假成功"));
+        }else{
+            echo json_encode(array('status'=>0,'message'=>"请假失败"));
+        }
+    }
+    /**
+     * 实现取消请假功能
+     */
+    public function cancel_leave(){
+        $order_id=I('order_id','','trim');
+        $beg_off=I("beg_off");
+        $sql="update otk_pay set beg_off=replace(beg_off,',$beg_off','') where order_id=".$order_id;
+        $res = M()->execute($sql);
+        if($res){
+            echo json_encode(array('status'=>1,'message'=>"取消请假成功"));
+        }else{
+            echo json_encode(array('status'=>0,'message'=>"取消请假失败"));
+        }
     }
 }

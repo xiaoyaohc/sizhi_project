@@ -68,13 +68,16 @@
                                 <h3 class="am-list-item-hd">
                                     <a href="{:U('Teacher/teacherClass','','')}/Cid/{$class.class_id}/.html" class="">
                                         {$class.class_name}
-                                        <if condition="$class.class_type eq 1">  （大班）
+                                        <!--<if condition="$class.class_type eq 1">  （大班）
                                             <elseif condition="$class.class_type eq 2"/> （小班）
-                                        </if>
+                                        </if>-->
                                         &nbsp;&nbsp;&nbsp;&nbsp;学生：{$class.student_name}
                                     </a>
                                     <small class="am-text-danger am-fr">共￥{$class.class_price}元</small>
                                 </h3>
+                                <!--上课日期：-->
+                                <?php $sign_in=explode(',',$class['sign_in']);?>
+                                <?php $arr_class_time=explode(',',$class['class_times']);?>
                                 <div class="am-g">
                                     <div class="am-u-sm-8">
                                         <div class="am-list-item-text">
@@ -90,30 +93,29 @@
                                     </div>
                                     <else/>
                                     <div class="am-u-sm-4 am-text-right">
-                                        {$class.class_status}
+                                        <if condition="count($sign_in) egt count($arr_class_time)">课程已上完
+                                            <else /> 课程未上完
+                                        </if>
                                     </div>
                                     </neq> 
                                 </div>
                             </div>
                             <ul class="am-avg-sm-3 am-text-center">
-                                <li>￥{$class.class_price}/
-                                    <?php
+                                <li>￥{$class.class_price}/<?=count($arr_class_time);?>次
+                                    <!--<?php
                                         if($class['class_type']==2){
                                             echo $class['times'].'</strong>次';
                                         }else{
                                             $classTurn = array('星期','周','月','年');
                                             echo $classTurn[$class['period']].'</strong>';
                                         }
-                                    ?>
+                                    ?>-->
                                 </li>
                                 <li> {$class.pay_status} </li>
                                 <li show-desc> 详细 <i class="am-icon-angle-down"></i> </li>
                             </ul>
                             <div class="desc am-padding-sm">
                                 简介：{$class.class_desc} <br />
-                                <!--上课日期：-->
-                                <?php $sign_in=explode(',',$class['sign_in']);?>
-                                <?php $arr_class_time=explode(',',$class['class_times']);?>
                                 <!--<foreach name="arr_class_time" item="classTime" >
                                     {$classTime}&lt;!&ndash;<?php $timeNow = strtotime(date('Ymd')); if($classTime['class_time']<$timeNow){ echo '(已上完)'; } ?>&ndash;&gt;
                                 </foreach>-->
@@ -207,54 +209,99 @@
     function first_date_show(class_times,sign_in,order_id,type,beg_off) {
         localStorage.setItem("order_id", order_id);//通过html5的localStorage存储变量
         localStorage.setItem("type", type);//通过html5的localStorage存储变量
-        date_show(class_times,sign_in);
+        date_show(class_times,sign_in,beg_off);
     }
     //一位数则补零
     function Appendzero(obj) {
         if (obj < 10) return "0" + obj; else return obj;
     }
+    var flag = false;
     $('body').on('click','.calendar-date', function (e) {
-            if (e.target.nodeName === 'LI') {
-                var that = $(e.target);
-                var class_times=localStorage.getItem("price");//获取课程的时间
-                var sign_in=localStorage.getItem("sign_in");//获取课程的时间
-                var sel_times=e.target.getAttribute("data");//获取选中的时间
-                //jquery获取时间
-                var myDate = new Date();
-                var at_times=String(Appendzero(myDate.getFullYear()))+String(Appendzero(myDate.getMonth()+1))+String(Appendzero(myDate.getDate()));
-                var data_start=class_times.indexOf(sel_times);
-                var sign_in_start=sign_in.indexOf(sel_times);
-                if (data_start!="-1") {
-                    var type=localStorage.getItem("type");//获取操作类型
-                    if(type==1) {
-                        if (sel_times <= at_times) {
-                            if (sign_in_start == "-1") {
-                                //将数据存入数据库
-                                var order_id = localStorage.getItem("order_id");//获取课程的时间
-                                var action = "{:U('User/sign_in')}";
-                                var data = {order_id: order_id, sign_in: sel_times};
-                                $.post(action, data, function (temp) {
-                                    if (temp.status) {
-                                        dialog.success("签到成功", "{:U('user/usercenter')}");
-                                        that.css({"background-color": "#fafafa"});
-                                        that.css({"background-image": "url(__ASSETS__/images/qiandao.gif)"});
-                                    }
-                                }, 'json');
+            if (!flag) {
+                flag = true;
+                if (e.target.nodeName === 'LI') {
+                    var that = $(e.target);
+                    var class_times=localStorage.getItem("price");//获取课程的时间
+                    var sign_in=localStorage.getItem("sign_in");//获取签到的时间
+                    var beg_off=localStorage.getItem("beg_off");//获取请假的时间
+                    var sel_times=e.target.getAttribute("data");//获取选中的时间
+                    //jquery获取时间
+                    var myDate = new Date();
+                    var at_times=String(Appendzero(myDate.getFullYear()))+String(Appendzero(myDate.getMonth()+1))+String(Appendzero(myDate.getDate()));
+                    var data_start=class_times.indexOf(sel_times);
+                    var sign_in_start=sign_in.indexOf(sel_times);
+                    var beg_off_start=beg_off.indexOf(sel_times);
+                    if (data_start!="-1") {
+                        var type=localStorage.getItem("type");//获取操作类型
+                        if(type==1) {
+                            if (sel_times <= at_times) {
+                                if (sign_in_start == "-1") {
+                                    //将数据存入数据库
+                                    var order_id = localStorage.getItem("order_id");//获取课程的时间
+                                    var action = "{:U('User/sign_in')}";
+                                    var data = {order_id: order_id, sign_in: sel_times};
+                                    $.post(action, data, function (temp) {
+                                        if (temp.status) {
+                                            dialog.success("签到成功", "{:U('user/usercenter')}");
+                                            that.css({"background-color": "#fafafa"});
+                                            that.css({"background-image": "url(__ASSETS__/images/qiandao.gif)"});
+                                            flag = false;
+                                        }
+                                    }, 'json');
+                                }
+                            } else {
+                                flag = false;
+                                dialog.error("签到时间不能大于当前的时间");
                             }
-                        } else {
-                            dialog.error("签到时间不能大于当前的时间");
+                        }
+                        if(type==2){
+                            if (sel_times > at_times) {
+                                //排除已上课程
+                                if (sign_in_start == "-1") {
+                                    if(beg_off_start == "-1"){
+                                        //请假
+                                        //将数据存入数据库
+                                        var order_id = localStorage.getItem("order_id");//获取课程的时间
+                                        var action = "{:U('User/leave')}";
+                                        var data = {order_id: order_id, beg_off: sel_times};
+                                        $.post(action, data, function (temp) {
+                                            if (temp.status) {
+                                                dialog.success("请假成功", "{:U('user/usercenter')}");
+                                                that.css({"background-color": "#fafafa"});
+                                                that.css({"background-image": "url(__ASSETS__/images/qingjia.gif)"});
+                                                flag = false;
+                                            }
+                                        }, 'json');
+                                    }else{
+                                        //取消请假
+                                        //将数据存入数据库
+                                        var order_id = localStorage.getItem("order_id");//获取课程的订单号
+                                        var action = "{:U('User/cancel_leave')}";
+                                        var data = {order_id: order_id, beg_off: sel_times};
+                                        $.post(action, data, function (temp) {
+                                            if (temp.status) {
+                                                that.css({"background-image": "url()"});
+                                                that.css({"background-color": "rgb(255, 128, 142)"});
+                                                dialog.success("取消请假成功", "{:U('user/usercenter')}");
+                                                flag = false;
+                                            }
+                                        }, 'json');
+                                    }
+                                }
+                            }else{
+                                flag = false;
+                                dialog.error("请假(取消)时间必须小于当前时间");
+                            }
                         }
                     }
-                    if(type==2){
-
-                    }
-                }
 //            that.css({"background-color": "red"});
-                /* if (!that.hasClass("active")) {
-                 that.addClass("active");
-                 } else {
-                 that.removeClass("active");
-                 }*/
+                    /* if (!that.hasClass("active")) {
+                     that.addClass("active");
+                     } else {
+                     that.removeClass("active");
+                     }*/
+                }
+
             }
     })
 </script>

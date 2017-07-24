@@ -53,6 +53,8 @@
 			<th class="">上课时间</th>
 			<th class="">支付时间</th>
 			<th class="">支付状态</th>
+			<th class="">签到时间</th>
+			<th class="">请假时间</th>
 			<th class="">课程状态</th>
 			<th class="">下单用户</th>
 			<th class="">操作</th>
@@ -72,6 +74,8 @@
 			<td><span>{$vo.class_start_time|time_format}</span></td>
 			<td><span>{$vo.pay_time|time_format}</span></td>
 			<td><span>{$vo.pay_status}</span></td>
+			<td><a href="javascript:;" onclick="time_status('{$vo.sign_in|ltrim=###,','}',0);"><span><?php echo $vo['sign_in']?substr(ltrim($vo['sign_in'],','),0,8).'...':'';?></span></a></td>
+			<td><a href="javascript:;" onclick="time_status('{$vo.beg_off|ltrim=###,','}',1);"><span><?php echo $vo['beg_off']?substr(ltrim($vo['beg_off'],','),0,8).'...':'';?></span></a></td>
 			<td><span>{$vo.class_status}</span></td>
 			<td><span>{$vo.nick_name}</span></td>
 			<td><eq name="vo.status" value="1">
@@ -102,7 +106,9 @@
 
 <block name="script">
 	<script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
-
+	<!--引入layer弹出层插件-->
+	<script src="__STATIC__/layer/layer.js"></script>
+	<script src="__STATIC__/dialog.js"></script>
 	<script type="text/javascript">
 	//搜索功能
 	$("#search").click(function(){
@@ -137,5 +143,15 @@
     		$('#search').click();
     	});
     });
+	</script>
+	<script>
+		function time_status(times,type) {
+		    if(type){
+                dialog.fall("请假时间",times);
+			}else{
+                dialog.fall("签到时间",times);
+			}
+
+        }
 	</script>
 </block>

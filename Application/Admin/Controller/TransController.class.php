@@ -109,7 +109,7 @@ class TransController extends AdminController {
         $db  =D('Pay');
         unset($_POST['parse']);
         $_POST['id'] = intval($_POST['id']);
-        $_POST['class_stime'] = strtotime($_POST['class_stime']);
+        //$_POST['class_stime'] = strtotime($_POST['class_stime']);
         $list  = $db->save($_POST);
         if ($list !== false) {
             $this->success('更新成功',U('Trans/index'));
