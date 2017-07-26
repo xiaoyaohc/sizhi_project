@@ -7452,3 +7452,7 @@ UPDATE `dbsizhi`.`otk_subject` SET `subject_image` = '/Public/Home/assets/images
 
 ALTER TABLE `otk_teacher` ADD `album` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '教师相册路径' AFTER `pic3`;
 
+ALTER TABLE `otk_pay` ADD `sign_in` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '签到记录' AFTER `class_status`;
+ALTER TABLE `otk_pay` ADD `beg_off` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '请假记录' AFTER `sign_in`;
+
+

@@ -1,8 +1,9 @@
 // 关于月份： 在设置时要-1，使用时要+1
 /*$(function () {*/
-function date_show(price) {
+function date_show(price,sign_in) {
     $('.date_status').show();
     localStorage.setItem("price", price);//通过html5的localStorage存储变量
+    localStorage.setItem("sign_in", sign_in);//通过html5的localStorage存储变量
     $('#calendar').calendar({
         ifSwitch: true, // 是否切换月份
         hoverDate: true, // hover是否显示当天信息
@@ -87,10 +88,20 @@ function date_show(price) {
                 $(this).text(allDay.getDate()).attr('data', allDay_str);
 
                 var date_array=localStorage.getItem("price");
+                var sign_in_array=localStorage.getItem("sign_in");
+                var type_array=localStorage.getItem("type");
                /* if (returnDateStr(new Date()) === allDay_str) {*/
                 var data_start=date_array.indexOf(allDay_str);
+                var sign_in_start=sign_in_array.indexOf(allDay_str);
                 if (data_start!="-1") {
                     $(this).attr('class', 'item item-curDay');
+                    if(sign_in_start!="-1"){
+                        if(type_array==1){
+                            $(this).attr('class', 'item item-curDay_status1');
+                        }else{
+                            $(this).attr('class', 'item item-curDay_status0');
+                        }
+                    }
                 } else if (returnDateStr(firstDay).substr(0, 6) === allDay_str.substr(0, 6)) {
                     $(this).attr('class', 'item item-curMonth');
                 } else {

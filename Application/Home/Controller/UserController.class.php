@@ -119,4 +119,19 @@ class UserController extends HomeController {
             $this->error('修改失败');
         }
     }
+    /**
+     * 签到功能实现
+     */
+    public function sign_in(){
+        $order_id=I('order_id','','trim');
+        $sign_in=I("sign_in");
+        $sql="update otk_pay set sign_in=CONCAT(sign_in,',',$sign_in) where order_id=".$order_id;
+        $res = M()->execute($sql);
+        if($res){
+            echo json_encode(array('status'=>1,'message'=>"签到成功"));
+        }else{
+            echo json_encode(array('status'=>0,'message'=>"签到失败"));
+        }
+
+    }
 }
