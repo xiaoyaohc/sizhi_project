@@ -119,18 +119,9 @@ class WechatAuth {
             case 'client':
                 $param['grant_type'] = 'client_credential';
                 $url = "{$this->apiURL}/token";
-                //获取该token需要保存至memcache
-                $memcache = new \Think\Cache\Driver\Memcache();
-                $token = $memcache->get('accessToken_SZ');
 
-                if($token == ""){
-                    $token = self::http($url, $param);
-                    $token = json_decode($token, true);
-                    $memcache->set('accessToken_SZ',$token['access_token'],7200);
-                }else{
-                    $this->accessToken = $token;
-                    return $token;
-                }
+                    return "";
+
                 break;
 
             case 'code':
