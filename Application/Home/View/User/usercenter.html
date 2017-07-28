@@ -209,8 +209,8 @@
 <link rel="stylesheet" href="__STATIC__/calendar/css/calendar.css">
 <script src="__STATIC__/calendar/js/calendar.js"></script>
 <!--引入layer弹出层插件-->
-<script src="__STATIC__/layer/layer.js"></script>
-<script src="__STATIC__/dialog.js"></script>
+<!--<script src="__STATIC__/layer/layer.js"></script>
+<script src="__STATIC__/dialog.js"></script>-->
 <script>
     $(function () {
         $(".zhezhao").click(function () {
@@ -241,7 +241,6 @@
                 if (e.target.nodeName === 'LI') {
                     var that = $(e.target);
                     var class_times=localStorage.getItem("price");//获取课程的时间
-                    var order_id = localStorage.getItem("order_id");//获取课程的时间
                     var sign_in=localStorage.getItem("sign_in");//获取签到的时间
                     var beg_off=localStorage.getItem("beg_off");//获取请假的时间
 
@@ -263,16 +262,19 @@
                                     var data = {order_id: order_id, sign_in: sel_times};
                                     $.post(action, data, function (temp) {
                                         if (temp.status) {
-                                            dialog.success("签到成功", "{:U('user/usercenter')}");
+                                            //dialog.success("签到成功", "{:U('user/usercenter')}");
                                             that.css({"background-color": "#fafafa"});
                                             that.css({"background-image": "url(__ASSETS__/images/qiandao.gif)"});
-                                            flag = false;
+                                            //flag = false;
+                                            alert("签到成功");
+                                            window.location.href="{:U('user/usercenter')}";
                                         }
                                     }, 'json');
                                 }
                             } else {
                                 flag = false;
-                                dialog.error("签到时间不能大于当前的时间");
+                                //dialog.error("签到时间不能大于当前的时间");
+                                alert("签到时间不能大于当前的时间");
                             }
                         }
                         if(type==2){
@@ -287,10 +289,12 @@
                                         var data = {order_id: order_id, beg_off: sel_times};
                                         $.post(action, data, function (temp) {
                                             if (temp.status) {
-                                                dialog.success("请假成功", "{:U('user/usercenter')}");
+                                                //dialog.success("请假成功", "{:U('user/usercenter')}");
                                                 that.css({"background-color": "#fafafa"});
                                                 that.css({"background-image": "url(__ASSETS__/images/qingjia.gif)"});
-                                                flag = false;
+                                                //flag = false;
+                                                alert("请假成功");
+                                                window.location.href="{:U('user/usercenter')}";
                                             }
                                         }, 'json');
                                     }else{
@@ -303,16 +307,18 @@
                                             if (temp.status) {
                                                 that.css({"background-image": "url()"});
                                                 that.css({"background-color": "rgb(255, 128, 142)"});
-                                                dialog.success("取消请假成功", "{:U('user/usercenter')}");
-                                                flag = false;
+                                                //dialog.success("取消请假成功", "{:U('user/usercenter')}");
+                                                //flag = false;
+                                                alert("取消请假成功");
+                                                window.location.href="{:U('user/usercenter')}";
                                             }
                                         }, 'json');
                                     }
                                 }
                             }else{
                                 flag = false;
-
-                                dialog.error("请假(取消)时间必须小于当前时间");
+                                //dialog.error("请假(取消)时间必须小于当前时间");
+                                alert("请假(取消)时间必须小于当前时间");
                             }
                         }
                     }
