@@ -125,7 +125,7 @@ class UserController extends HomeController {
     public function sign_in(){
         $order_id=I('order_id','','trim');
         $sign_in=I("sign_in");
-        $sql="update otk_pay set sign_in=CONCAT(sign_in,',',$sign_in) where order_id=".$order_id;
+        $sql="update otk_pay set sign_in=CONCAT(sign_in,',',$sign_in) where order_id='{$order_id}'";
         $res = M()->execute($sql);
         if($res){
             echo json_encode(array('status'=>1,'message'=>"签到成功"));
@@ -139,7 +139,7 @@ class UserController extends HomeController {
     public function leave(){
         $order_id=I('order_id','','trim');
         $beg_off=I("beg_off");
-        $sql="update otk_pay set beg_off=CONCAT(beg_off,',',$beg_off) where order_id=".$order_id;
+        $sql="update otk_pay set beg_off=CONCAT(beg_off,',',$beg_off) where order_id='{$order_id}'";
         $res = M()->execute($sql);
         if($res){
             echo json_encode(array('status'=>1,'message'=>"请假成功"));
@@ -153,7 +153,7 @@ class UserController extends HomeController {
     public function cancel_leave(){
         $order_id=I('order_id','','trim');
         $beg_off=I("beg_off");
-        $sql="update otk_pay set beg_off=replace(beg_off,',$beg_off','') where order_id=".$order_id;
+        $sql="update otk_pay set beg_off=replace(beg_off,',$beg_off','') where order_id='{$order_id}'";
         $res = M()->execute($sql);
         if($res){
             echo json_encode(array('status'=>1,'message'=>"取消请假成功"));

@@ -3,52 +3,55 @@ body { font-family: "Microsoft Yahei"; font-size: 12px; color: #888; }
 a, a:hover { color: #888; text-decoration: none; }*/
 
 
-
+	#calendar{
+		margin-top:6rem;
+	}
 
 ul, li { list-style: none; }
 
 .calendar {
   display: none;
-  width: 354px;
+  width: 98%;
   padding: 2px;
-  margin: 180px auto 0;
+  margin: 2rem auto 0;
   background-color: #fafafa;
   border-radius: 1px;
+  	font-size:0.4rem;
   /*zoom:2*/
 }
 .calendar-title {
   position: relative;
-  height: 30px;
-  line-height: 46px;
-  padding: 10px 0;
+  height: 3rem;
+  line-height: 3rem;
+  padding: 0.4rem 0;
 }
 .calendar-title a.title {
   display: inline-block;
-  font-size: 26px;
+  font-size: 0.4rem;
   text-indent: 10px;
 }
 #backToday {
   position: absolute;
   left: 70%;
-  top: 8px;
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
+  top: 0rem;
+  width: 4.1rem;
+  height: 4.1rem;
+  line-height: 4.1rem;
   text-align: center;
   border-radius: 50%;
   color: #fff;
   background-color: rgb(255, 128, 142);
-  font-size: 18px;
+  font-size: 0.4rem;
 }
 .calendar-title .arrow {
   position: absolute;
   top: 10px;
   right: 0;
-  width: 50px;
+  width: 4.1rem;
 }
 .calendar-title .arrow span {
   color: #ddd;
-  font-size: 26px;
+  font-size: 0.4rem;
   cursor: pointer;
 
   -webkit-user-select: none;
@@ -73,22 +76,22 @@ ul, li { list-style: none; }
 .calendar-week .item,
 .calendar-date .item {
   float: left;
-  width: 50px;
-  height: 50px;
-  line-height: 50px;
+  width: 4.1rem;
+  height: 4.1rem;
+  line-height:4.1rem;
   text-align: center;
 }
 .calendar-week {
   padding-bottom: 6px;
   border-bottom: 1px solid rgb(255, 128, 142);
   font-weight: bold;
-  font-size: 16px;
+  font-size: 0.4rem;
 }
 .calendar-date {}
 .calendar-date .item {
   border-radius: 50%;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 0.4rem;
 }
 .calendar-date .item:hover,
 /*.calendar-date .item-curMonth:hover {
@@ -137,7 +140,7 @@ ul, li { list-style: none; }
 }
 .calendar-today p {
   color: #fff;
-  font-size: 14px;
+  font-size: 0.4rem;
   line-height: 24px;
 }
 

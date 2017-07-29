@@ -48,7 +48,7 @@ var dialog={
     fall : function(title, content) {
         layer.open({
             type: 1 //Page层类型
-            ,area: ['88%', '25%']
+            ,area: ['400px', '100%']
             ,title: title
             ,shade: 0.6 //遮罩透明度
             ,maxmin: true //允许全屏最小化
