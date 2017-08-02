@@ -33,7 +33,7 @@
                 <i class="am-circle-area">{$Info.0.area_name}</i>
 				<br></br>
                 <?php $teacher_id=$Info[0]['teacher_id'];?>
-                <a href="{:U('Teacher/sel_photo?teacher_id='.$teacher_id)}"><img src="{$Info.0.pic1}" class="am-img-thumbnail am-circle" alt=""></a>
+                <img src="{$Info.0.pic1}" class="am-img-thumbnail am-circle" alt="">
             </div>
             <div class="am-u-sm-12 am-text-center">
                 <h3>{$Info.0.teacher_name}</h3>
@@ -46,6 +46,53 @@
 
         <div class="courses-list">
             <ul class="am-list" id="course-list">
+                <li class="course-item">
+                    <style>
+                        /*.xiangce {
+                            padding-bottom: 30px;
+                        }*/
+                        .xiangce .left {
+                            float: left;
+                            margin-top: 2rem;
+                            margin-left: 0.5rem;
+                            font-size: 1rem;
+                        }
+                        .xiangce .right {
+                            float: left;
+                            padding-left: 2rem;
+                        }
+                        .xiangce .right .divcss5 {
+                            float: left;
+                            width: 6rem;
+                            height: 6rem;
+                            overflow: hidden;
+                            margin-right: 1rem;
+                        }
+                        .xiangce .right img {
+                            float: left;
+                            /*width: 6rem;
+                            height: 6rem;*/
+                            max-width:6rem;
+                        }
+                    </style>
+                    <div class="xiangce am-g">
+                        <div  class="left">
+                            老师相册
+                        </div>
+                        <a href="{:U('Teacher/sel_photo?teacher_id='.$teacher_id)}">
+                        <div class="right">
+                            <?php $album=explode(',',trim($Info[0]['album'],','));?>
+                            <foreach name="album" item="vo" key="k" >
+                                <if condition="$k lt 3 ">
+                                    <div class="divcss5">
+                                        <img src="{$vo}"/>
+                                    </div>
+                                </if>
+                            </foreach>
+                        </div>
+                        </a>
+                    </div>
+                </li>
             <!-- 课程列表start -->
             <foreach name="Info" item="class" >
                 <li class="course-item">
