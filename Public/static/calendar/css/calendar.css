@@ -51,7 +51,7 @@ ul, li { list-style: none; }
 }
 .calendar-title .arrow span {
   color: #ddd;
-  font-size: 1.4rem;
+  font-size: 0.9rem;
   cursor: pointer;
 
   -webkit-user-select: none;
