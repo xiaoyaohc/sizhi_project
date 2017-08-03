@@ -7455,4 +7455,4 @@ ALTER TABLE `otk_teacher` ADD `album` VARCHAR(255) CHARACTER SET utf8 COLLATE ut
 ALTER TABLE `otk_pay` ADD `sign_in` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '签到记录' AFTER `class_status`;
 ALTER TABLE `otk_pay` ADD `beg_off` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '请假记录' AFTER `sign_in`;
 
-ALTER TABLE `otk_pay` ADD `comment` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '学生课程评论' AFTER `beg_off`;
+ALTER TABLE `otk_pay` ADD `comment` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '学生课程评论' AFTER `beg_off`;
