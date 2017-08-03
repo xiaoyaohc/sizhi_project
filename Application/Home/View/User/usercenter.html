@@ -132,6 +132,9 @@
                                         </td>
                                     </tr>
                                 </table>
+                                <if condition="$class['comment']">
+                                老师评价：{$class.comment}
+                                </if>
                             </div>
                         </li>
                         </eq>
@@ -264,7 +267,8 @@
                                         if (temp.status) {
                                             //dialog.success("签到成功", "{:U('user/usercenter')}");
                                             that.css({"background-color": "#fafafa"});
-                                            that.css({"background-image": "url(__ASSETS__/images/qiandao.gif)"});
+                                            that.css({"background": "url(__ASSETS__/images/qiandao.png) no-repeat"});
+                                            that.css({"background-size": "contain"});
                                             //flag = false;
                                             alert("签到成功");
                                             window.location.href="{:U('user/usercenter')}";
@@ -291,7 +295,8 @@
                                             if (temp.status) {
                                                 //dialog.success("请假成功", "{:U('user/usercenter')}");
                                                 that.css({"background-color": "#fafafa"});
-                                                that.css({"background-image": "url(__ASSETS__/images/qingjia.gif)"});
+                                                that.css({"background": "url(__ASSETS__/images/qingjia.png) no-repeat"});
+                                                that.css({"background-size": "contain"});
                                                 //flag = false;
                                                 alert("请假成功");
                                                 window.location.href="{:U('user/usercenter')}";

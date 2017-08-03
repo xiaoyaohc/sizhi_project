@@ -110,17 +110,17 @@ ul, li { list-style: none; }
 }
 .calendar-date .item-curDay_status0{
   color: #fff;
-  background: url(../../../Home/assets/images/yishangke.gif) no-repeat;
+  background: url(../../../Home/assets/images/yishangke.png) no-repeat;
   background-size: contain;
 }
 .calendar-date .item-curDay_status1{
   color: #fff;
-  background: url(../../../Home/assets/images/qiandao.gif) no-repeat;
+  background: url(../../../Home/assets/images/qiandao.png) no-repeat;
   background-size: contain;
 }
 .calendar-date .item-curDay_status2{
   color: #fff;
-  background: url(../../../Home/assets/images/qingjia.gif) no-repeat;
+  background: url(../../../Home/assets/images/qingjia.png) no-repeat;
   background-size: contain;
 }
 .calendar-today {
