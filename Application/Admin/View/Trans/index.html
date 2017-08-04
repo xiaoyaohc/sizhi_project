@@ -78,9 +78,9 @@
 			<td><a href="javascript:;" onclick="time_status('{$vo.beg_off|ltrim=###,','}',1);"><span><?php echo $vo['beg_off']?substr(ltrim($vo['beg_off'],','),0,8).'...':'';?></span></a></td>
 			<td><span>{$vo.class_status}</span></td>
 			<td><span>{$vo.nick_name}</span></td>
-			<td><eq name="vo.status" value="1">
+			<td width="40px;"><eq name="vo.status" value="1">
 				[<a href="{:U('Trans/edit?id='.$vo['id'])}" class="authorize">编辑</a>]
-                [<a href="{:U('Trans/deleteInfos?id='.$vo['id'])}" class="confirm ajax-get">删除</a>]
+               <!-- [<a href="{:U('Trans/deleteInfos?id='.$vo['id'])}" class="confirm ajax-get">删除</a>]-->
             </td>
 			
 		</tr>

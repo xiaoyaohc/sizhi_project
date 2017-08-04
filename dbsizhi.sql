@@ -7456,3 +7456,7 @@ ALTER TABLE `otk_pay` ADD `sign_in` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8
 ALTER TABLE `otk_pay` ADD `beg_off` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '请假记录' AFTER `sign_in`;
 
 ALTER TABLE `otk_pay` ADD `comment` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '学生课程评论' AFTER `beg_off`;
+
+UPDATE `otk_menu` SET `title` = '机构管理', `sort` = '0', `tip` = '机构管理' WHERE `otk_menu`.`id` = 166;
+UPDATE `otk_menu` SET `title` = '机构收入', `sort` = '1', `tip` = '机构收入' WHERE `otk_menu`.`id` = 213;
+UPDATE `otk_menu` SET `title` = '教师管理', `tip` = '教师管理' WHERE `otk_menu`.`id` = 187;

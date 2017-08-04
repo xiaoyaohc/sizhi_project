@@ -9,6 +9,7 @@ class AreaorderController extends AdminController {
         $area_own_name   = I('area_own_name');
         $statements_status=I('statements_status');
         $start_time=strtotime(I('start_time'));
+        $area_id   = I('area_id');
         $end=I('end_time');
         $end_time=strtotime($end)+86400;
         //非本月份的订单都显示为已经结算
@@ -40,6 +41,10 @@ class AreaorderController extends AdminController {
         if(!empty($end)){
             $where  .=  " AND o.add_time <$end_time";
         }
+        if(!empty($area_id)){
+            //$where  .=  " AND a.agent_name like '%$agent_name%'";
+            $where  .=" AND a.id =".$area_id;
+        }
         $rs   = get_site_cate();
         $list = D('Area_order')->query("SELECT o.*,a.area_name from otk_area_order o 
             left join otk_area a on a.id=o.area_id 
@@ -53,13 +58,15 @@ class AreaorderController extends AdminController {
             $data['all_income']  += $list[$key]['income'];
         }
         $status   = array(0=>'请选择',1=>'已结算',2=>'未结算');
-        $this->meta_title = '校区收入';
+        $this->meta_title = '机构收入';
         $request    =   (array)I('request.');
         $total      =   $list? count($list) : 1 ;
         $listRows   =   C('LIST_ROWS') > 0 ? C('LIST_ROWS') : 10;
         $page       =   new \Think\Page($total, $listRows, $request);
         $voList     =   array_slice($list, $page->firstRow, $page->listRows);
         $p          =   $page->show();
+        $area = D('Area')->select();
+        $this->assign('area',$area);
         $this->assign('statements_status', $statements_status);
         $this->assign('status', $status);
         $this->assign('start_time', $start_time);

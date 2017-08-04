@@ -12,7 +12,7 @@ class AreaController extends AdminController {
         }
         $rs   = get_site_cate();
         $list = D('Area')->where($where)->order('add_time asc')->select();
-        $this->meta_title = '区域信息管理';
+        $this->meta_title = '机构信息管理';
         $request    =   (array)I('request.');
         $total      =   $list? count($list) : 1 ;
         $listRows   =   C('LIST_ROWS') > 0 ? C('LIST_ROWS') : 10;
