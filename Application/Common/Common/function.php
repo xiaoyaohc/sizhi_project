@@ -983,9 +983,42 @@ function GBsubstr($string, $start, $length) {
 }
 
 function filter_html($str){
-    $str = preg_replace( "@<script(.*?)</script>@is", "", $str ); 
-    $str = preg_replace( "@<iframe(.*?)</iframe>@is", "", $str ); 
-    $str = preg_replace( "@<style(.*?)</style>@is", "", $str ); 
-    $str = preg_replace( "@<(.*?)>@is", "", $str ); 
+    $str = preg_replace( "@<script(.*?)</script>@is", "", $str );
+    $str = preg_replace( "@<iframe(.*?)</iframe>@is", "", $str );
+    $str = preg_replace( "@<style(.*?)</style>@is", "", $str );
+    $str = preg_replace( "@<(.*?)>@is", "", $str );
     return $str;
+}
+
+/**
+ * PHPExcel实现导出功能
+ * @param $expTitle string 文档名称
+ * @param $expCellName array 文档标题
+ * @param $expTableData array 文档内容
+ */
+function exportExcel($expTitle,$expCellName,$expTableData){
+    $xlsTitle = iconv('utf-8', 'gb2312', $expTitle).date('_Ymd');//文件名称
+    $cellNum = count($expCellName);
+    $dataNum = count($expTableData);
+    import("Org.Util.PHPExcel");//PHPExcel没有命名空间，因此使用这种方式引入
+    $objPHPExcel = new PHPExcel();//实例化，前面一定要加上\,否则报错
+    $cellName = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','AA','AB','AC','AD','AE','AF','AG','AH','AI','AJ','AK','AL','AM','AN','AO','AP','AQ','AR','AS','AT','AU','AV','AW','AX','AY','AZ');
+    //此作用是，在Excel文件的第一行合并一行单元格，用作表格的标题或简介。
+    /*$objPHPExcel->getActiveSheet(0)->mergeCells('A1:'.$cellName[$cellNum-1].'1');//合并单元格
+    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('A1', $expTitle.'  Export time:'.date('Y-m-d H:i:s'));*/
+    for($i=0;$i<$cellNum;$i++){
+        $objPHPExcel->setActiveSheetIndex(0)->setCellValue($cellName[$i].'1', $expCellName[$i][1]);//数字1表示从第一行开始，第一行如果处理了，从第二行开始
+    }
+    // Miscellaneous glyphs, UTF-8
+    for($i=0;$i<$dataNum;$i++){
+        for($j=0;$j<$cellNum;$j++){
+            $objPHPExcel->getActiveSheet(0)->setCellValue($cellName[$j].($i+2), $expTableData[$i][$expCellName[$j][0]]);//数字2表示紧接第二行
+        }
+    }
+    header('pragma:public');
+    header('Content-type:application/vnd.ms-excel');
+    header("Content-Disposition:attachment;filename=$xlsTitle.xls");//attachment新窗口打印inline本窗口打印
+    $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+    $objWriter->save('php://output');
+    exit;
 }

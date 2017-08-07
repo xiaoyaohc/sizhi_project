@@ -11,6 +11,7 @@ class AreaorderController extends AdminController {
         $start_time=strtotime(I('start_time'));
         $area_id   = I('area_id');
         $end=I('end_time');
+        $type=I('type');
         $end_time=strtotime($end)+86400;
         //非本月份的订单都显示为已经结算
         $t   =   time();
@@ -52,6 +53,28 @@ class AreaorderController extends AdminController {
         foreach($list as $k=>$v){
             $list[$k]['pay_status']    =$v['pay_status']==1?'已付款':'未付款';
             $list[$k]['statements_status']    =$v['add_time']<$mouth?'已结算':'未结算';
+        }
+       //实现导出功能
+        if($type){
+            $xlsName  = "机构收入";
+            $xlsCell  = array(
+                array('order_id','订单号'),
+                array('area_name','校区'),
+                array('area_own_name','负责人'),
+                array('class_name','课程名称'),
+                array('pay_money','订单金额'),
+                array('pay_time','下单时间'),
+                array('area_ratio','校区提成比例'),
+                array('income','收入'),
+                array('statements_status','结算状态'),
+                array('add_time','添加时间'),
+            );
+            foreach ($list as $k => $v) {
+                $list[$k]['order_id'] = ' '.$v['order_id'].' ';
+                $list[$k]['pay_time'] = $v['pay_time'] == null ? '-' : date("Y-m-d H:i",$v['pay_time']);
+                $list[$k]['add_time'] =  $v['add_time'] == null ? '-' : date("Y-m-d H:i",$v['add_time']);
+            }
+            exportExcel($xlsName,$xlsCell,$list);
         }
         $data=array();
         foreach($list as $key=>$val){
