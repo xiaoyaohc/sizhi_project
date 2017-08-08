@@ -7460,3 +7460,5 @@ ALTER TABLE `otk_pay` ADD `comment` TEXT CHARACTER SET utf8 COLLATE utf8_general
 UPDATE `otk_menu` SET `title` = '机构管理', `sort` = '0', `tip` = '机构管理' WHERE `otk_menu`.`id` = 166;
 UPDATE `otk_menu` SET `title` = '机构收入', `sort` = '1', `tip` = '机构收入' WHERE `otk_menu`.`id` = 213;
 UPDATE `otk_menu` SET `title` = '教师管理', `tip` = '教师管理' WHERE `otk_menu`.`id` = 187;
+
+ALTER TABLE `otk_area` ADD `teacher_id` INT NOT NULL COMMENT '教师id(外键)' AFTER `name`;

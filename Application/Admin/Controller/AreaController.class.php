@@ -31,6 +31,8 @@ class AreaController extends AdminController {
             $db  = D('Area');
             $this->meta_title = '新增区域';
             $rs  = get_site_cate();
+            $teacher = D('Teacher')->select();
+            $this->assign('teacher',$teacher);
             $this->assign('rs', $rs);
             $this->display('add');
     }
@@ -42,6 +44,8 @@ class AreaController extends AdminController {
         $where['id'] = $id;
         $data  = $model->find($id);
         $this->type = I('type',1);
+        $teacher = D('Teacher')->select();
+        $this->assign('teacher',$teacher);
         $this->assign('data',$data);
         $this->assign('rs', $rs);
         $this->meta_title = '编辑区域';

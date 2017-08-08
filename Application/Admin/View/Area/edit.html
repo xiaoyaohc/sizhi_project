@@ -12,10 +12,28 @@
             <div class="controls">
                 <input type="text" class="text input-large" name="area_name" value="{$data.area_name}">
             </div>
-            <label class="item-label">负责人姓名<span class="check-tips"></span></label>
+            <div class="form-item">
+                <label class="item-label">选择教师<span class="check-tips"><!--（教师账号才需要选择）--></span></label>
+                <div class="controls">
+                    <select name="teacher_id">
+                        <option value="0" >请选择</option>
+                        <foreach name="teacher" item="opt" key="opt_k">
+                            <option value_name="{$opt.teacher_name}" value="{$opt.teacher_id}" <eq name="data.teacher_id" value="$opt.teacher_id"> selected</eq>>{$opt.teacher_name}</option>
+                        </foreach>
+                    </select>
+                </div>
+            </div>
+            <script>
+                $("select[name='teacher_id']").bind("change",function(){
+                    var value_name = $(this).find("option:selected").attr("value_name");
+                    $('#teacher_name').val(value_name);
+                });
+            </script>
+            <input type="hidden" class="text input-large" name="name" value="{$data.name}" id="teacher_name">
+            <!--<label class="item-label">负责人姓名<span class="check-tips"></span></label>
             <div class="controls">
                 <input type="text" class="text input-large" name="name" value="{$data.name}">
-            </div>
+            </div>-->
             <label class="item-label">负责人微信id<span class="check-tips"></span></label>
             <div class="controls">
                 <input type="text" class="text input-large" name="wx_id" value="{$data.wx_id}">
