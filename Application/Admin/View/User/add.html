@@ -23,7 +23,7 @@
                 <input type="password" class="text input-large" name="repassword" value="">
             </div>
         </div>
-        <div class="form-item">
+        <!--<div class="form-item">
             <label class="item-label">选择区域<span class="check-tips">（子账号才需要选择,比如校长或者教师）</span></label>
             <div class="controls">
                 <select name="area_id">
@@ -33,16 +33,38 @@
                     </foreach>
                 </select>
             </div>
-        </div>
+        </div>-->
         <div class="form-item">
             <label class="item-label">选择教师<span class="check-tips"><!--（教师账号才需要选择）--></span></label>
             <div class="controls">
                 <select name="teacher_id">
                     <option value="0" >请选择</option>
                     <foreach name="teacher" item="opt" key="opt_k">
-                        <option value="{$opt.teacher_id}" <eq name="data.teacher_id" value="$opt.teacher_id"> selected</eq>>{$opt.teacher_name}</option>
+                        <option value="{$opt.teacher_id}" area_id="{$opt.area_id}"  area_name="{$opt.area_name}" >{$opt.teacher_name}</option>
                     </foreach>
                 </select>
+            </div>
+        </div>
+        <script>
+            $(function () {
+                $("select[name='teacher_id']").bind("change", function () {
+                    var area_id = $(this).find("option:selected").attr("area_id");
+                    var area_name = $(this).find("option:selected").attr("area_name");
+                    if(area_name==""||area_name=="undefined"){
+                        $('#area_id').val('无');
+                        $('#area_name').val('无');
+                    }else{
+                        $('#area_id').val(area_id);
+                        $('#area_name').val(area_name);
+                    }
+                });
+            });
+        </script>
+        <div class="form-item">
+            <label class="item-label">所在区域<span class="check-tips">（选择老师，自动绑定区域,没有区域则显示无）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large"  value="" disabled="disabled" id="area_name">
+                <input type="hidden" class="text input-large" name="area_id" value="" id="area_id">
             </div>
         </div>
         <div class="form-item">

@@ -43,7 +43,7 @@
 		<notempty name="_list">
 		<volist name="_list" id="vo">
 		<tr>
-            <td><input class="ids" type="checkbox" name="id[]" value="{$vo.uid}" /></td>
+            <td><if condition="$vo['uid'] neq 1"><input class="ids" type="checkbox" name="id[]" value="{$vo.uid}" /></if></td>
 			<td>{$vo.uid} </td>
 			<td>{$vo.nickname}</td>
 			<td>{$vo.area_name}</td>
@@ -54,16 +54,19 @@
 			<td><span>{:long2ip($vo['last_login_ip'])}</span></td>
 			<td>{$vo.status_text}</td>
 			<td>
-				
-				<a href="{:U('User/edit?uid='.$vo['uid'])}" class="authorize">编辑</a>
-				<eq name="vo.status" value="1">
-				<a href="{:U('User/changeStatus?method=forbidUser&id='.$vo['uid'])}" class="ajax-get">禁用</a>
-				<else/>
-				<a href="{:U('User/changeStatus?method=resumeUser&id='.$vo['uid'])}" class="ajax-get">启用</a>
-				</eq>
-				<a href="{:U('AuthManager/group?uid='.$vo['uid'])}" class="authorize">授权</a>
-                <a href="{:U('User/changeStatus?method=deleteUser&id='.$vo['uid'])}" class="confirm ajax-get">删除</a>
-                </td>
+				<if condition="$vo['uid'] neq 1">
+					<a href="{:U('User/edit?uid='.$vo['uid'])}" class="authorize">编辑</a>
+					<eq name="vo.status" value="1">
+						<a href="{:U('User/changeStatus?method=forbidUser&id='.$vo['uid'])}" class="ajax-get">禁用</a>
+						<else/>
+						<a href="{:U('User/changeStatus?method=resumeUser&id='.$vo['uid'])}" class="ajax-get">启用</a>
+					</eq>
+					<a href="{:U('AuthManager/group?uid='.$vo['uid'])}" class="authorize">授权</a>
+					<a href="{:U('User/changeStatus?method=deleteUser&id='.$vo['uid'])}" class="confirm ajax-get">删除</a>
+					<else/>
+					超级管理员不可编辑
+				</if>
+			</td>
 		</tr>
 		</volist>
 		<else/>

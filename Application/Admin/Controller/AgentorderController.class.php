@@ -41,9 +41,19 @@ class AgentorderController extends AdminController {
         $where  .=  " AND a.add_time <$end_time";
         }
         $rs   = get_site_cate();
+        //权限限制条件
+        if(UID!=1){
+            $teacher_1=D()->table('otk_member a')->join('left join otk_teacher b on b.teacher_id=a.teacher_id')->field('b.teacher_name')->where('a.uid='.UID)->find();
+            if($teacher_1){
+                $where  .=  " AND a.agent_name ='{$teacher_1['teacher_name']}'";
+            }else{
+                $where  .=  " AND a.agent_name ='0'";
+            }
+        }
         $list = D('Agent_order')->query("SELECT a.*,c.class_name from otk_agent_order a 
             left join otk_class c on a.class_id=c.class_id 
             WHERE $where;");
+        //var_dump($list);exit;
         foreach($list as $k=>$v){
            // $list[$k]['statements_status']    =$v['statements_status']==1?'已结算':'未结算';
             $list[$k]['statements_status']    =$v['add_time']<$mouth?'已结算':'未结算';

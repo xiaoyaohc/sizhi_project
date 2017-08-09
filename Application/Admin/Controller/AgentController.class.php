@@ -11,6 +11,15 @@ class AgentController extends AdminController {
            $where['name']  = array('like', '%'.$name.'%'); 
         }
         $rs   = get_site_cate();
+        //权限限制条件
+        if(UID!=1){
+            $teacher_1=D()->table('otk_member a')->join('left join otk_teacher b on b.teacher_id=a.teacher_id')->field('b.teacher_name')->where('a.uid='.UID)->find();
+            if($teacher_1){
+                $where['name']= array('eq',"{$teacher_1['teacher_name']}");
+            }else{
+                $where['name']= array('eq',"0");
+            }
+        }
         $list = D('Agent')->where($where)->order('add_time asc')->select();
         $this->meta_title = '代理商信息管理';
         $request    =   (array)I('request.');

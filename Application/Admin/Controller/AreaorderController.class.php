@@ -47,7 +47,16 @@ class AreaorderController extends AdminController {
             $where  .=" AND a.id =".$area_id;
         }
         $rs   = get_site_cate();
-        $list = D('Area_order')->query("SELECT o.*,a.area_name from otk_area_order o 
+        //权限限制条件
+        if(UID!=1){
+            $teacher_1=D()->table('otk_member')->field('teacher_id')->where('uid='.UID)->find();
+            if($teacher_1){
+                $where  .=" AND a.teacher_id =".$teacher_1['teacher_id'];
+            }else{
+                $where  .=" AND a.teacher_id =0";
+            }
+        }
+        $list = D('Area_order')->query("SELECT o.*,a.area_name,a.name area_own_names from otk_area_order o 
             left join otk_area a on a.id=o.area_id 
             WHERE $where");
         foreach($list as $k=>$v){
@@ -60,7 +69,7 @@ class AreaorderController extends AdminController {
             $xlsCell  = array(
                 array('order_id','订单号'),
                 array('area_name','校区'),
-                array('area_own_name','负责人'),
+                array('area_own_names','负责人'),
                 array('class_name','课程名称'),
                 array('pay_money','订单金额'),
                 array('pay_time','下单时间'),

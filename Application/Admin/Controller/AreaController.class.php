@@ -10,6 +10,15 @@ class AreaController extends AdminController {
         if(!empty($area_name)){
            $where['area_name']  = array('like', '%'.$area_name.'%'); 
         }
+        //权限限制条件
+        if(UID!=1){
+                $teacher_1=D()->table('otk_member')->field('teacher_id')->where('uid='.UID)->find();
+                if($teacher_1){
+                    $where['teacher_id']  = array('eq',$teacher_1['teacher_id']);
+                }else{
+                    $where['teacher_id']  = array('eq',0);
+                }
+        }
         $rs   = get_site_cate();
         $list = D('Area')->where($where)->order('add_time asc')->select();
         $this->meta_title = '机构信息管理';

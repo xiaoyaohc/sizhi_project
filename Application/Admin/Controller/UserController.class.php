@@ -162,7 +162,9 @@ class UserController extends AdminController {
         $data=$model->find($uid);
         $area = D('Area')->select();
         $this->assign('area',$area);
-        $teacher = D('Teacher')->select();
+       // $teacher = D('Teacher')->select();
+        $teacher = D('Teacher')->table('otk_teacher a')->field('a.teacher_id,a.teacher_name,a.area_id,b.area_name')->join("left join otk_area b on b.id=a.area_id")->select();
+        //var_dump($teacher);exit;
         $this->assign('teacher',$teacher);
         $this->assign('data',$data);
         $this->meta_title = '编辑用户';
@@ -236,20 +238,23 @@ class UserController extends AdminController {
             if($password != $repassword){
                 $this->error('密码和重复密码不一致！');
             }
+            if(!I('teacher_id')){
+                $this->error('教师必须选择！');
+            }
             /* 调用注册接口注册用户 */
             $User   =   new UserApi;
             $uid    =   $User->register($username, $password, $email);
             if(0 < $uid){ //注册成功
-                $user = array('uid' => $uid, 'nickname' => $username, 'status' => 1);
+                $user = array('uid' => $uid, 'nickname' => $username, 'status' => 1,'teacher_id'=>I('teacher_id'),'area_id'=>I('area_id')?I('area_id'):0);
                 if(!M('Member')->add($user)){
                     $this->error('用户添加失败！');
                 } else {
-                    if($_POST['area_id']){
+                    /*if($_POST['area_id']){
                         $where['uid']      = $uid;
                         $con['area_id']    = I('area_id');
                         $con['teacher_id'] = I('teacher_id');
                         M('Member')->where($where)->save($con);
-                    }
+                    }*/
                     $this->success('用户添加成功！',U('index'));
                 }
             } else { //注册失败，显示错误信息
@@ -258,7 +263,7 @@ class UserController extends AdminController {
         } else {
             $area = D('Area')->select();
             $this->assign('area',$area);
-            $teacher = D('Teacher')->select();
+            $teacher = D('Teacher')->table('otk_teacher a')->field('a.teacher_id,a.teacher_name,a.area_id,b.area_name')->join("left join otk_area b on b.id=a.area_id")->select();
             $this->assign('teacher',$teacher);
             $this->meta_title = '新增用户';
             $this->display();
