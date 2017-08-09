@@ -11,8 +11,8 @@ class SizhiController extends Controller{
      */
     public function index(){
         date_default_timezone_set("Asia/Shanghai");
-        file_put_contents('log.text',"\r\n".date('Y-m-d H:i:s',time())."-".json_encode($_REQUEST),FILE_APPEND);
-        file_put_contents('log1.text',"\r\n".date('Y-m-d H:i:s',time()).file_get_contents("php://input"),FILE_APPEND);
+        //file_put_contents('log.text',"\r\n".date('Y-m-d H:i:s',time())."-".json_encode($_REQUEST),FILE_APPEND);
+        //file_put_contents('log1.text',"\r\n".date('Y-m-d H:i:s',time()).file_get_contents("php://input"),FILE_APPEND);
         //1.将token、timestamp、nonce三个参数进行字典序排序
         $timestamp=$_GET['timestamp'];
         $nonce=$_GET['nonce'];
@@ -129,7 +129,7 @@ class SizhiController extends Controller{
                         )
                     ));
                     $res_template=$this->http_curl($url_template,'post','json',$postTemplateJson);
-                    file_put_contents('template.text',json_encode($res_template),FILE_APPEND);
+                    //file_put_contents('template.text',json_encode($res_template),FILE_APPEND);
                 }
             }
         }
