@@ -1008,7 +1008,10 @@ Kalendae.Input = function (targetElement, options) {
 			noclose = false;
 			$input.focus();
 		}
-		else self.hide();
+		else {
+            $("input[name='times']").val(($("input[name='course_dates']").val().split(",")).length);
+            self.hide();
+		}
 	});
 
 	this._events.inputKeyup = util.addEvent($input, 'keyup', function (event) {

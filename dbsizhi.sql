@@ -7462,3 +7462,5 @@ UPDATE `otk_menu` SET `title` = '机构收入', `sort` = '1', `tip` = '机构收
 UPDATE `otk_menu` SET `title` = '教师管理', `tip` = '教师管理' WHERE `otk_menu`.`id` = 187;
 
 ALTER TABLE `otk_area` ADD `teacher_id` INT NOT NULL COMMENT '教师id(外键)' AFTER `name`;
+
+UPDATE `otk_menu` SET `hide` = '1' WHERE `otk_menu`.`id` = 194;

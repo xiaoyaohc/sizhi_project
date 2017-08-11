@@ -65,7 +65,7 @@ class ClassController extends AdminController {
             //课程
             $subject  = M('Subject')->field('subject_id,subject_name')->order("add_time desc")->select();
             //教师
-            $teacher  = M('Teacher')->field('teacher_id,teacher_name')->select();
+            $teacher  = M('Teacher')->field('teacher_id,teacher_name')->order('convert(teacher_name using gbk) asc')->select();
             //周
             $week     = M('Week')->field('week_id,week_name')->order("week_sort asc")->select();
         

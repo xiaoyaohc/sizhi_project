@@ -5,6 +5,11 @@
     <!--引入日历控件Kalendae-->
     <link rel="stylesheet" href="__STATIC__/kalendae/kalendae.css" type="text/css">
     <script type='text/javascript' src='__STATIC__/kalendae/kalendae.standalone.js'></script>
+    <!--validate验证控件-->
+    <script type='text/javascript' src='__STATIC__/validate/js/jquery.validate.js'></script>
+    <script type='text/javascript' src='__STATIC__/validate/js/validate.js'></script>
+    <link rel="stylesheet" href="__STATIC__/validate/css/validate.css" type="text/css">
+
     <div class="main-title">
         <h2>{$meta_title}</h2>
     </div>
@@ -74,31 +79,31 @@
             </div>
         </div>
        <div class="form-item">
-            <label class="item-label">团购价格<span class="check-tips"></span></label>
+            <label class="item-label">团购价格<span class="check-tips">(即客户下单价格)</span></label>
             <div class="controls">
                 <input type="text" class="text input-large" name="class_price" value="">
             </div>
         </div>
         <div class="form-item">
-            <label class="item-label">原价<span class="check-tips"></span></label>
+            <label class="item-label">原价<span class="check-tips">(原价必须高于团购价格)</span></label>
             <div class="controls">
                 <input type="text" class="text input-large" name="original_price" value="">
             </div>
         </div>
         <div class="form-item">
-            <label class="item-label">次数<span class="check-tips"></span></label>
+            <label class="item-label">上课次数<span class="check-tips"></span></label>
             <div class="controls">
-                <input type="text" class="text input-large" name="times" value="">
+                <input type="text" class="text input-large" name="times" value="" disabled="disabled">
             </div>
         </div>
         <div class="form-item">
-            <label class="item-label">教师提成比例<span class="check-tips"></span></label>
+            <label class="item-label">教师提成比例<span class="check-tips">（如需系统自动计算机构与教师分成可填写，否则不填。比如团购价为1000元，机构分40%，教师分60%，那么此栏填0.6）</span></label>
             <div class="controls">
                 <input type="text" class="text input-large" name="proportion" value="">
             </div>
         </div>
         <div class="form-item">
-            <label class="item-label">代理商提成比例<span class="check-tips"></span></label>
+            <label class="item-label">代理商提成比例<span class="check-tips">（此栏不填）</span></label>
             <div class="controls">
                 <input type="text" class="text input-large" name="agent_ratio" value="">
             </div>
@@ -118,7 +123,7 @@
             </div>
         </div>
         <div class="form-item">
-            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <input class="btn submit-btn" id="submit" type="submit" target-form="form-horizontal" value="确 定" />
             <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>           
         </div>
     </form>
