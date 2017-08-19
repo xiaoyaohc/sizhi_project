@@ -169,7 +169,7 @@ class TeacherModel extends Model{
 	}
 	//获取推荐老师
 	public static function getRank(){
-	    $return = M()->table('otk_teacher t')
+	    $return = M()->field('t.teacher_id,t.teacher_name,t.pic1,t.senority,a.area_name')->table('otk_teacher t')
 	    ->join ("otk_area a on a.id=t.area_id")
 	    ->where('t.rank in(1,2,3,4)')
 	    ->order('t.rank asc')
