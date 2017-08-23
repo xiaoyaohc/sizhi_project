@@ -27,7 +27,8 @@ class TransController extends AdminController {
         }
         //权限限制条件
         $cod['a.uid'] = UID;
-        $rs = D('Member')->table('otk_member a')->join('otk_auth_group_access b on a.uid=b.uid')->field('a.area_id,a.teacher_id,b.group_id')->where($cod)->find();
+        $cod['a.teacher_id']  = array('GT','0');
+        /*$rs = D('Member')->table('otk_member a')->join('otk_auth_group_access b on a.uid=b.uid')->field('a.area_id,a.teacher_id,b.group_id')->where($cod)->find();
         if($rs['group_id']==5){//校长
             $map['area_id']  = array('in',$rs['area_id']);
             $ret = D('Teacher')->field('teacher_id')->where($map)->select();
@@ -39,8 +40,28 @@ class TransController extends AdminController {
         }
         if($rs['teacher_id']){//教师
            $where .= " AND a.teacher_id = ".$rs['teacher_id']."";
-        }
+        }*/
+        if(UID!=1){
+            $temp=D()->table('otk_member a')->join('right join otk_area b on b.teacher_id=a.teacher_id')->field('b.id,a.teacher_id')->where($cod)->find();
+            if($temp){
+                $teacher=D()->table('otk_teacher')->field('teacher_id')->where('area_id='.$temp['id'])->select();
+                $teacher_array=array();
+                //$teacher_array[]=$temp['teacher_id'];
+                foreach($teacher as $k => $v){
+                    $teacher_array[]=$v['teacher_id'];
+                }
+                $teacher_string=implode(',',$teacher_array);
+                $where .=" AND b.teacher_id in ($teacher_string)";
 
+            }else{
+                $teacher_1=D()->table('otk_member')->field('teacher_id')->where('uid='.UID)->find();
+                if($teacher_1){
+                    $where .= " AND b.teacher_id =".$teacher_1['teacher_id'];
+                }else{
+                    $where .= " AND b.teacher_id = 0";
+                }
+            }
+        }
 
         $list   = D('Pay')->query(" SELECT a.*,b.teacher_name,c.subject_name,d.class_name,e.nick_name,f.student_name FROM otk_pay a 
             LEFT JOIN  otk_teacher b ON a.teacher_id = b.teacher_id
