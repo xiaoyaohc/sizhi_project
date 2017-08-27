@@ -24,7 +24,7 @@ class WxpayController extends Controller {
         $_POST['order_id'] = $order_sn;
         $_POST['pay_status'] = 0;
         
-        $sql  = "SELECT a.*,b.teacher_name,c.class_name,c.class_price,c.times,c.class_room,c.class_type,c.period,d.area_name,ca.time_interval,ca.week_id FROM otk_pay a LEFT JOIN otk_teacher b ON a.teacher_id = b.teacher_id LEFT JOIN otk_class c on a.class_id = c.class_id  LEFT JOIN otk_area d on a.area_id = d.id LEFT JOIN otk_class_times ca on ca.class_id=a.class_id WHERE a.order_id ='".$order_sn."' and a.pay_status = 0 limit 1";
+        $sql  = "SELECT a.*,b.teacher_name,c.class_name,c.class_price,c.times,c.class_room,c.class_type,c.period,d.area_name,c.time_interval,ca.week_id FROM otk_pay a LEFT JOIN otk_teacher b ON a.teacher_id = b.teacher_id LEFT JOIN otk_class c on a.class_id = c.class_id  LEFT JOIN otk_area d on a.area_id = d.id LEFT JOIN otk_class_times ca on ca.class_id=a.class_id WHERE a.order_id ='".$order_sn."' and a.pay_status = 0 limit 1";
         $res_pay = D('otk_pay')->query($sql);
         if($res_pay[0]){
             $res = array(
