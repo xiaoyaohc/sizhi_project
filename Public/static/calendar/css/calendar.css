@@ -51,7 +51,7 @@ ul, li { list-style: none; }
 }
 .calendar-title .arrow span {
   color: #ddd;
-  font-size: 0.4rem;
+  font-size: 1.4rem;
   cursor: pointer;
 
   -webkit-user-select: none;
@@ -80,6 +80,9 @@ ul, li { list-style: none; }
   height: 4.1rem;
   line-height:4.1rem;
   text-align: center;
+}
+.calendar-date .item {
+  color: #E5E5E5;
 }
 .calendar-week {
   padding-bottom: 6px;

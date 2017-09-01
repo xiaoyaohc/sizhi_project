@@ -2090,7 +2090,7 @@ var MinPubSub = function(d){
             this._ordinalParseLenient = new RegExp(this._ordinalParse.source + '|' + /\d{1,2}/.source);
         },
 
-        _months : 'January_February_March_April_May_June_July_August_September_October_November_December'.split('_'),
+        _months : '一月_二月_三月_四月_五月_六月_七月_八月_九月_十月_十一月_十二月'.split('_'),
         months : function (m) {
             return this._months[m.month()];
         },
@@ -2141,7 +2141,7 @@ var MinPubSub = function(d){
             return this._weekdaysShort[m.day()];
         },
 
-        _weekdaysMin : 'Su_Mo_Tu_We_Th_Fr_Sa'.split('_'),
+        _weekdaysMin : '日_一_二_三_四_五_六'.split('_'),
         weekdaysMin : function (m) {
             return this._weekdaysMin[m.day()];
         },

@@ -88,4 +88,14 @@ class TeacherController extends HomeController {
     	$this->assign('Info',$Info);
     	$this->display('/teacher/courses');
     }
+    /*
+     * 查询教师相册
+     */
+    public function sel_photo(){
+        $teacher_id=I('teacher_id',0,'int');
+        $list = M()->table('otk_teacher')->field('album')->where('teacher_id='.$teacher_id)->find();
+        $data=explode(',',trim($list['album'],','));
+        $this->assign('photoData',$data);
+        $this->display('/teacher/sel_photo');
+    }
 }

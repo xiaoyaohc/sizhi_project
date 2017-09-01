@@ -32,7 +32,8 @@
             <div class="am-u-sm-4 am-u-sm-offset-4">
                 <i class="am-circle-area">{$Info.0.area_name}</i>
 				<br></br>
-                <a href="javascript:;" onclick="login.check();"><img src="{$Info.0.pic1}" class="am-img-thumbnail am-circle" alt=""></a>
+                <?php $teacher_id=$Info[0]['teacher_id'];?>
+                <a href="{:U('Teacher/sel_photo?teacher_id='.$teacher_id)}"><img src="{$Info.0.pic1}" class="am-img-thumbnail am-circle" alt=""></a>
             </div>
             <div class="am-u-sm-12 am-text-center">
                 <h3>{$Info.0.teacher_name}</h3>
@@ -139,9 +140,6 @@
 <!--引入日历控件calendar-->
 <link rel="stylesheet" href="__STATIC__/calendar/css/calendar.css">
 <script src="__STATIC__/calendar/js/calendar.js"></script>
-<!--引入layer弹出层插件-->
-<script src="__STATIC__/layer/layer.js"></script>
-<script src="__STATIC__/dialog.js"></script>
 <script>
     $(function () {
         $(".zhezhao").click(function () {
@@ -150,11 +148,6 @@
         })
     })
 </script>
-<?php $arr_album=explode(',',$Info[0]['album']);?>
-<!--    <foreach name="arr_album" item="vo" >
-        <div ><img src="{$vo}"/></div>
-    </foreach>-->
-<input type="hidden" id="string_album" value="{$Info[0]['album']}">
 <script type="text/javascript">
     wx.ready(function () {
         var shareData = {
@@ -227,24 +220,6 @@
             });
         });
     });
-</script>
-<script>
-    var login={
-        check:function () {
-            var string_album=$("#string_album").val();
-            if(!string_album){
-                alert('暂时没有照片!!!');
-            }else{
-                var img_url='';
-                img_url+='<foreach name="arr_album" item="vo" >';
-                img_url+='<if condition="$vo">';
-                img_url+='<div style="float: left;" ><img src="{$vo}" id="aa{$key}" width="400px" height="600px" /></div>';
-                img_url+='</if >';
-                img_url+='</foreach>';
-                dialog.fall("老师相册",img_url);
-            }
-        }
-    }
 </script>
 </body>
 </html>
