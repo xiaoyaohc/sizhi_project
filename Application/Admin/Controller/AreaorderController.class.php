@@ -90,7 +90,7 @@ class AreaorderController extends AdminController {
             $data['all_income']  += $list[$key]['income'];
         }
         $status   = array(0=>'请选择',1=>'已结算',2=>'未结算');
-        $this->meta_title = '机构收入';
+        $this->meta_title = '机构结算明细';
         $request    =   (array)I('request.');
         $total      =   $list? count($list) : 1 ;
         $listRows   =   C('LIST_ROWS') > 0 ? C('LIST_ROWS') : 10;
